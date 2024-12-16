@@ -16,8 +16,10 @@
     <x-sidebar></x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:name>{{ $name }}</x-slot:name>
+        <x-slot:email>{{ $email }}</x-slot:email>
+
         <div class="class flex flex-wrap justify-center items-center bg-white w-full h-[80px] shadow border-s-[10px] border-custom-blue rounded-md">
-            
         </div>
     </x-layout_homepage>
     
@@ -31,6 +33,7 @@
             content.classList.toggle('ml-64');
         });
     </script>
+    
 </body>
 
 </html>

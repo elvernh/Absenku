@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\ExtracurricularController;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/loginSekolah', [SchoolController::class, 'processLogin']);
+Route::get('/dashboard', [SchoolController::class, 'showDashboard'])->name('dashboard');
+
 Route::get('/pendaftaran', function () {
     return view('pendaftaran');
 });
@@ -14,11 +18,7 @@ Route::get('/login', function () {
     return view('login', compact('type'));
 });
 
-Route::get('/dashboard', function(){
-    return view('dashboard',[
-        "pageTitle" => "Dashboard"
-    ]);
-});
+
 
 Route::get('/daftarekskul', [ExtracurricularController::class, 'index']);
 
