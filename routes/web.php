@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('/pendaftaran', function () {
+    return view('pendaftaran');
+});
 Route::get('/login', function () {
     $type = request('type', 'Vendor'); // Default to 'Vendor' if no type is provided
     return view('login', compact('type'));
