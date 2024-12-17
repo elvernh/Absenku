@@ -12,28 +12,65 @@ class SchoolController extends Controller
     //
     public function processLogin(Request $request)
     {
-        // Validasi input
-        $credentials = $request->validate([
+        // // Validasi input
+        // $credentials = $request->validate([
+        //     'email' => 'required|email',
+        //     'password' => 'required',
+        // ]);
+        // if (Auth::guard('web')->attempt($credentials)) {
+        //     $request->session()->regenerate(); // Regenerasi session
+        //     return redirect()->route('dashboard'); // Redirect ke dashboard
+        // }
+
+        // return back()->withErrors([
+        //     'email' => 'Email atau password salah.',
+        // ]);
+        $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        if (Auth::guard('web')->attempt($credentials)) {
-            $request->session()->regenerate(); // Regenerasi session
-            return redirect()->route('dashboard'); // Redirect ke dashboard
+
+        // Cek apakah pengguna ada di database
+        $school = School::where('email', $request->email)->first();
+
+        // Cek password
+        if ($school && Hash::check($request->password, $school->password)) {
+            // Menyimpan data ke session
+            session(['school_id' => $school->id]);
+
+            return redirect()->route('dashboard');
         }
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
+        return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     public function showDashboard()
     {
-        if (!Auth::check()) {
+        // if (!Auth::check()) {
+        //     return redirect()->route('/');
+        // }
+
+        // $school = Auth::guard('web')->user();
+
+        // return view('dashboard', [
+        //     'pageTitle' => "Dashboard Sekolah",
+        //     'name' => $school->name,
+        //     'email' => $school->email
+        // ]);
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
             return redirect()->route('/');
         }
 
-        $school = Auth::guard('web')->user();
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route('/');
+        }
 
         return view('dashboard', [
             'pageTitle' => "Dashboard Sekolah",
@@ -44,10 +81,7 @@ class SchoolController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('web')->logout();
-        $request->session()->invalidate(); // Hapus session
-        $request->session()->regenerateToken(); // Regenerasi CSRF token
-
+        session()->forget('school_id');
         return redirect()->route('/'); // Redirect ke halaman login
     }
 }
