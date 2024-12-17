@@ -38,7 +38,11 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'schools',
+        ],
+        'student' => [ 
+            'driver' => 'session',
+            'provider' => 'students',
         ],
     ],
 
@@ -64,11 +68,15 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'schools' => [ // Tambahkan provider untuk model School
+            'driver' => 'eloquent',
+            'model' => App\Models\School::class,
+        ],
+        'students' => [ // Provider untuk tabel students
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class, // Model Student
+        ],
+        
     ],
 
     /*

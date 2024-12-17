@@ -17,14 +17,11 @@ class SchoolController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        // Cek user berdasarkan email
-        $school = School::where('email', $request->email)->first();
-
-        if ($school && Hash::check($request->password, $school->password)) {
-            session(['school_id' => $school->id]);
-            return redirect()->route('dashboard'); 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate(); // Regenerasi session
+            return redirect()->route('dashboard'); // Redirect ke dashboard
         }
+
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ]);
@@ -32,14 +29,25 @@ class SchoolController extends Controller
 
     public function showDashboard()
     {
-        $school = School::find(session('school_id'));
-        $schoolArray = $school->toArray();
-        $schoolArray = $school->only(['name', 'email']); 
+        if (!Auth::check()) {
+            return redirect()->route('/');
+        }
+
+        $school = Auth::user();
 
         return view('dashboard', [
-            'pageTitle' => "Sekolah",
-            'name' => $schoolArray['name'],
-            'email' => $schoolArray['email']
+            'pageTitle' => "Dashboard Sekolah",
+            'name' => $school->name,
+            'email' => $school->email
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Logout user
+        $request->session()->invalidate(); // Hapus session
+        $request->session()->regenerateToken(); // Regenerasi CSRF token
+
+        return redirect()->route('login'); // Redirect ke halaman login
     }
 }
