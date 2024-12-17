@@ -15,7 +15,7 @@
     {{-- sidebar --}}
     <x-sidebar></x-sidebar>
     <x-layout_homepage>
-        <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:layoutTitle>{{ $pageTitle }} </x-slot:layoutTitle>
         {{-- nanti diisi sesuatu --}}
     </x-layout_homepage>
 

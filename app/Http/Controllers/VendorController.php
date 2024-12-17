@@ -7,4 +7,8 @@ use Illuminate\Http\Request;
 class VendorController extends Controller
 {
     //
+
+    public function getVendor(){
+        
+    }
 }
