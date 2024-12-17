@@ -1,9 +1,10 @@
+{{-- layout_homepage.blade.php --}}
 <main id="content" class="ml-64 my-14 w-full ">
     <div class="mx-14">
         {{-- top section --}}
         <div class="flex justify-between mb-10">
             <h1 class="font-medium text-lg sm:text-2xl">{{ $layoutTitle }}</h1>
-            <h1 class="text-md sm:text-xl">Sekolah Yanto</h1>
+            {{-- Display the school name --}}
             <a href="/editprofile" class="flex items-center">
                 <img src="{{ asset('icons/profile.svg') }}" alt="profile" class="mr-4">
                 <div class="lg:flex flex-col hidden">
@@ -12,11 +13,12 @@
                 </div>
             </a>
         </div>
-            {{-- content --}}
-            {{ $slot }}
-
+        
+        {{-- content --}}
+        {{ $slot }}
     </div>
 </main>
+
 <script>
     const sidebar = document.getElementById('sidebar');
     const toggleBtn = document.getElementById('toggleBtn');

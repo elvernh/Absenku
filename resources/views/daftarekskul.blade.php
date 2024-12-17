@@ -6,37 +6,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Daftar Ekskul</title>
+    <title>{{ $pageTitle }}</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar></x-sidebar>
+
+    {{-- Pass the school data to the layout component --}}
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
-        <div
-            class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Id Ekskul</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Nama Ekskul</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Divisi</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Level</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Absensi Siswa</h1>
+
+        <div class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
+            <h1 class="text-black sm:text-sm text-[11px] w-1/6 font-medium text-center">Id Ekskul</h1>
+            <h1 class="text-black sm:text-sm text-[11px] w-1/6 font-medium text-center">Nama Ekskul</h1>
+            <h1 class="text-black sm:text-sm text-[11px] w-1/6 font-medium text-center">Divisi</h1>
+            <h1 class="text-black sm:text-sm text-[11px] w-1/6 font-medium text-center">Level</h1>
+            <h1 class="text-black sm:text-sm text-[11px] w-1/6 font-medium text-center">Absensi Siswa</h1>
         </div>
 
-        <!-- Data Row -->
+        {{-- Display the extracurricular list --}}
         @if ($ekskulList && count($ekskulList) > 0)
             @foreach ($ekskulList as $ekskul)
-                <div
-                    class="flex flex-wrap items-center justify-between bg-white w-full h-[80px] rounded-md px-4 xl:px-10 mb-[3px] border-s-[11px] shadow border-custom-blue">
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center"># {{ $ekskul['id'] }} </h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul['name'] }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul['division'] }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul['level'] }}</h1>
+                <div class="flex flex-wrap items-center justify-between bg-white w-full h-[120px] rounded-md px-4 xl:px-10 mb-[3px] border-s-[11px] shadow border-custom-blue">
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center"># {{ $ekskul->id }} </h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul->name }}</h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul->division }}</h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul->level }}</h1>
                     <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">
-                        <a href="#"
-                            class="xl:border-[1px] xl:no-underline underline xl:border-custom-blue hover:text-blue-700 text-custom-blue xl:px-4 xl:py-2 rounded-xl md:hover:bg-custom-blue md:hover:text-white transition-all duration-300">Detil
-                            Absensi</a>
+                        <a href="/detilabsensi/{{ $ekskul->id }}" class="xl:border-[1px] xl:no-underline underline xl:border-custom-blue hover:text-blue-700 text-custom-blue xl:px-4 xl:py-2 rounded-xl md:hover:bg-custom-blue md:hover:text-white transition-all duration-300">Detil Absensi</a>
                     </h1>
                 </div>
             @endforeach
@@ -46,6 +45,9 @@
             </div>
         @endif
 
+        <div class="flex flex-col justify-center mt-4">
+            {{ $ekskulList->links() }}
+        </div>
 
     </x-layout_homepage>
 

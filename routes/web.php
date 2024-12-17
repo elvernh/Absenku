@@ -19,6 +19,7 @@ Route::get('/dashboard', function(){
 });
 
 Route::get('/daftarekskul', [ExtracurricularController::class, 'index']);
+Route::get('/detilabsensi/{id}',[ExtracurricularController::class, 'findDetilAbsensi']);
 
 Route::get('/absensisiswa', function(){
     return view('absensisiswa',[
@@ -31,3 +32,4 @@ Route::get('/editprofile', function(){
         "pageTitle" => "Edit Profile"
     ]);
 });
+
