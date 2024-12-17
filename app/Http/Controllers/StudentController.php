@@ -20,7 +20,6 @@ class StudentController extends Controller
             $request->session()->regenerate(); 
             return redirect()->route('dashboardStudent'); 
         }
-
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ]);
@@ -33,22 +32,22 @@ class StudentController extends Controller
             return redirect()->route('/');
         }
 
-        $school = Auth::user();
+        $student = Auth::guard('student')->user(); 
 
         return view('dashboard_student', [
             'pageTitle' => "Dashboard",
-            'name' => $school->name,
-            'email' => $school->email
+            'name' => $student->full_name,
+            'email' => $student->email
         ]);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout(); // Logout user
+        Auth::guard('student')->logout();
         $request->session()->invalidate(); // Hapus session
         $request->session()->regenerateToken(); // Regenerasi CSRF token
 
-        return redirect()->route('login'); // Redirect ke halaman login
+        return redirect()->route('/'); // Redirect ke halaman login
     }
 
 }

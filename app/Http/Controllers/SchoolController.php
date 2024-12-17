@@ -17,7 +17,7 @@ class SchoolController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate(); // Regenerasi session
             return redirect()->route('dashboard'); // Redirect ke dashboard
         }
@@ -33,7 +33,7 @@ class SchoolController extends Controller
             return redirect()->route('/');
         }
 
-        $school = Auth::user();
+        $school = Auth::guard('web')->user();
 
         return view('dashboard', [
             'pageTitle' => "Dashboard Sekolah",
@@ -44,10 +44,10 @@ class SchoolController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout(); // Logout user
+        Auth::guard('web')->logout();
         $request->session()->invalidate(); // Hapus session
         $request->session()->regenerateToken(); // Regenerasi CSRF token
 
-        return redirect()->route('login'); // Redirect ke halaman login
+        return redirect()->route('/'); // Redirect ke halaman login
     }
 }

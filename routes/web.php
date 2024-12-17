@@ -3,6 +3,8 @@
 use App\Http\Controllers\ExtracurricularController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\VendorController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +22,11 @@ Route::get('/logoutSekolah', [SchoolController::class, 'logout'])->name('logout'
 
 Route::post("/loginMurid", [StudentController::class, 'processLogin']);
 Route::get("/dashboardStudent", [StudentController::class, 'showDashboard'])->name('dashboardStudent');
+Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
+
+Route::post("/loginVendor", [VendorController::class, 'processLogin']);
+Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
+Route::get('/logoutVendor', [VendorController::class, 'logout'])->name('logoutVendor');
 
 Route::get('/pendaftaran', function () {
     return view('pendaftaran');
