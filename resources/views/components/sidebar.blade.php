@@ -26,7 +26,7 @@
         </li>
         <div class="h-[320px] xl:h-[350px]"></div>
         <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
-            <a href="#" class="flex px-6 py-3 items-center">
+            <a href="/" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">
                 <span class="font-medium">Log out</span>
             </a>

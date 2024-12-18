@@ -28,8 +28,8 @@ Route::get('/absensisiswa', function(){
 });
 
 Route::get('/editprofile', function(){
-    return view('editprofile',[
-        "pageTitle" => "Edit Profile"
-    ]);
+    $type = request('type', 'Vendor');
+    return view('editprofile', compact('type')
+    );
 });
 

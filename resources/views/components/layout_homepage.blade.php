@@ -5,8 +5,7 @@
         <div class="flex justify-between mb-10">
             <h1 class="font-medium text-lg sm:text-2xl">{{ $layoutTitle }}</h1>
             {{-- Display the school name --}}
-            <a href="/editprofile" class="flex items-center">
-                <img src="{{ asset('icons/profile.svg') }}" alt="profile" class="mr-4">
+            <a href="/editprofile?type=Vendor" class="flex items-center">
                 <div class="lg:flex flex-col hidden">
                     <h1 class="text-sm sm:text-base font-medium">Jono Vendor</h1>
                     <h1 class="text-sm sm:text-base text-[#726F6F]">jonovendor@gmail.com</h1>
