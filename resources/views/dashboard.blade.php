@@ -15,15 +15,15 @@
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
+        //untuk logout type di sidebar
         <x-slot:type>{{ "Sekolah" }}</x-slot:type>
-
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
         <div>
-            <div class="flex w-full flex-wrap  gap-5">
+            <div class="flex w-full flex-wrap gap-5">
                 <x-box>
                     <x-slot:text>Jumlah Extrakulikuler</x-slot:text>
                     <x-slot:value>10</x-slot:value>
@@ -48,7 +48,7 @@
                         <a href="/jadwal" class="text-sm">Buat jadwal</a>
                     </div>
                 </div>
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full xl:w-[55%] border-[1px] border-slate-600">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full xl:w-[100%] border-[1px] border-slate-600">
                     <table class=" w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>

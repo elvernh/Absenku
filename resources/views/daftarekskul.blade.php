@@ -14,10 +14,9 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
 
     <x-sidebar>
-
+        <x-slot:type>{{ "Sekolah" }}</x-slot:type>
     </x-sidebar>
     <x-layout_homepage>
-        <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
