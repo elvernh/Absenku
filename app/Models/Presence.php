@@ -18,6 +18,10 @@ class Presence extends Model
     }
     public function status(): BelongsTo
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(related: Status::class);
+    }
+
+    public function studentExcurVendor():BelongsTo{
+        return $this->belongsTo(related: StudentExcurVendor::class);
     }
 }
