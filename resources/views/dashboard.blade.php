@@ -65,7 +65,7 @@
                                     Vendor
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    jam mulai
+                                    Jam mulai
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     jam berakhir

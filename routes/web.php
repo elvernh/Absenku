@@ -32,8 +32,11 @@ Route::get('/pendaftaran', function () {
     return view('pendaftaran');
 });
 
-
-
+// Route::get('/dashboard', function(){
+//     return view ('dashboard',[
+//         "pageTitle" => "Absensi Siswa"
+//     ]);
+// });
 
 Route::get('/daftarekskul', [ExtracurricularController::class, 'index']);
 Route::get('/detilabsensi/{id}',[ExtracurricularController::class, 'findDetilAbsensi']);
