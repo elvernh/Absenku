@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExcurVendor;
+use App\Models\Extracurricular;
 use App\Models\School;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -12,19 +15,7 @@ class SchoolController extends Controller
     //
     public function processLogin(Request $request)
     {
-        // // Validasi input
-        // $credentials = $request->validate([
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        // ]);
-        // if (Auth::guard('web')->attempt($credentials)) {
-        //     $request->session()->regenerate(); // Regenerasi session
-        //     return redirect()->route('dashboard'); // Redirect ke dashboard
-        // }
-
-        // return back()->withErrors([
-        //     'email' => 'Email atau password salah.',
-        // ]);
+       
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -46,17 +37,7 @@ class SchoolController extends Controller
 
     public function showDashboard()
     {
-        // if (!Auth::check()) {
-        //     return redirect()->route('/');
-        // }
-
-        // $school = Auth::guard('web')->user();
-
-        // return view('dashboard', [
-        //     'pageTitle' => "Dashboard Sekolah",
-        //     'name' => $school->name,
-        //     'email' => $school->email
-        // ]);
+       
         $schoolId = session('school_id');
 
         if (!$schoolId) {
@@ -75,7 +56,52 @@ class SchoolController extends Controller
         return view('dashboard', [
             'pageTitle' => "Dashboard Sekolah",
             'name' => $school->name,
-            'email' => $school->email
+            'email' => $school->email,
+            'excurVendors' => ExcurVendor::getAllToday()
+        ]);
+    }
+    public function showDaftarEkskul()
+    {
+       
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        $school = School::find($schoolId);
+
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('daftarekskul', [
+            'pageTitle' => "Daftar Ekskul",
+            'school' => $school,
+            'extracurriculars' => Extracurricular::getAll()
+        ]);
+    }
+
+    public function showDaftarMurid()
+    {
+       
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        $school = School::find($schoolId);
+
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('daftarmurid', [
+            'pageTitle' => "Daftar Murid",
+            'school' => $school,
+            'smps' => Student::getSmp(),
+            'smas' => Student::getSma()
         ]);
     }
 

@@ -10,6 +10,11 @@ class Extracurricular extends Model
 {
     //
     use HasFactory;
+
+    public static function getAll() {
+        $extracurriculars = Extracurricular::all();
+        return $extracurriculars;
+    }
     public function excurVendors():HasMany  
     {
         return $this->hasMany(ExcurVendor::class, 'extracurricular_id');

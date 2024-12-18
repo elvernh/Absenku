@@ -13,13 +13,13 @@
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
-
+      <x-slot:type>Sekolah</x-slot:type>  
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
-        <x-slot:name>{{ $name }}</x-slot:name>
-        <x-slot:email>{{ $email }}</x-slot:email>
+        <x-slot:name>{{ $school->name }}</x-slot:name>
+        <x-slot:email>{{ $school->email }}</x-slot:email>
 
         <div
             class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
@@ -27,23 +27,19 @@
             <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Nama Ekskul</h1>
             <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Divisi</h1>
             <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Level</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Absensi Siswa</h1>
+
         </div>
 
         <!-- Data Row -->
-        @if ($ekskulList && count($ekskulList) > 0)
-            @foreach ($ekskulList as $ekskul)
+        @if ($extracurriculars && count($extracurriculars) > 0)
+            @foreach ($extracurriculars as $extracurricular)
                 <div
-                    class="flex flex-wrap items-center justify-between bg-white w-full h-[80px] rounded-md px-4 xl:px-10 mb-[3px] border-s-[11px] shadow border-custom-blue">
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center"># {{ $ekskul['id'] }} </h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul['name'] }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul['division'] }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul['level'] }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">
-                        <a href="#"
-                            class="xl:border-[1px] xl:no-underline underline xl:border-custom-blue hover:text-blue-700 text-custom-blue xl:px-4 xl:py-2 rounded-xl md:hover:bg-custom-blue md:hover:text-white transition-all duration-300">Detil
-                            Absensi</a>
-                    </h1>
+                    class="flex flex-wrap items-center justify-between bg-white w-full h-[80px] rounded-md px-4 xl:px-10 mb-[10px] border-s-[11px] shadow border-custom-blue">
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center"># {{ $extracurricular['id'] }} </h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $extracurricular['name'] }}</h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $extracurricular['division'] }}</h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $extracurricular['level'] }}</h1>
+                    
                 </div>
             @endforeach
         @else
