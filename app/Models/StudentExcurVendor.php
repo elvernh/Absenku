@@ -4,9 +4,36 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class StudentExcurVendor extends Model
 {
     //or
     use HasFactory;
+
+    public function payment(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'student_excur_vendor_id'); 
+    }
+
+    public function student():BelongsTo {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function excurVendor(): BelongsTo
+    {
+        return $this->belongsTo(ExcurVendor::class, 'excur_vendor_id');
+
+    }
+
+    public function presences():HasMany
+    {
+        return $this->hasMany(Presence::class, 'student_excur_vendor_id');
+    }
+
+    public function payments():HasMany
+    {
+        return $this->hasMany(Payment::class, 'student_excur_vendor_id');
+    }
 }
