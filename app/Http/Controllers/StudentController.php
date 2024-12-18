@@ -31,14 +31,17 @@ class StudentController extends Controller
 
         // Cek apakah pengguna ada di database
         $student = Student::where('email', $request->email)->first();
-
-        // Cek password
-        if ($student && Hash::check($request->password, $student->password)) {
-            // Menyimpan data ke session
-            session(['student_id' => $student->id]);
-
-            return redirect()->route('dashboardStudent');
+        if($student){
+            // Cek password
+            if ($student && Hash::check($request->password, $student->password)) {
+                // Menyimpan data ke session
+                session(['student_id' => $student->id]);
+    
+                return redirect()->route('dashboardStudent');
+            }
+            return back()->withErrors(['password' => 'The password is incorrect.']);
         }
+        
 
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
