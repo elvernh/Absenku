@@ -38,7 +38,19 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'schools',
+        ],
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
+        'vendor' => [
+            'driver' => 'session',
+            'provider' => 'vendors',
+        ],
+        'school' => [
+            'driver' => 'session',
+            'provider' => 'schools',
         ],
     ],
 
@@ -64,11 +76,18 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'schools' => [ // Tambahkan provider untuk model School
+            'driver' => 'eloquent',
+            'model' => App\Models\School::class,
+        ],
+        'students' => [ // Provider untuk tabel students
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class, // Model Student
+        ],
+        'vendors' => [ // Provider untuk tabel students
+            'driver' => 'eloquent',
+            'model' => App\Models\Vendor::class, // Model Student
+        ]
     ],
 
     /*
@@ -97,6 +116,26 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'students' => [
+            'provider' => 'students',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'schools' => [
+            'provider' => 'schools',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'vendors' => [
+            'provider' => 'vendors',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ]
     ],
 
     /*

@@ -15,8 +15,7 @@
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
-        <x-slot:type>{{ "Sekolah" }}</x-slot:type>
-
+        <x-slot:type>{{ "Murid" }}</x-slot:type>
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
@@ -25,15 +24,15 @@
         <div>
             <div class="flex w-full flex-wrap  gap-5">
                 <x-box>
-                    <x-slot:text>Jumlah Extrakulikuler</x-slot:text>
+                    <x-slot:text>Total Tagihan: </x-slot:text>
+                    <x-slot:value>100000</x-slot:value>
+                </x-box>
+                <x-box>
+                    <x-slot:text>Mid Score: </x-slot:text>
                     <x-slot:value>10</x-slot:value>
                 </x-box>
                 <x-box>
-                    <x-slot:text>Jumlah Murid</x-slot:text>
-                    <x-slot:value>10000</x-slot:value>
-                </x-box>
-                <x-box>
-                    <x-slot:text>Jumlah Vendor</x-slot:text>
+                    <x-slot:text>Final Score: </x-slot:text>
                     <x-slot:value>10</x-slot:value>
                 </x-box>
                 <x-box>

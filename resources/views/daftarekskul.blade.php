@@ -12,9 +12,15 @@
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
-    <x-sidebar></x-sidebar>
+    <x-sidebar>
+
+    </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:name>{{ $name }}</x-slot:name>
+        <x-slot:email>{{ $email }}</x-slot:email>
+
         <div
             class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
             <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Id Ekskul</h1>
