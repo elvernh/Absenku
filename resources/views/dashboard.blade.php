@@ -15,15 +15,15 @@
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
-        //untuk logout type di sidebar
         <x-slot:type>{{ "Sekolah" }}</x-slot:type>
+
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
         <div>
-            <div class="flex w-full flex-wrap gap-5">
+            <div class="flex w-full flex-wrap  gap-5">
                 <x-box>
                     <x-slot:text>Jumlah Extrakulikuler</x-slot:text>
                     <x-slot:value>10</x-slot:value>
@@ -48,7 +48,7 @@
                         <a href="/jadwal" class="text-sm">Buat jadwal</a>
                     </div>
                 </div>
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full xl:w-[100%] border-[1px] border-slate-600">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full xl:w-[65%] border-[1px] border-slate-600">
                     <table class=" w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
@@ -65,7 +65,7 @@
                                     Vendor
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Jam mulai
+                                    jam mulai
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     jam berakhir
@@ -74,30 +74,34 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < 9; $i++)
+                            @foreach ($excurVendors as $excurVendor )
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Basket
+                                       {{ $excurVendor->extracurricular->name }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        Silver
+                                        {{ $excurVendor->extracurricular->division }}
+
                                     </td>
                                     <td class="px-6 py-4">
-                                        Laptop
+                                        {{ $excurVendor->extracurricular->level }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        $2999
+                                        {{ $excurVendor->vendor->name }}
+
                                     </td>
                                     <td class="px-6 py-4">
-                                        $2999
+                                        {{ $excurVendor->start_time }}
+
                                     </td>
                                     <td class="px-6 py-4">
-                                        $2999
+                                        {{ $excurVendor->end_time }}
+
                                     </td>
                                 </tr>
-                            @endfor
+                            @endforeach
     
     
                         </tbody>

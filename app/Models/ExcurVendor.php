@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +12,14 @@ class ExcurVendor extends Model
 {
     //
     use HasFactory;
+
+    public static function getAllToday() {
+        $excurVendors = ExcurVendor::where('day', [Carbon::now()->format('l')])->get();;
+        return $excurVendors;
+    }
+
+    
+
     public function meetings(): HasMany
     {
         return $this->HasMany(Meeting::class, 'excur_vendor_id'); 

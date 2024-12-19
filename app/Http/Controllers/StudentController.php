@@ -12,18 +12,7 @@ class StudentController extends Controller
     //
     public function processLogin(Request $request)
     {
-        // Validasi input
-        // $credentials = $request->validate([
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        // ]);
-        // if (Auth::guard('student')->attempt($credentials)) {
-        //     $request->session()->regenerate(); 
-        //     return redirect()->route('dashboardStudent'); 
-        // }
-        // return back()->withErrors([
-        //     'email' => 'Email atau password salah.',
-        // ]);
+        
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',

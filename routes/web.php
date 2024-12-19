@@ -19,9 +19,12 @@ Route::get('/login', function () {
 Route::post('/loginSekolah', [SchoolController::class, 'processLogin']);
 Route::get('/dashboard', [SchoolController::class, 'showDashboard'])->name('dashboard');
 Route::get('/logoutSekolah', [SchoolController::class, 'logout'])->name('logout');
+Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul']);
+Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
 
-Route::post("/loginMurid", [StudentController::class, 'processLogin']);
+Route::post("/loginMurid",[StudentController::class, 'processLogin']);
 Route::get("/dashboardStudent", [StudentController::class, 'showDashboard'])->name('dashboardStudent');
+Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
 Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
 
 Route::post("/loginVendor", [VendorController::class, 'processLogin']);
@@ -32,14 +35,9 @@ Route::get('/pendaftaran', function () {
     return view('pendaftaran');
 });
 
-// Route::get('/dashboard', function(){
-//     return view ('dashboard',[
-//         "pageTitle" => "Absensi Siswa"
-//     ]);
-// });
 
-Route::get('/daftarekskul', [ExtracurricularController::class, 'index']);
-Route::get('/detilabsensi/{id}',[ExtracurricularController::class, 'findDetilAbsensi']);
+
+
 
 Route::get('/absensisiswa', function () {
     return view('absensisiswa', [
@@ -47,8 +45,8 @@ Route::get('/absensisiswa', function () {
     ]);
 });
 
-Route::get('/editprofile', function(){
-    $type = request('type', 'Vendor');
-    return view('editprofile', compact('type')
-    );
+Route::get('/editprofile', function () {
+    return view('editprofile', [
+        "pageTitle" => "Edit Profile"
+    ]);
 });

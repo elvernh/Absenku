@@ -21,6 +21,12 @@
                 <span class="font-medium">Absensi Siswa</span>
             </a>
         </li>
+        <li class="{{ Request::is('siswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+            <a href="/daftarsiswa" class="flex px-6 py-3 items-center">
+                <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
+                <span class="font-medium">Siswa</span>
+            </a>
+        </li>
         <div class="h-[320px] xl:h-[350px]"></div>
         <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
 

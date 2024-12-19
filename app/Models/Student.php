@@ -16,6 +16,15 @@ class Student extends Authenticatable
     // Kolom yang harus disembunyikan (untuk keamanan)
     protected $hidden = ['password', 'token'];
 
+public static function getSma() {
+    $smas = Student::where('educational_level','SMA')->get();
+    return $smas;
+}
+
+public static function getSmp() {
+    $smps = Student::where('educational_level','SMP')->get();
+    return $smps;
+}
     public function studentExcurVendors():HasMany
     {
         return $this->hasMany(StudentExcurVendor::class, 'student_id');
