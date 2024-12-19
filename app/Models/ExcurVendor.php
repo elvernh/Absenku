@@ -18,8 +18,6 @@ class ExcurVendor extends Model
         return $excurVendors;
     }
 
-    
-
     public function meetings(): HasMany
     {
         return $this->HasMany(Meeting::class, 'excur_vendor_id'); 

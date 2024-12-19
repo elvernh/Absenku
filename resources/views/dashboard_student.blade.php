@@ -10,19 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
+    <!-- Sidebar -->
     <x-sidebar>
         <x-slot:type>{{ 'Murid' }}</x-slot:type>
     </x-sidebar>
+
+    <!-- Main Layout -->
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
+
         <div>
-            <div class="flex w-full flex-wrap  gap-5">
+            <!-- Cards Section -->
+            <div class="flex w-full flex-wrap gap-5 mb-10">
                 <x-box>
                     <x-slot:text>Total Tagihan: </x-slot:text>
                     <x-slot:value>100000</x-slot:value>
@@ -41,25 +45,26 @@
                 </x-box>
             </div>
 
+            <!-- Chart Section -->
+            <div class="flex w-full gap-4">
+                <!-- Pie Chart -->
+                <div class="w-1/2 bg-white py-10 px-8 shadow flex flex-col items-center justify-center border-s-[10px] border-custom-blue">
+                    <h1 class="text-center font-medium">Data</h1>
+                    <div class="mt-10">
+                        <canvas id="pieChart" width="300" height="300"></canvas>
+                    </div>
+                    
+                </div>
+                <!-- Empty Section -->
+                <div class="w-1/2 bg-white py-10 shadow border-s-[10px] border-custom-blue"></div>
+            </div>
         </div>
-
-
     </x-layout_homepage>
+
+    <!-- Scripts -->
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('toggleBtn');
-        const content = document.getElementById('content');
-
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-64');
-            content.classList.toggle('ml-64');
-        });
+        
     </script>
-
-
-
-
-
 </body>
 
 </html>

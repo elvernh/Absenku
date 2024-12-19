@@ -37,8 +37,6 @@ Route::get('/pendaftaran', function () {
 
 
 
-
-
 Route::get('/absensisiswa', function () {
     return view('absensisiswa', [
         "pageTitle" => "Absensi Siswa"
