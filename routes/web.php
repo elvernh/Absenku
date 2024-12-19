@@ -22,7 +22,7 @@ Route::get('/logoutSekolah', [SchoolController::class, 'logout'])->name('logout'
 Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul']);
 Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
 
-Route::post("/loginMurid",[StudentController::class, 'processLogin']);
+Route::post("/loginMurid", [StudentController::class, 'processLogin']);
 Route::get("/dashboardStudent", [StudentController::class, 'showDashboard'])->name('dashboardStudent');
 Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
 Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
@@ -32,11 +32,16 @@ Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name
 Route::get('/logoutVendor', [VendorController::class, 'logout'])->name('logoutVendor');
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
+Route::get(
+    '/tambahekskul',
+    [SchoolController::class, 'addExcur']
+);
+
 
 
 
 Route::get('/absensisiswa', [SchoolController::class, 'showMeeting']);
-Route::get('/detail/absensi/{id}',[SchoolController::class,'showAbsensi'] );
+Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
 Route::get('/editprofile', function () {
     return view('editprofile', [
         "pageTitle" => "Edit Profile"

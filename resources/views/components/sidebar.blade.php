@@ -19,7 +19,7 @@
         <li class="{{ Request::is('absensisiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
             <a href="/absensisiswa" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
-                <span class="font-medium">Absensi Siswa</span>
+                <span class="font-medium">Meeting</span>
             </a>
         </li>
         <li class="{{ Request::is('daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">

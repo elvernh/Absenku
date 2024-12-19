@@ -164,6 +164,29 @@ class SchoolController extends Controller
         ]);
     }
 
+    public function addExcur()
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route('/');
+        }
+        $vendors = Vendor::getAll();
+        return view('tambahekskul', [
+            'pageTitle' => "Tambah",
+            'all' => $vendors
+        ]);
+    }
+
     public function logout(Request $request)
     {
         session()->forget('school_id');

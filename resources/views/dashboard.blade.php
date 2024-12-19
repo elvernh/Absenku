@@ -46,9 +46,7 @@
                 <div class="w-full xl:w-1/2">
                     <div class="flex items-center mb-4">
                         <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
-                        <div class="ms-20 text-white bg-green-600 flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
-                            <a href="/jadwal" class="text-sm">Buat jadwal</a>
-                        </div>
+                        
                     </div>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
                         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

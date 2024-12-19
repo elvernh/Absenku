@@ -23,8 +23,9 @@ class Presence extends Model
     public static function getPresenceBasedOnMeet($id) {
         $presences = Presence::where('meeting_id', $id)->get();
         return $presences;
-    }
 
+    }
+    
     public function studentExcurVendor():BelongsTo{
         return $this->belongsTo(related: StudentExcurVendor::class);
     }
