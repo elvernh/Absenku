@@ -25,6 +25,7 @@ Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid'])
 Route::post("/loginMurid",[StudentController::class, 'processLogin']);
 Route::get("/dashboardStudent", [StudentController::class, 'showDashboard'])->name('dashboardStudent');
 Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
+Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
 
 Route::post("/loginVendor", [VendorController::class, 'processLogin']);
 Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
