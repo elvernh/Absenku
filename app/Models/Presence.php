@@ -14,11 +14,15 @@ class Presence extends Model
     public function meeting(): BelongsTo
     {
         return $this->belongsTo(Meeting::class);
-
     }
     public function status(): BelongsTo
     {
         return $this->belongsTo(related: Status::class);
+    }
+
+    public static function getPresenceBasedOnMeet($id) {
+        $presences = Presence::where('meeting_id', $id)->get();
+        return $presences;
     }
 
     public function studentExcurVendor():BelongsTo{
