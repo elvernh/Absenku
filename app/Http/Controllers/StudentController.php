@@ -40,7 +40,6 @@ class StudentController extends Controller
         $studentId = session('student_id');
 
         if (!$studentId) {
-            // Jika tidak ada student_id di sesi, redirect ke halaman login
             return redirect()->route('/');
         }
 
@@ -52,7 +51,7 @@ class StudentController extends Controller
             return redirect()->route('/');
         }
 
-        return view('dashboard', [
+        return view('dashboard_student', [
             'pageTitle' => "Dashboard Sekolah",
             'name' => $student->full_name,
             'email' => $student->email
