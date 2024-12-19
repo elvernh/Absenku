@@ -20,34 +20,72 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $school->name }}</x-slot:name>
         <x-slot:email>{{ $school->email }}</x-slot:email>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nama
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Divisi 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Level
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Vendor
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            PIC
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Hari
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                           Jam Mulai
+                        </th> <th scope="col" class="px-6 py-3">
+                           Jam Selesai
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($excurVendors as $excurVendor)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $excurVendor->extracurricular->name }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->extracurricular->division }}
 
-        <div
-            class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Id Ekskul</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Nama Ekskul</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Divisi</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Level</h1>
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->extracurricular->level }}
 
-        </div>
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->vendor->name }}
 
-        <!-- Data Row -->
-        @if ($extracurriculars && count($extracurriculars) > 0)
-            @foreach ($extracurriculars as $extracurricular)
-                <div
-                    class="flex flex-wrap items-center justify-between bg-white w-full h-[80px] rounded-md px-4 xl:px-10 mb-[10px] border-s-[11px] shadow border-custom-blue">
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center"># {{ $extracurricular['id'] }} </h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $extracurricular['name'] }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $extracurricular['division'] }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $extracurricular['level'] }}</h1>
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->pic }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->day }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->start_time }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->end_time }}
+                        </td>
+                    </tr>
+                    @endforeach
                     
-                </div>
-            @endforeach
-        @else
-            <div class="flex flex-col justify-center items-center h-screen">
-                <h1 class="text-gray-500 text-lg">Tidak ada ekskul</h1>
-            </div>
-        @endif
-
+                </tbody>
+            </table>
+        </div>
+        
 
     </x-layout_homepage>
 

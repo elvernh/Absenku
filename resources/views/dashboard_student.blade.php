@@ -28,32 +28,33 @@
             <!-- Cards Section -->
             <div class="flex w-full flex-wrap gap-5 mb-10">
                 <x-box>
-                    <x-slot:text>Total Tagihan: </x-slot:text>
-                    <x-slot:value>100000</x-slot:value>
+                    <x-slot:text>Total Tagihan </x-slot:text>
+                    <x-slot:value>{{ $studentExcur->bill }}</x-slot:value>
                 </x-box>
                 <x-box>
-                    <x-slot:text>Mid Score: </x-slot:text>
-                    <x-slot:value>10</x-slot:value>
+                    <x-slot:text>Mid Score </x-slot:text>
+                    <x-slot:value>{{ $studentExcur->score_mid }}</x-slot:value>
                 </x-box>
                 <x-box>
-                    <x-slot:text>Final Score: </x-slot:text>
-                    <x-slot:value>10</x-slot:value>
+                    <x-slot:text>Final Score </x-slot:text>
+                    <x-slot:value>{{ $studentExcur->score_final }}</x-slot:value>
                 </x-box>
                 <x-box>
-                    <x-slot:text>Jumlah Extrakulikuler aktif</x-slot:text>
-                    <x-slot:value>10</x-slot:value>
+                    <x-slot:text>Jumlah Extrakulikuler </x-slot:text>
+                    <x-slot:value>{{ $sum }}</x-slot:value>
                 </x-box>
             </div>
 
             <!-- Chart Section -->
             <div class="flex w-full gap-4">
                 <!-- Pie Chart -->
-                <div class="w-1/2 bg-white py-10 px-8 shadow flex flex-col items-center justify-center border-s-[10px] border-custom-blue">
+                <div
+                    class="w-1/2 bg-white py-10 px-8 shadow flex flex-col items-center justify-center border-s-[10px] border-custom-blue">
                     <h1 class="text-center font-medium">Data</h1>
                     <div class="mt-10">
                         <canvas id="pieChart" width="300" height="300"></canvas>
                     </div>
-                    
+
                 </div>
                 <!-- Empty Section -->
                 <div class="w-1/2 bg-white py-10 shadow border-s-[10px] border-custom-blue"></div>
@@ -62,9 +63,7 @@
     </x-layout_homepage>
 
     <!-- Scripts -->
-    <script>
-        
-    </script>
+    <script></script>
 </body>
 
 </html>

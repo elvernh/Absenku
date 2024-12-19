@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\ExcurVendor;
 use App\Models\Extracurricular;
+use App\Models\Meeting;
+use App\Models\Presence;
 use App\Models\School;
 use App\Models\Student;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +18,7 @@ class SchoolController extends Controller
     //
     public function processLogin(Request $request)
     {
-       
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -40,7 +43,7 @@ class SchoolController extends Controller
 
     public function showDashboard()
     {
-       
+
         $schoolId = session('school_id');
 
         if (!$schoolId) {
@@ -60,12 +63,13 @@ class SchoolController extends Controller
             'pageTitle' => "Dashboard Sekolah",
             'name' => $school->name,
             'email' => $school->email,
-            'excurVendors' => ExcurVendor::getAllToday()
+            'excurVendors' => ExcurVendor::getAllToday(),
+            'vendors' => Vendor::all()
         ]);
     }
     public function showDaftarEkskul()
     {
-       
+
         $schoolId = session('school_id');
 
         if (!$schoolId) {
@@ -81,13 +85,13 @@ class SchoolController extends Controller
         return view('daftarekskul', [
             'pageTitle' => "Daftar Ekskul",
             'school' => $school,
-            'extracurriculars' => Extracurricular::getAll()
+            'excurVendors' => ExcurVendor::getAll()
         ]);
     }
 
     public function showDaftarMurid()
     {
-       
+
         $schoolId = session('school_id');
 
         if (!$schoolId) {
@@ -105,6 +109,56 @@ class SchoolController extends Controller
             'school' => $school,
             'smps' => Student::getSmp(),
             'smas' => Student::getSma()
+        ]);
+    }
+
+    public static function showMeeting()
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('absensisiswa', [
+            'pageTitle' => "Meeting",
+            'name' => $school->name,
+            'email' => $school->email,
+            'meetings' => Meeting::getAll()
+        ]);
+    }
+
+    public static function showAbsensi($id)
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('detilabsensi', [
+            'pageTitle' => "Detail Absensi",
+            'name' => $school->name,
+            'email' => $school->email,
+            'presences' => Presence::getPresenceBasedOnMeet($id)
         ]);
     }
 

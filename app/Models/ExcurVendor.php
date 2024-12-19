@@ -12,7 +12,10 @@ class ExcurVendor extends Model
 {
     //
     use HasFactory;
-
+    public static function formatRupiah($number) {
+        return "Rp " . number_format($number, 0, ',', '.');
+    }
+    
     public static function getAllToday() {
         $excurVendors = ExcurVendor::where('day', [Carbon::now()->format('l')])->get();;
         return $excurVendors;
@@ -26,6 +29,11 @@ class ExcurVendor extends Model
     public function vendor():BelongsTo
     {
         return $this->belongsTo(Vendor::class);
+    }
+
+    public static function getAll() {
+        $excurvendors = ExcurVendor::all();
+        return $excurvendors;
     }
 
     public function extracurricular():BelongsTo

@@ -31,18 +31,12 @@ Route::post("/loginVendor", [VendorController::class, 'processLogin']);
 Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
 Route::get('/logoutVendor', [VendorController::class, 'logout'])->name('logoutVendor');
 
-Route::get('/pendaftaran', function () {
-    return view('pendaftaran');
-});
+Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
 
 
 
-Route::get('/absensisiswa', function () {
-    return view('absensisiswa', [
-        "pageTitle" => "Absensi Siswa"
-    ]);
-});
-
+Route::get('/absensisiswa', [SchoolController::class, 'showMeeting']);
+Route::get('/detail/absensi/{id}',[SchoolController::class,'showAbsensi'] );
 Route::get('/editprofile', function () {
     return view('editprofile', [
         "pageTitle" => "Edit Profile"

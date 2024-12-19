@@ -2,14 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExcurVendor;
 use App\Models\Student;
+use App\Models\StudentExcurVendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class StudentController extends Controller
 {
-    //
+    public function store(Request $request)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'grade' => 'required|string|max:255',
+            'educational_level' => 'required|string|max:255',
+            'from_class' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+
+        // Membuat data student
+        $student = Student::createData($validatedData);
+
+        // Mengembalikan respon
+        return response()->json([
+            'message' => 'Data berhasil dibuat',
+            'data' => $student,
+        ], 201);
+    }
     public function processLogin(Request $request)
     {
         
@@ -44,7 +66,9 @@ class StudentController extends Controller
         }
 
         // Ambil data sekolah dari database berdasarkan student_id
-        $student = student::find($studentId);
+        $student = Student::find($studentId);
+        $studentExcur = StudentExcurVendor::getStudentExcur($studentId);
+        $sum = StudentExcurVendor::getSumExcur($studentId);
 
         // Jika tidak ditemukan, redirect ke login
         if (!$student) {
@@ -54,7 +78,9 @@ class StudentController extends Controller
         return view('dashboard_student', [
             'pageTitle' => "Dashboard Sekolah",
             'name' => $student->full_name,
-            'email' => $student->email
+            'email' => $student->email,
+            'studentExcur' => $studentExcur,
+            'sum'=> $sum
         ]);
     }
 
@@ -64,4 +90,17 @@ class StudentController extends Controller
         return redirect()->route('/'); // Redirect ke halaman login
     }
 
+    public function showPendaftaran() {
+        $excurVendors = ExcurVendor::getAll();
+        $fees = ExcurVendor::pluck('fee');
+        $feeRp = [];
+        for($i = 0; $i < count($fees); $i++) {
+            $rp = ExcurVendor::formatRupiah($fees[$i]);
+            $feeRp[$i] = $rp;
+        }
+        return view("pendaftaran", [
+            "excurVendors" => $excurVendors,
+            "feesRp" => $feeRp
+        ]);
+    }
 }
