@@ -23,14 +23,17 @@ class SchoolController extends Controller
 
         // Cek apakah pengguna ada di database
         $school = School::where('email', $request->email)->first();
+        if ($school) {
+            // Cek password
+            if ($school && Hash::check($request->password, $school->password)) {
+                // Menyimpan data ke session
+                session(['school_id' => $school->id]);
 
-        // Cek password
-        if ($school && Hash::check($request->password, $school->password)) {
-            // Menyimpan data ke session
-            session(['school_id' => $school->id]);
-
-            return redirect()->route('dashboard');
+                return redirect()->route('dashboard');
+            }
+            return back()->withErrors(['password' => 'The password is incorrect.']);
         }
+
 
         return back()->withErrors(['email' => 'Invalid credentials']);
     }

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class VendorController extends Controller
 {
-    //
+
     public function processLogin(Request $request)
     {
         // // Validasi input
@@ -33,17 +33,20 @@ class VendorController extends Controller
 
         // Cek apakah pengguna ada di database
         $vendor = Vendor::where('email', $request->email)->first();
+        if ($vendor) {
+            // Cek password
+            if ($vendor && Hash::check($request->password, $vendor->password)) {
+                // Menyimpan data ke session
+                session(['vendor_id' => $vendor->id]);
 
-        // Cek password
-        if ($vendor && Hash::check($request->password, $vendor->password)) {
-            // Menyimpan data ke session
-            session(['vendor_id' => $vendor->id]);
-
-            return redirect()->route('dashboardVendor');
+                return redirect()->route('dashboardVendor');
+            }
+            // Password is incorrect
+            return back()->withErrors(['password' => 'The password is incorrect.']);
         }
 
-        return back()->withErrors(['email' => 'Invalid credentials']);
 
+        return back()->withErrors(['email' => 'Invalid credentials']);
     }
 
     public function showDashboard()
@@ -72,5 +75,4 @@ class VendorController extends Controller
         session()->forget('vendor_id');
         return redirect()->route('/'); // Redirect ke halaman login
     }
-
 }
