@@ -58,13 +58,15 @@ class SchoolController extends Controller
         if (!$school) {
             return redirect()->route('/');
         }
+        $vendorsCount = Vendor::withCount('excurVendors')->get();
 
         return view('dashboard', [
             'pageTitle' => "Dashboard Sekolah",
             'name' => $school->name,
             'email' => $school->email,
             'excurVendors' => ExcurVendor::getAllToday(),
-            'vendors' => Vendor::all()
+            'vendors' => Vendor::all(),
+            'counts' => $vendorsCount
         ]);
     }
     public function showDaftarEkskul()
