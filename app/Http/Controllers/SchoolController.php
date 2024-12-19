@@ -8,6 +8,7 @@ use App\Models\Meeting;
 use App\Models\Presence;
 use App\Models\School;
 use App\Models\Student;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -62,7 +63,8 @@ class SchoolController extends Controller
             'pageTitle' => "Dashboard Sekolah",
             'name' => $school->name,
             'email' => $school->email,
-            'excurVendors' => ExcurVendor::getAllToday()
+            'excurVendors' => ExcurVendor::getAllToday(),
+            'vendors' => Vendor::all()
         ]);
     }
     public function showDaftarEkskul()
@@ -83,7 +85,7 @@ class SchoolController extends Controller
         return view('daftarekskul', [
             'pageTitle' => "Daftar Ekskul",
             'school' => $school,
-            'extracurriculars' => Extracurricular::getAll()
+            'excurVendors' => ExcurVendor::getAll()
         ]);
     }
 

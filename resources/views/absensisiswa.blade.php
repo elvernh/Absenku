@@ -35,6 +35,8 @@
             @foreach ($meetings as $meeting)
                 <div
                     class="flex flex-wrap items-center justify-between bg-white w-full h-[80px] rounded-md px-4 xl:px-10 mb-[10px] border-s-[11px] shadow border-custom-blue">
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $meeting->id }}
+                    </h1>
                     <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $meeting->meeting_date }}
                     </h1>
                     <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">
@@ -44,7 +46,6 @@
                     </h1>
                     <a class="text-blue-700 sm:text-sm text-[11px] w-1/6 text-center"
                         href={{ '/detail/absensi/' . $meeting->id }}>detail</a>
-
                 </div>
             @endforeach
 
