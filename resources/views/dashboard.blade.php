@@ -129,7 +129,7 @@
                                     <td class="px-6 py-4">{{ $vendor->phone }}</td>
                                     <td class="px-6 py-4">{{ $vendor->email }}</td>
                                     <td class="px-6 py-4">{{ $vendor->description }}</td>
-                                    <td class="px-6 py-4">{{ count($counts)}}</td>
+                                    <td class="px-6 py-4">{{  count($vendor->excurVendors)}}</td>
 
                                 </tr>
                             @endforeach
