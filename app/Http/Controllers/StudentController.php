@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\StudentExcurVendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,7 +45,9 @@ class StudentController extends Controller
         }
 
         // Ambil data sekolah dari database berdasarkan student_id
-        $student = student::find($studentId);
+        $student = Student::find($studentId);
+        $studentExcur = StudentExcurVendor::getStudentExcur($studentId);
+        $sum = StudentExcurVendor::getSumExcur($studentId);
 
         // Jika tidak ditemukan, redirect ke login
         if (!$student) {
@@ -54,7 +57,9 @@ class StudentController extends Controller
         return view('dashboard_student', [
             'pageTitle' => "Dashboard Sekolah",
             'name' => $student->full_name,
-            'email' => $student->email
+            'email' => $student->email,
+            'studentExcur' => $studentExcur,
+            'sum'=> $sum
         ]);
     }
 

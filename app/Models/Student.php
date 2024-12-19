@@ -21,6 +21,11 @@ public static function getSma() {
     return $smas;
 }
 
+public static function getUser($id) {
+    $student = Student::find($id);
+    return $student;
+}
+
 public static function getSmp() {
     $smps = Student::where('educational_level','SMP')->get();
     return $smps;

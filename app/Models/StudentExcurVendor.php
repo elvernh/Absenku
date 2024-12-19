@@ -11,8 +11,16 @@ class StudentExcurVendor extends Model
 {
     //or
     use HasFactory;
+    public static function getStudentExcur($id) {
+        $student = StudentExcurVendor::find($id);
+        return $student;
+    }
 
-    public function payment(): HasMany
+    public static function getSumExcur($id) {
+        $count = StudentExcurVendor::where('student_id', $id)->count();
+        return $count;
+    }
+        public function payment(): HasMany
     {
         return $this->hasMany(Payment::class, 'student_excur_vendor_id'); 
     }

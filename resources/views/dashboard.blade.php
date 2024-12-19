@@ -41,9 +41,9 @@
                     <x-slot:value>10</x-slot:value>
                 </x-box>
             </div>
-            <div class="mt-10 flex flex-wrap xl:flex-nowrap gap-4">
+            <div class="mt-10 w-full  flex flex-wrap justify-between">
                 <!-- Table Section -->
-                <div class="w-full xl:w-1/2 p-4">
+                <div class="w-full xl:w-1/2">
                     <div class="flex items-center mb-4">
                         <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
                         <div class="ms-20 text-white bg-green-600 flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
@@ -83,9 +83,9 @@
                     </div>
                 </div>
 
-                <div class="w-full xl:w-1/2 p-4">
+                <div class="w-full xl:w-[40%]">
                     <div class="flex items-center mb-4">
-                        <h2 class="text-2xl font-bold">Chart</h2>
+                        <h2 class="text-2xl font-bold">Persentase</h2>
                     </div>
                     <div class="bg-white p-8 shadow rounded-lg border-slate-600 flex justify-center">
                         <!-- Canvas element with width and height defined in CSS -->
