@@ -22,44 +22,9 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
-        <div>
-            <div class="flex w-full flex-wrap gap-5">
-                <div
-                    class="flex items-center bg-white rounded-lg xl:w-[23%] md:w-[30%] w-full h-[100px] shadow-lg border-s-[10px] border-custom-blue p-4">
-                    <div class="flex justify-start w-full items-center">
-                        <!-- Icon Section -->
-                        <img src="{{ asset('icons/students.svg') }}" alt="Students Icon"
-                            class="w-16 h-16 object-contain">
-
-                        <!-- Text Content Section -->
-                        <div class="flex flex-col ml-4">
-                            <h1 class="font-bold text-lg text-gray-800">Jumlah Murid</h1>
-                            <p class="text-sm text-gray-500">100</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div
-                    class="flex items-center bg-white rounded-lg xl:w-[23%] md:w-[30%] w-full h-[100px] shadow-lg border-s-[10px] border-custom-blue p-4">
-                    <div class="flex justify-start w-full items-center">
-                        <!-- Icon Section -->
-                        <img src="{{ asset('icons/smile.svg') }}" alt="Students Icon"
-                            class="w-16 h-16 object-contain">
-
-                        <!-- Text Content Section -->
-                        <div class="flex flex-col ml-4">
-                            <h1 class="font-bold text-lg text-gray-800">Jumlah Ekskul</h1>
-                            <p class="text-sm text-gray-500">{{ $jumlahEkskul }}</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="mt-10 flex space-x-8">
-            <!-- Jadwal Hari Ini Table (50% width) -->
-            <div class="w-1/2">
+        <div class="mt-10 flex flex-col md:flex-row gap-8">
+            <!-- Jadwal Hari Ini Table (50% width on medium screens and above) -->
+            <div class="w-full md:w-1/2">
                 <div class="flex p-3 items-center">
                     <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
                 </div>
@@ -98,10 +63,9 @@
                     </table>
                 </div>
             </div>
-        
-            <!-- Calendar Section (50% width) -->
-
-            <div class="w-1/2 bg-white rounded-lg shadow-md">
+            
+            <!-- Calendar Section (50% width on medium screens and above) -->
+            <div class="w-full md:w-1/2 bg-white rounded-lg shadow-md mt-8 md:mt-0">
                 <div class="bg-custom-blue text-white rounded-t-lg flex items-center justify-between">
                     <!-- Previous Month Button -->
                     <button id="prev-month" class="px-4 py-2 text-lg font-medium">
@@ -127,13 +91,15 @@
                     <div class="text-center font-bold">Fri</div>
                     <div class="text-center font-bold">Sat</div>
                 </div>
-
+        
                 <!-- Calendar Days -->
                 <div id="calendar-days" class="grid grid-cols-7 gap-2 px-4 pt-4 pb-6">
                     <!-- Dynamic calendar days will be inserted here by JavaScript -->
                 </div>
             </div>
         </div>
+        
+        
 
     </x-layout_homepage>
     <script>

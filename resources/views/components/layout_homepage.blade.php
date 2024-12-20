@@ -6,6 +6,7 @@
             <h1 class="font-medium text-lg sm:text-2xl">{{ $layoutTitle }}</h1>
             {{-- Display the school name --}}
             <a href="/editprofile?type=Vendor" class="flex items-center">
+                <img src="{{ asset("icons/profile.svg") }}" alt=null class="mr-4">
                 <div class="lg:flex flex-col hidden">
                     <h1 class="text-sm sm:text-base font-medium">{{ $name }}</h1>
                     <h1 class="text-sm sm:text-base text-[#726F6F]">{{ $email }}</h1>
