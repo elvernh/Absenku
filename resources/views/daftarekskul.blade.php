@@ -6,53 +6,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $pageTitle }}</title>
+    <title>Daftar Ekskul</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
-
     <x-sidebar>
-
+      <x-slot:type>Sekolah</x-slot:type>  
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
-        <x-slot:name>{{ $name }}</x-slot:name>
-        <x-slot:email>{{ $email }}</x-slot:email>
+        <x-slot:name>{{ $school->name }}</x-slot:name>
+        <x-slot:email>{{ $school->email }}</x-slot:email>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nama
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Divisi 
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Level
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Vendor
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            PIC
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Hari
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                           Jam Mulai
+                        </th> <th scope="col" class="px-6 py-3">
+                           Jam Selesai
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($excurVendors as $excurVendor)
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $excurVendor->extracurricular->name }}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->extracurricular->division }}
 
-        <div
-            class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Id Ekskul</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Nama Ekskul</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Divisi</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Level</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Absensi Siswa</h1>
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->extracurricular->level }}
+
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->vendor->name }}
+
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->pic }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->day }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->start_time }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $excurVendor->end_time }}
+                        </td>
+                    </tr>
+                    @endforeach
+                    
+                </tbody>
+            </table>
         </div>
-
-        {{-- Display the extracurricular list --}}
-        @if ($ekskulList && count($ekskulList) > 0)
-            @foreach ($ekskulList as $ekskul)
-                <div class="flex flex-wrap items-center justify-between bg-white w-full h-[120px] rounded-md px-4 xl:px-10 mb-[3px] border-s-[11px] shadow border-custom-blue">
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center"># {{ $ekskul->id }} </h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul->name }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul->division }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $ekskul->level }}</h1>
-                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">
-                        <a href="/detilabsensi/{{ $ekskul->id }}" class="xl:border-[1px] xl:no-underline underline xl:border-custom-blue hover:text-blue-700 text-custom-blue xl:px-4 xl:py-2 rounded-xl md:hover:bg-custom-blue md:hover:text-white transition-all duration-300">Detil Absensi</a>
-                    </h1>
-                </div>
-            @endforeach
-        @else
-            <div class="flex flex-col justify-center items-center h-screen">
-                <h1 class="text-gray-500 text-lg">Tidak ada ekskul</h1>
-            </div>
-        @endif
-
-        <div class="flex flex-col justify-center mt-4">
-            {{ $ekskulList->links() }}
-        </div>
+        
 
     </x-layout_homepage>
 

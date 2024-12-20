@@ -36,7 +36,7 @@
                 @csrf
                 <div>
                     <label for="name" class="block text-sm font-semibold text-gray-700">Nama Lengkap</label>
-                    <input type="text" name="name" id="name" required
+                    <input type="text" name="full_name" id="name" required
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
@@ -49,7 +49,6 @@
                     <select name="jenjang" id="jenjang" required
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                         <option value="" disabled selected>Pilih Jenjang</option>
-                        <option value="SD">SD</option>
                         <option value="SMP">SMP</option>
                         <option value="SMA">SMA</option>
                     </select>
@@ -62,13 +61,12 @@
                 <div>
                     <label class="block text-sm font-semibold text-gray-700">Ekstrakurikuler</label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        @for ($i = 1; $i <= 10; $i++)
+                        @for ($i =0; $i < count($excurVendors); $i++)
                             <div class="flex items-center">
-                                <input type="checkbox" name="ekstrakurikuler[]"
-                                    value="Ekstrakurikuler {{ $i }}" id="ekstrakurikuler_{{ $i }}"
+                                <input type="checkbox" value={{ $excurVendors[$i] }}
                                     class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="ekstrakurikuler_{{ $i }}"
-                                    class="ml-2 text-gray-700">Ekstrakurikuler {{ $i }}</label>
+                                <label for="e"
+                                    class="ml-2 text-gray-700">{{ $excurVendors[$i]->extracurricular->name }} {{ $excurVendors[$i]->extracurricular->level }} {{ $excurVendors[$i]->extracurricular->division}} ({{ $feesRp[$i] }}) </label>
                             </div>
                         @endfor
                     </div>

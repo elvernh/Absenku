@@ -10,11 +10,19 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Meeting extends Model
 {
     //
+
+    public static function getAll() {
+        $meetings = Meeting::paginate(15);
+        return $meetings;
+    }
     use HasFactory;
+    // Relationship with Presence model
     public function presences(): HasMany
     {
-        return $this->hasMany(Meeting::class, 'excur_vendor_id'); 
+        return $this->hasMany(Presence::class, 'meeting_id'); 
     }
+
+
     public function excurVendor(): BelongsTo{
         return $this->belongsTo(ExcurVendor::class);
     }

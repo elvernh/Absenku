@@ -10,12 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
-        <x-slot:type>{{ "Sekolah" }}</x-slot:type>
+        <x-slot:type>{{ 'Sekolah' }}</x-slot:type>
 
     </x-sidebar>
     <x-layout_homepage>
@@ -41,83 +41,133 @@
                     <x-slot:value>10</x-slot:value>
                 </x-box>
             </div>
-            <div class="mt-10">
-                <div class="flex  p-3 items-center">
-                    <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
-                    <div class="ms-20 text-white bg-green-600  flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
-                        <a href="/jadwal" class="text-sm">Buat jadwal</a>
+            <div class="mt-10 w-full  flex flex-wrap justify-between  mb-10">
+                <!-- Table Section -->
+                <div class="w-full xl:w-1/2">
+                    <div class="flex items-center mb-4">
+                        <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
+                        <div class="ms-20 text-white bg-green-600 flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
+                            <a href="/jadwal" class="text-sm">Buat jadwal</a>
+                        </div>
+                    </div>
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                            <thead
+                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
+                                    <th scope="col" class="px-6 py-3">Divisi</th>
+                                    <th scope="col" class="px-6 py-3">Level</th>
+                                    <th scope="col" class="px-6 py-3">Vendor</th>
+                                    <th scope="col" class="px-6 py-3">Jam Mulai</th>
+                                    <th scope="col" class="px-6 py-3">Jam Berakhir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($excurVendors as $excurVendor)
+                                    <tr
+                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <th scope="row"
+                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            {{ $excurVendor->extracurricular->name }}
+                                        </th>
+                                        <td class="px-6 py-4">{{ $excurVendor->extracurricular->division }}</td>
+                                        <td class="px-6 py-4">{{ $excurVendor->extracurricular->level }}</td>
+                                        <td class="px-6 py-4">{{ $excurVendor->vendor->name }}</td>
+                                        <td class="px-6 py-4">{{ $excurVendor->start_time }}</td>
+                                        <td class="px-6 py-4">{{ $excurVendor->end_time }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full xl:w-[55%] border-[1px] border-slate-600">
-                    <table class=" w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+
+                <div class="w-full xl:w-[40%]">
+                    <div class="flex items-center mb-4">
+                        <h2 class="text-2xl font-bold">Persentase</h2>
+                    </div>
+                    <div class="bg-white p-8 shadow rounded-lg border-slate-600 flex justify-center">
+                        <!-- Canvas element with width and height defined in CSS -->
+                        <canvas id="pieChart" class="w-[150px] h-[150px]"></canvas>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="w-full xl:w-[70%]">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold">Daftar Vendor</h2>
+                    <div class="ms-20 text-white bg-green-600 flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
+                        <a href="/jadwal" class="text-sm">Tambah Vendor</a>
+                    </div>
+                </div>
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Ekstrakurikuler
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Divisi
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Level
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Vendor
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    jam mulai
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    jam berakhir
-                                </th>
-    
+                                <th scope="col" class="px-6 py-3">id</th>
+                                <th scope="col" class="px-6 py-3">Nama</th>
+                                <th scope="col" class="px-6 py-3">Alamat</th>
+                                <th scope="col" class="px-6 py-3">Nomor Telepon</th>
+                                <th scope="col" class="px-6 py-3">Email</th>
+                                <th scope="col" class="px-6 py-3">Deskripsi</th>
+                                <th scope="col" class="px-6 py-3">Jumlah Ekskul</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < 9; $i++)
+                            @foreach ($vendors as $vendor)
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <td class="px-6 py-4">{{ $vendor->id }}</td>
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Basket
+                                        {{ $vendor->name }}
                                     </th>
-                                    <td class="px-6 py-4">
-                                        Silver
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Laptop
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
+                                    <td class="px-6 py-4">{{ $vendor->address }}</td>
+                                    <td class="px-6 py-4">{{ $vendor->phone }}</td>
+                                    <td class="px-6 py-4">{{ $vendor->email }}</td>
+                                    <td class="px-6 py-4">{{ $vendor->description }}</td>
+                                    <td class="px-6 py-4">{{  count($vendor->excurVendors)}}</td>
+
                                 </tr>
-                            @endfor
-    
-    
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-    
             </div>
-        </div>
-        
 
-        
+
     </x-layout_homepage>
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('toggleBtn');
-        const content = document.getElementById('content');
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('pieChart');
+            if (!canvas) {
+                console.error('Canvas element with id "pieChart" not found.');
+                return;
+            }
 
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-64');
-            content.classList.toggle('ml-64');
+            const ctx = canvas.getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Completed', 'Remaining', 'Kenneth'],
+                    datasets: [{
+                        data: [25, 25, 50],
+                        backgroundColor: ['#4CAF50', '#E0E0E0', '#1E1E1E'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true, // Ensure it resizes proportionally
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        },
+                    },
+                },
+            });
         });
     </script>
 
