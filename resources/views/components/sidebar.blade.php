@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform z-">
+<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform z-[10000]">
     <div class="flex justify-center mt-6 pb-5 border-b-[1px]">
         <img src="{{ asset('images/Atten-cropped.svg') }}" alt="logo" class="w-40 h-20">
     </div>

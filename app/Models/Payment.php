@@ -13,6 +13,6 @@ class Payment extends Model
     use HasFactory;
 
     public function studentExcurVendors():BelongsTo {
-        return $this->belongsTo(StudentExcurVendor::class);
+        return $this->belongsTo(StudentExcurVendor::class, 'student_excur_vendor_id');
     }
 }

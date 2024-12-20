@@ -24,49 +24,59 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
 
-        
         <div class="flex w-full flex-wrap gap-5 mb-10">
             <x-box>
-                <x-slot:text>Total Tagihan </x-slot:text>
+                <x-slot:text>Total Tagihan</x-slot:text>
                 <x-slot:value></x-slot:value>
             </x-box>
-    
+
             <x-box>
-                <x-slot:text>Sisa Tagihan </x-slot:text>
+                <x-slot:text>Sisa Tagihan</x-slot:text>
                 <x-slot:value></x-slot:value>
             </x-box>
         </div>
-        <h1>Riwayat Pembayaran</h1>
-        <div
-            class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Tanggal</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Nama </h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Topic</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Pengajar</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Kehadiran</h1>
-            <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Keterangan</h1>
+
+        <h1 class="text-xl font-semibold mb-4">Riwayat Pembayaran</h1>
+
+        <!-- Table Wrapper -->
+        <div class="overflow-x-auto bg-white rounded-lg shadow">
+            <table class="w-full text-sm text-left text-gray-600">
+                <thead class="bg-gray-100 text-gray-800 uppercase">
+                    <tr>
+                        <th class="px-4 py-3 text-center">Tanggal</th>
+                        <th class="px-4 py-3 text-center">Jumlah</th>
+                        <th class="px-4 py-3 text-center">Status</th>
+                        <th class="px-4 py-3 text-center">Ekstrakurikuler</th>
+                        <th class="px-4 py-3 text-center">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($payments as $payment)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-4 py-3 text-center">{{ $payment->payment_date }}</td>
+                            <td class="px-4 py-3 text-center">{{ $payment->amount }}</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-2 py-1 rounded-lg text-white text-xs
+                                    {{ $payment->status_payment == 'berhasil' ? 'bg-green-500' : 'bg-red-500' }}">
+                                    {{ ucfirst($payment->status_payment) }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 text-center">
+                                {{ $payment->studentExcurVendors->excurVendor->extracurricular->name ?? 'Tidak Diketahui' }}
+                            </td>
+                            <td class="px-4 py-3 text-center">
+                                @if ($payment->status_payment == 'gagal')
+                                    <a href="/bayar" class="text-blue-500 hover:underline">Bayar Ulang</a>
+                                @else
+                                    -
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-
-        <!-- Data Row -->
-        @foreach ($presences as $presence)
-            <div
-                class="flex flex-wrap items-center justify-between bg-white w-full h-[80px] rounded-md px-4 xl:px-10 mb-[10px] border-s-[11px] shadow border-custom-blue">
-                <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $presence->meeting->meeting_date}}</h1>
-                <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $presence->meeting->excurVendor->extracurricular->name }}</h1>
-                <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $presence->meeting->topic }}</h1>
-                <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $presence->meeting->teacher }}</h1>
-                <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $presence->status->status_name }}</h1>
-                <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $presence->keterangan }}</h1>
-
-            </div>
-        @endforeach
-
     </x-layout_homepage>
-    
-
-
-
-
 
 </body>
 

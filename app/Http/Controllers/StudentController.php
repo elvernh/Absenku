@@ -126,10 +126,7 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->route('/');
         }
-        $studentExcs = StudentExcurVendor::where('student_id',$studentId)->get();
-
-        // Mem-filter data berdasarkan hari ini
-        // Filter presences berdasarkan kondisi tertentu (misalnya: kehadiran hari ini)
+        $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
         $presences = $studentExcs->pluck('presences')->flatten();
 
         return view('meeting_murid', [
@@ -154,17 +151,40 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->route('/');
         }
-        $studentExcs = StudentExcurVendor::where('student_id',$studentId)->get();
-        
-        // Filter presences berdasarkan kondisi tertentu (misalnya: kehadiran hari ini)
-        $presences = $studentExcs->pluck('presences')->flatten();
+        $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
+        $payments = $studentExcs->pluck('payment')->flatten();
 
         return view('payment_student', [
             'pageTitle' => "Pembayaran",
             'name' => $student->full_name,
             'email' => $student->email,
-           
+            'studentExcs' => $studentExcs,
+            'payments' => $payments
         ]);
     }
+    public function showBayar()
+    {
+        $studentId = session('student_id');
 
+        if (!$studentId) {
+            return redirect()->route('/');
+        }
+
+        $student = Student::find($studentId);
+
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$student) {
+            return redirect()->route('/');
+        }
+        $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
+       
+        return view('paymentform', [
+            'pageTitle' => "Pembayaran",
+            'name' => $student->full_name,
+            'email' => $student->email,
+            'studentExcs' => $studentExcs,
+            
+        ]);
+    }
 }

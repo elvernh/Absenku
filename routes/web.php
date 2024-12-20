@@ -49,3 +49,5 @@ Route::get('/editprofile', function () {
         "pageTitle" => "Edit Profile"
     ]);
 });
+
+Route::get('/bayar', [StudentController::class, 'showBayar']);
