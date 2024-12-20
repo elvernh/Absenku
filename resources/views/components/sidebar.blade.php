@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform z-[100000]">
+<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform z-">
     <div class="flex justify-center mt-6 pb-5 border-b-[1px]">
         <img src="{{ asset('images/Atten-cropped.svg') }}" alt="logo" class="w-40 h-20">
     </div>
@@ -64,29 +64,23 @@
                 <span class="font-medium">Log out</span>
             </a>
         </li>
-        @else
+        @elseif($type == "Murid")
         <li class="{{ Request::is('dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/dashboard" class="flex px-6 py-3 items-center">
+            <a href="/dashboardStudent" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/home.svg') }}" alt="home" class="mr-4">
                 <span class="font-medium">Dashboard</span>
             </a>
         </li>
-        <li class="{{ Request::is('daftarekskul') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/daftarekskul" class="flex px-6 py-3 items-center">
+        <li class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+            <a href="/meetingStudent" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
                 <span class="font-medium">Meeting</span>
             </a>
         </li>
-        <li class="{{ Request::is('absensisiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/absensisiswa" class="flex px-6 py-3 items-center">
-                <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
-                <span class="font-medium">Absensi</span>
-            </a>
-        </li>
-        <li class="{{ Request::is('siswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/daftarsiswa" class="flex px-6 py-3 items-center">
-                <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
-                <span class="font-medium">Pertemuan</span>
+        <li class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+            <a href="/payment" class="flex px-6 py-3 items-center">
+                <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                <span class="font-medium">Payments</span>
             </a>
         </li>
         <div class="h-[320px] xl:h-[350px]"></div>

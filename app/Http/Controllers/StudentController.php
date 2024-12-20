@@ -110,4 +110,61 @@ class StudentController extends Controller
             "feesRp" => $feeRp
         ]);
     }
+
+    public function showMeeting()
+    {
+        $studentId = session('student_id');
+
+        if (!$studentId) {
+            return redirect()->route('/');
+        }
+
+        $student = Student::find($studentId);
+
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$student) {
+            return redirect()->route('/');
+        }
+        $studentExcs = StudentExcurVendor::where('student_id',$studentId)->get();
+
+        // Mem-filter data berdasarkan hari ini
+        // Filter presences berdasarkan kondisi tertentu (misalnya: kehadiran hari ini)
+        $presences = $studentExcs->pluck('presences')->flatten();
+
+        return view('meeting_murid', [
+            'pageTitle' => "Daftar Meeting",
+            'name' => $student->full_name,
+            'email' => $student->email,
+            'presences' => $presences
+        ]);
+    }
+    public function showPayment()
+    {
+        $studentId = session('student_id');
+
+        if (!$studentId) {
+            return redirect()->route('/');
+        }
+
+        $student = Student::find($studentId);
+
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$student) {
+            return redirect()->route('/');
+        }
+        $studentExcs = StudentExcurVendor::where('student_id',$studentId)->get();
+        
+        // Filter presences berdasarkan kondisi tertentu (misalnya: kehadiran hari ini)
+        $presences = $studentExcs->pluck('presences')->flatten();
+
+        return view('payment_student', [
+            'pageTitle' => "Pembayaran",
+            'name' => $student->full_name,
+            'email' => $student->email,
+           
+        ]);
+    }
+
 }

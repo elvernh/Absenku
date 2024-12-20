@@ -24,8 +24,19 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
 
-
-
+        
+        <div class="flex w-full flex-wrap gap-5 mb-10">
+            <x-box>
+                <x-slot:text>Total Tagihan </x-slot:text>
+                <x-slot:value></x-slot:value>
+            </x-box>
+    
+            <x-box>
+                <x-slot:text>Sisa Tagihan </x-slot:text>
+                <x-slot:value></x-slot:value>
+            </x-box>
+        </div>
+        <h1>Riwayat Pembayaran</h1>
         <div
             class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
             <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center">Tanggal</h1>
@@ -51,36 +62,7 @@
         @endforeach
 
     </x-layout_homepage>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const canvas = document.getElementById('pieChart');
-            if (!canvas) {
-                console.error('Canvas element with id "pieChart" not found.');
-                return;
-            }
-
-            const ctx = canvas.getContext('2d');
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: ['Completed', 'Remaining', 'Kenneth'],
-                    datasets: [{
-                        data: [25, 25, 50],
-                        backgroundColor: ['#4CAF50', '#E0E0E0', '#1E1E1E'],
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: true, // Ensure it resizes proportionally
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                    },
-                },
-            });
-        });
-    </script>
+    
 
 
 
