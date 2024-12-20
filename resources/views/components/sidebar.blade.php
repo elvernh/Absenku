@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform">
+<div id="sidebar" class="w-64 h-screen px-6 z-10 bg-custom-blue text-white fixed transition-transform transform">
     <div class="flex justify-center mt-6 pb-5 border-b-[1px]">
         <img src="{{ asset('images/Atten-cropped.svg') }}" alt="logo" class="w-40 h-20">
     </div>
@@ -38,7 +38,7 @@
         </li>
         @elseif ($type == "Vendor")
         <li class="{{ Request::is('dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/dashboard" class="flex px-6 py-3 items-center">
+            <a href="/dashboardVendor" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/home.svg') }}" alt="home" class="mr-4">
                 <span class="font-medium">Dashboard Vendor</span>
             </a>
@@ -98,14 +98,7 @@
             </a>
         </li>
         @endif
-        
 
-                <a href={{ '/logout' . $type }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">
-                    <span class="font-medium">Log out</span>
-                </a>
-            </li>
-        @endif
     </ul>
     <button id="toggleBtn"
         class="absolute w-[40px] h-[80px] left-64 top-12 z-10 border-black border-t border-e border-b text-custom-blue p-2 text-3xl rounded bg-white">☰</button>
