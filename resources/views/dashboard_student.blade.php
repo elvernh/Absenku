@@ -12,14 +12,14 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="flex overflow-x-hidden bg-[#F4F4F4]">
+<body class="flex overflow-x-hidden bg-[#f4f4f4bd] relative">
     <!-- Sidebar -->
-    <x-sidebar>
+    <x-sidebar class="relative">
         <x-slot:type>{{ 'Murid' }}</x-slot:type>
     </x-sidebar>
 
     <!-- Main Layout -->
-    <x-layout_homepage>
+    <x-layout_homepage class="relative">
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
@@ -51,10 +51,11 @@
                         <h2 class="text-2xl font-bold">Ekstrakurikuler yang diikuti</h2>
 
                     </div>
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                            <thead
-                                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <div
+                        class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px]  bg-[#f4f4f457]">
+                        <table
+                            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Nomor</th>
                                     <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
@@ -148,6 +149,10 @@
                 </div>
 
     </x-layout_homepage>
+    <img src="images/aset1.png" alt=""
+        class="absolute left-[-90px] -z-[100] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] bottom-0 ">
+    <img src="images/aset5.png" alt=""
+        class="absolute  right-[3px] -z-[100] sm:right-[-10px] md:right-[-20px] lg:right-[0px] w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] bottom-0 ">
 
     <!-- Scripts -->
     <script></script>

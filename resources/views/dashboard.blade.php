@@ -17,7 +17,6 @@
 
     <x-sidebar class="relative">
         <x-slot:type>{{ 'Sekolah' }}</x-slot:type>
-
     </x-sidebar>
     <x-layout_homepage class="relative">
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
