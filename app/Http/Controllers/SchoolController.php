@@ -155,12 +155,14 @@ class SchoolController extends Controller
         if (!$school) {
             return redirect()->route('/');
         }
+        $name = Meeting::find($id);
 
         return view('detilabsensi', [
             'pageTitle' => "Detail Absensi",
             'name' => $school->name,
             'email' => $school->email,
-            'presences' => Presence::getPresenceBasedOnMeet($id)
+            'presences' => Presence::getPresenceBasedOnMeet($id),
+            'excur' => $name
         ]);
     }
 

@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform">
+<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform z-[100000]">
     <div class="flex justify-center mt-6 pb-5 border-b-[1px]">
         <img src="{{ asset('images/Atten-cropped.svg') }}" alt="logo" class="w-40 h-20">
     </div>
@@ -74,7 +74,7 @@
         <li class="{{ Request::is('daftarekskul') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
             <a href="/daftarekskul" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
-                <span class="font-medium">Ekstracurricular</span>
+                <span class="font-medium">Meeting</span>
             </a>
         </li>
         <li class="{{ Request::is('absensisiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">

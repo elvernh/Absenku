@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\Models\ExcurVendor;
 use App\Models\Student;
 use App\Models\StudentExcurVendor;
@@ -34,7 +34,7 @@ class StudentController extends Controller
     }
     public function processLogin(Request $request)
     {
-        
+
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -42,17 +42,17 @@ class StudentController extends Controller
 
         // Cek apakah pengguna ada di database
         $student = Student::where('email', $request->email)->first();
-        if($student){
+        if ($student) {
             // Cek password
             if ($student && Hash::check($request->password, $student->password)) {
                 // Menyimpan data ke session
                 session(['student_id' => $student->id]);
-    
+
                 return redirect()->route('dashboardStudent');
             }
             return back()->withErrors(['password' => 'The password is incorrect.']);
         }
-        
+
 
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
@@ -65,7 +65,6 @@ class StudentController extends Controller
             return redirect()->route('/');
         }
 
-        // Ambil data sekolah dari database berdasarkan student_id
         $student = Student::find($studentId);
         $studentExcur = StudentExcurVendor::getStudentExcur($studentId);
         $sum = StudentExcurVendor::getSumExcur($studentId);
@@ -74,13 +73,20 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->route('/');
         }
+        $results = StudentExcurVendor::where('student_id', $studentId)->get();
 
+        // Mem-filter data berdasarkan hari ini
+        $nows = $results->filter(function ($result) {
+            return $result->excurVendor->day == Carbon::now()->format('l'); // Bandingkan dengan hari ini
+        });
         return view('dashboard_student', [
-            'pageTitle' => "Dashboard Sekolah",
+            'pageTitle' => "Dashboard Murid",
             'name' => $student->full_name,
             'email' => $student->email,
-            'studentExcur' => $studentExcur,
-            'sum'=> $sum
+            'studentExcurs' => $studentExcur,
+            'results' => $results,
+            'sum' => $sum,
+            'nows' => $nows
         ]);
     }
 
@@ -90,11 +96,12 @@ class StudentController extends Controller
         return redirect()->route('/'); // Redirect ke halaman login
     }
 
-    public function showPendaftaran() {
+    public function showPendaftaran()
+    {
         $excurVendors = ExcurVendor::getAll();
         $fees = ExcurVendor::pluck('fee');
         $feeRp = [];
-        for($i = 0; $i < count($fees); $i++) {
+        for ($i = 0; $i < count($fees); $i++) {
             $rp = ExcurVendor::formatRupiah($fees[$i]);
             $feeRp[$i] = $rp;
         }
