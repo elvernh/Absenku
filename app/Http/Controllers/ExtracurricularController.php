@@ -12,6 +12,7 @@ class ExtracurricularController extends Controller
     //
     use HasFactory;
 
+
     public function index()
     {
         $ekskulList = Extracurricular::paginate(7);

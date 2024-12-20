@@ -15,116 +15,161 @@
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
-        <x-slot:type>{{ "Vendor" }}</x-slot:type>
+        <x-slot:type>{{ 'Vendor' }}</x-slot:type>
     </x-sidebar>
-    
+
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
-        <div>
-            <div class="flex w-full flex-wrap  gap-5">
-                <x-box>
-                    <x-slot:text>Jumlah Extrakulikuler</x-slot:text>
-                    <x-slot:value>10</x-slot:value>
-                </x-box>
-                <x-box>
-                    <x-slot:text>Jumlah Murid</x-slot:text>
-                    <x-slot:value>10000</x-slot:value>
-                </x-box>
-                <x-box>
-                    <x-slot:text>Jumlah Vendor</x-slot:text>
-                    <x-slot:value>10</x-slot:value>
-                </x-box>
-                <x-box>
-                    <x-slot:text>Jumlah Extrakulikuler aktif</x-slot:text>
-                    <x-slot:value>10</x-slot:value>
-                </x-box>
-            </div>
-            <div class="mt-10">
-                <div class="flex  p-3 items-center">
+        <div class="mt-10 flex flex-col md:flex-row gap-8">
+            <!-- Jadwal Hari Ini Table (50% width on medium screens and above) -->
+            <div class="w-full md:w-1/2">
+                <div class="flex p-3 items-center">
                     <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
-                    <div class="ms-20 text-white bg-green-600  flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
-                        <a href="/jadwal" class="text-sm">Buat jadwal</a>
-                    </div>
                 </div>
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full xl:w-[55%] border-[1px] border-slate-600">
-                    <table class=" w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full border-[1px] border-slate-600">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-white uppercase bg-custom-blue">
                             <tr>
-                                <th scope="col" class="px-6 py-3">
-                                    Ekstrakurikuler
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Divisi
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Level
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Vendor
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    jam mulai
-                                </th>
-                                <th scope="col" class="px-6 py-3">
-                                    jam berakhir
-                                </th>
-    
+                                <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
+                                <th scope="col" class="px-6 py-3">Divisi</th>
+                                <th scope="col" class="px-6 py-3">Level</th>
+                                <th scope="col" class="px-6 py-3">Vendor</th>
+                                <th scope="col" class="px-6 py-3">Jam Mulai</th>
+                                <th scope="col" class="px-6 py-3">Jam Berakhir</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @for ($i = 0; $i < 9; $i++)
-                                <tr
-                                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                    <th scope="row"
-                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        Basket
+                            @forelse ($jadwalHariIni as $jadwal)
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $jadwal->extracurricular->name }}
                                     </th>
-                                    <td class="px-6 py-4">
-                                        Silver
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        Laptop
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        $2999
+                                    <td class="px-6 py-4">{{ $jadwal->extracurricular->division }}</td>
+                                    <td class="px-6 py-4">{{ $jadwal->extracurricular->level }}</td>
+                                    <td class="px-6 py-4">{{ $jadwal->vendor->name }}</td>
+                                    <td class="px-6 py-4">{{ $jadwal->start_time }}</td>
+                                    <td class="px-6 py-4">{{ $jadwal->end_time }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="px-6 py-4 text-center">
+                                        Tidak ada jadwal untuk hari ini.
                                     </td>
                                 </tr>
-                            @endfor
-    
-    
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
-    
+            </div>
+            
+            <!-- Calendar Section (50% width on medium screens and above) -->
+            <div class="w-full md:w-1/2 bg-white rounded-lg shadow-md mt-8 md:mt-0">
+                <div class="bg-custom-blue text-white rounded-t-lg flex items-center justify-between">
+                    <!-- Previous Month Button -->
+                    <button id="prev-month" class="px-4 py-2 text-lg font-medium">
+                        &lt; Prev
+                    </button>
+            
+                    <!-- Month and Year Display -->
+                    <h2 id="month-year-display" class="text-2xl font-medium p-4">{{ \Carbon\Carbon::now()->format('F Y') }}</h2>
+            
+                    <!-- Next Month Button -->
+                    <button id="next-month" class="px-4 py-2 text-lg font-medium">
+                        Next &gt;
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-7 gap-2 px-4 pt-4 pb-6">
+                    <!-- Weekdays -->
+                    <div class="text-center font-bold">Sun</div>
+                    <div class="text-center font-bold">Mon</div>
+                    <div class="text-center font-bold">Tue</div>
+                    <div class="text-center font-bold">Wed</div>
+                    <div class="text-center font-bold">Thu</div>
+                    <div class="text-center font-bold">Fri</div>
+                    <div class="text-center font-bold">Sat</div>
+                </div>
+        
+                <!-- Calendar Days -->
+                <div id="calendar-days" class="grid grid-cols-7 gap-2 px-4 pt-4 pb-6">
+                    <!-- Dynamic calendar days will be inserted here by JavaScript -->
+                </div>
             </div>
         </div>
         
-
         
+
     </x-layout_homepage>
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const toggleBtn = document.getElementById('toggleBtn');
-        const content = document.getElementById('content');
-
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('-translate-x-64');
-            content.classList.toggle('ml-64');
+        // Initialize current month and year
+        let currentMonth = {{ \Carbon\Carbon::now()->month }};
+        let currentYear = {{ \Carbon\Carbon::now()->year }};
+        
+        // Update calendar display
+        function updateCalendar() {
+            // Update the month and year display
+            const monthYearDisplay = document.getElementById('month-year-display');
+            monthYearDisplay.innerText = new Date(currentYear, currentMonth - 1).toLocaleString('default', { month: 'long', year: 'numeric' });
+            
+            // Clear the current days
+            const calendarDays = document.getElementById('calendar-days');
+            calendarDays.innerHTML = '';
+            
+            // Get the first day of the month (0 = Sunday, 6 = Saturday)
+            const firstDayOfMonth = new Date(currentYear, currentMonth - 1, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth, 0).getDate();
+            
+            // Add empty divs for days before the first day
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                const emptyDiv = document.createElement('div');
+                calendarDays.appendChild(emptyDiv);
+            }
+    
+            // Add the days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateDiv = document.createElement('div');
+                const date = new Date(currentYear, currentMonth - 1, day);
+                const isToday = new Date().toDateString() === date.toDateString(); // Check if today is the current day
+    
+                // Highlight today
+                if (isToday) {
+                    dateDiv.classList.add('bg-custom-blue', 'text-white', 'font-medium', 'rounded-sm');
+                } else {
+                    dateDiv.classList.add('hover:bg-custom-blue', 'hover:text-white', 'cursor-pointer', 'hover:rounded-sm');
+                }
+                dateDiv.classList.add('text-center', 'py-2');
+                dateDiv.innerText = day;
+                calendarDays.appendChild(dateDiv);
+            }
+        }
+    
+        // Previous month button click handler
+        document.getElementById('prev-month').addEventListener('click', () => {
+            if (currentMonth === 1) {
+                currentMonth = 12;
+                currentYear--;
+            } else {
+                currentMonth--;
+            }
+            updateCalendar();
         });
+    
+        // Next month button click handler
+        document.getElementById('next-month').addEventListener('click', () => {
+            if (currentMonth === 12) {
+                currentMonth = 1;
+                currentYear++;
+            } else {
+                currentMonth++;
+            }
+            updateCalendar();
+        });
+    
+        // Initialize the calendar
+        updateCalendar();
     </script>
-
-
-
-
-
 </body>
 
 </html>

@@ -19,8 +19,8 @@ Route::get('/login', function () {
 Route::post('/loginSekolah', [SchoolController::class, 'processLogin']);
 Route::get('/dashboard', [SchoolController::class, 'showDashboard'])->name('dashboard');
 Route::get('/logoutSekolah', [SchoolController::class, 'logout'])->name('logout');
-Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul']);
-Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
+Route::get('/daftarekskul', [SchoolController::class, 'showDaftarEkskul'])->name('daftarekskul');
+Route::get('/daftarsiswa', [SchoolController::class, 'showDaftarMurid'])->name('daftarsiswa');
 
 Route::post("/loginMurid",[StudentController::class, 'processLogin']);
 Route::get("/dashboardStudent", [StudentController::class, 'showDashboard'])->name('dashboardStudent');
@@ -29,6 +29,7 @@ Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMu
 
 Route::post("/loginVendor", [VendorController::class, 'processLogin']);
 Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
+// Route::get("/daftarpertemuan",)
 Route::get('/logoutVendor', [VendorController::class, 'logout'])->name('logoutVendor');
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);

@@ -16,9 +16,21 @@ class ExcurVendor extends Model
         return "Rp " . number_format($number, 0, ',', '.');
     }
     
+    public static function getAllTodayByVendor($vendorId) {
+        return ExcurVendor::with(['extracurricular', 'vendor'])
+                          ->where('day', Carbon::now()->format('l')) // Filter by the current day of the week
+                          ->where('vendor_id', $vendorId)  // Filter by the specific vendor ID
+                          ->get();
+    }
+
     public static function getAllToday() {
-        $excurVendors = ExcurVendor::where('day', [Carbon::now()->format('l')])->get();;
-        return $excurVendors;
+        return ExcurVendor::with(['extracurricular', 'vendor'])
+                          ->where('day', Carbon::now()->format('l'))  // Ensure it filters by the day of the week
+                          ->get();
+    }
+
+    public static function getJumlahEkskul($vendorId){
+        return ExcurVendor::where('vendor_id', $vendorId)->count();
     }
 
     public function meetings(): HasMany
