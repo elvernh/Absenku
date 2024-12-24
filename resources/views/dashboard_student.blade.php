@@ -15,7 +15,7 @@
 <body class="flex overflow-x-hidden bg-[#f4f4f4bd] relative">
     <!-- Sidebar -->
     <x-sidebar class="relative">
-        <x-slot:type>{{ 'Murid' }}</x-slot:type>
+        <x-slot:type>{{ 'student' }}</x-slot:type>
     </x-sidebar>
 
     <!-- Main Layout -->
@@ -46,16 +46,16 @@
             </div>
 
             <div class="flex w-full flex-wrap justify-between">
-                <div class="w-full xl:w-1/2">
+                <div class="w-full xl:w-1/2 ">
                     <div class="flex items-center mb-4">
                         <h2 class="text-2xl font-bold">Ekstrakurikuler yang diikuti</h2>
 
                     </div>
                     <div
-                        class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px]  bg-[#f4f4f457]">
+                        class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px]  bg-[#f6f6f685]">
                         <table
                             class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase  dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Nomor</th>
                                     <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
@@ -70,7 +70,7 @@
 
                                 @for ($i = 0; $i < count($results); $i++)
                                     <tr
-                                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                             {{ $results[$i]->id }}

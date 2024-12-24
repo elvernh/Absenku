@@ -16,7 +16,7 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
 
     <x-sidebar class="relative">
-        <x-slot:type>{{ 'Sekolah' }}</x-slot:type>
+        <x-slot:type>{{ 'school' }}</x-slot:type>
     </x-sidebar>
     <x-layout_homepage class="relative">
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
@@ -154,7 +154,7 @@
             new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Completed', 'Remaining', 'Kenneth'],
+                    labels: ['Completed', 'Remaining', 'ongoing'],
                     datasets: [{
                         data: [25, 25, 50],
                         backgroundColor: ['#4CAF50', '#E0E0E0', '#1E1E1E'],

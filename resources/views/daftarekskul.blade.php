@@ -14,7 +14,7 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <!-- Sidebar -->
     <x-sidebar>
-        <x-slot:type>Sekolah</x-slot:type>
+        <x-slot:type>school</x-slot:type>
     </x-sidebar>
 
     <!-- Layout Homepage -->

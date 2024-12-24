@@ -35,7 +35,12 @@
                 <x-slot:value></x-slot:value>
             </x-box>
         </div>
-
+            <div class="flex">
+                <a href="/bayar" class=" text-white bg-green-600 flex items-center px-6 py-3 rounded-lg text-sm mb-5">
+                    Bayar
+                </a>
+        </div>
+       
         <h1 class="text-xl font-semibold mb-4">Riwayat Pembayaran</h1>
 
         <!-- Table Wrapper -->

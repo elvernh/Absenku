@@ -15,7 +15,7 @@
     
     {{-- sidebar --}}
     <x-sidebar>
-        <x-slot:type>{{ 'Sekolah' }}</x-slot:type>
+        <x-slot:type>{{ 'school' }}</x-slot:type>
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>

@@ -16,7 +16,7 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
 
     <x-sidebar class="relative">
-        <x-slot:type>{{ 'Murid' }}</x-slot:type>
+        <x-slot:type>{{ 'student' }}</x-slot:type>
     </x-sidebar>
 
     <x-layout_homepage class="relative">
