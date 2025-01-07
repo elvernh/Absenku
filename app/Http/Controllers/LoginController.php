@@ -38,7 +38,7 @@ class LoginController extends Controller
                     return redirect()->route('dashboardVendor');
                 } else if ($type == "school") {
                     session(['school_id' => $user->id]);
-                    return redirect()->route('dashboard');
+                    return redirect()->route('dashboardSchool');
                 }
 
             }
@@ -49,6 +49,18 @@ class LoginController extends Controller
 
         return back()->withErrors(['email' => 'Invalid credentials']);
     }
-}
 
+    public function logout($type)
+    {
+        if ($type == "student") {
+            session()->forget('student_id');
+        } else if ($type == "vendor") {
+            session()->forget('vendor_id');
+        } else if ($type == "school") {
+            session()->forget('school_id');
+        }
+        return redirect()->route('/'); // Redirect ke halaman login
+
+    }
+}
 ?>

@@ -16,48 +16,21 @@ use Illuminate\Support\Facades\Auth;
 class SchoolController extends Controller
 {
     //
-    public function processLogin(Request $request)
-    {
-
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        // Cek apakah pengguna ada di database
-        $school = School::where('email', $request->email)->first();
-        if ($school) {
-            // Cek password
-            if ($school && Hash::check($request->password, $school->password)) {
-                // Menyimpan data ke session
-                session(['school_id' => $school->id]);
-
-                return redirect()->route('dashboard');
-            }
-            return back()->withErrors(['password' => 'The password is incorrect.']);
-        }
-
-
-        return back()->withErrors(['email' => 'Invalid credentials']);
-    }
-
-    public function showDashboard()
+    
+   
+    public function index()
     {
 
         $schoolId = session('school_id');
-
+        // Jika tidak ditemukan, redirect ke login
         if (!$schoolId) {
-            // Jika tidak ada school_id di sesi, redirect ke halaman login
             return redirect()->route('/');
         }
-
-        // Ambil data sekolah dari database berdasarkan school_id
         $school = School::find($schoolId);
-
-        // Jika tidak ditemukan, redirect ke login
         if (!$school) {
             return redirect()->route('/');
         }
+        
         $vendorsCount = Vendor::withCount('excurVendors')->get();
 
         return view('dashboard', [
@@ -189,9 +162,4 @@ class SchoolController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
-    {
-        session()->forget('school_id');
-        return redirect()->route('/'); // Redirect ke halaman login
-    }
 }

@@ -23,6 +23,7 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
         <div>
+          
             <div class="flex w-full flex-wrap  gap-5">
                 <x-box>
                     <x-slot:text>Jumlah Extrakulikuler</x-slot:text>

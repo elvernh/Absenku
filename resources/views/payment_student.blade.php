@@ -16,7 +16,7 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
 
     <x-sidebar class="relative">
-        <x-slot:type>{{ 'Murid' }}</x-slot:type>
+        <x-slot:type>{{ 'student' }}</x-slot:type>
     </x-sidebar>
 
     <x-layout_homepage class="relative">
@@ -36,7 +36,7 @@
             </x-box>
         </div>
             <div class="flex">
-                <a href="/bayar" class=" text-white bg-green-600 flex items-center px-6 py-3 rounded-lg text-sm mb-5">
+                <a href={{ "/student". "/bayar"}} class=" text-white bg-green-600 flex items-center px-6 py-3 rounded-lg text-sm mb-5">
                     Bayar
                 </a>
         </div>
@@ -48,6 +48,7 @@
             <table class="w-full text-sm text-left text-gray-600">
                 <thead class="bg-gray-100 text-gray-800 uppercase">
                     <tr>
+                        <th class="px-4 py-3 text-center">id</th>
                         <th class="px-4 py-3 text-center">Tanggal</th>
                         <th class="px-4 py-3 text-center">Jumlah</th>
                         <th class="px-4 py-3 text-center">Status</th>
@@ -58,6 +59,8 @@
                 <tbody>
                     @foreach ($payments as $payment)
                         <tr class="border-b hover:bg-gray-50">
+                            <td class="px-4 py-3 text-center">{{ $payment->id }}</td>
+
                             <td class="px-4 py-3 text-center">{{ $payment->payment_date }}</td>
                             <td class="px-4 py-3 text-center">{{ $payment->amount }}</td>
                             <td class="px-4 py-3 text-center">
@@ -71,7 +74,7 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 @if ($payment->status_payment == 'gagal')
-                                    <a href="/bayar" class="text-blue-500 hover:underline">Bayar Ulang</a>
+                                    <a href={{  "student/bayar/".$payment->id}} class="text-blue-500 hover:underline">Bayar Ulang</a>
                                 @else
                                     -
                                 @endif

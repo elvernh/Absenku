@@ -10,46 +10,9 @@ use Illuminate\Support\Facades\Hash;
 class VendorController extends Controller
 {
 
-    public function processLogin(Request $request)
-    {
-        // // Validasi input
-        // $credentials = $request->validate([
-        //     'email' => 'required|email',
-        //     'password' => 'required',
-        // ]);
-        // if (Auth::guard('vendor')->attempt($credentials)) {
-        //     $request->session()->regenerate(); 
-        //     return redirect()->route('dashboardVendor'); 
-        // }
+    
 
-        // return back()->withErrors([
-        //     'email' => 'Email atau password salah.',
-        // ]);
-
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        // Cek apakah pengguna ada di database
-        $vendor = Vendor::where('email', $request->email)->first();
-        if ($vendor) {
-            // Cek password
-            if ($vendor && Hash::check($request->password, $vendor->password)) {
-                // Menyimpan data ke session
-                session(['vendor_id' => $vendor->id]);
-
-                return redirect()->route('dashboardVendor');
-            }
-            // Password is incorrect
-            return back()->withErrors(['password' => 'The password is incorrect.']);
-        }
-
-
-        return back()->withErrors(['email' => 'Invalid credentials']);
-    }
-
-    public function showDashboard()
+    public function index()
     {
         $vendorId = session('vendor_id');
 
@@ -64,7 +27,7 @@ class VendorController extends Controller
         }
 
         return view('dashboard_vendor', [
-            'pageTitle' => "Dashboard Sekolah",
+            'pageTitle' => "Dashboard Vendor",
             'name' => $vendor->name,
             'email' => $vendor->email
         ]);

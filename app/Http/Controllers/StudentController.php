@@ -32,32 +32,9 @@ class StudentController extends Controller
             'data' => $student,
         ], 201);
     }
-    public function processLogin(Request $request)
-    {
+    
 
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        // Cek apakah pengguna ada di database
-        $student = Student::where('email', $request->email)->first();
-        if ($student) {
-            // Cek password
-            if ($student && Hash::check($request->password, $student->password)) {
-                // Menyimpan data ke session
-                session(['student_id' => $student->id]);
-
-                return redirect()->route('dashboardStudent');
-            }
-            return back()->withErrors(['password' => 'The password is incorrect.']);
-        }
-
-
-        return back()->withErrors(['email' => 'Invalid credentials']);
-    }
-
-    public function showDashboard()
+    public function index()
     {
         $studentId = session('student_id');
 
