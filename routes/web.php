@@ -29,6 +29,7 @@ Route::prefix('school')->group(function () {
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
      Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
 
+
 });
 
 Route::prefix('student')->group(function () {
@@ -53,6 +54,7 @@ Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::
 // Route::post("/loginVendor", [VendorController::class, 'processLogin']);
 // Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
 // Route::get('/logoutVendor', [VendorController::class, 'logout'])->name('logoutVendor');
+
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
 Route::get(
