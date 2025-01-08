@@ -155,7 +155,8 @@
             new Chart(ctx, {
                 type: 'pie',
                 data: {
-                    labels: ['Completed', 'Remaining', 'ongoing'],
+
+                    labels: ['Completed', 'Remaining', 'Test'],
                     datasets: [{
                         data: [25, 25, 50],
                         backgroundColor: ['#4CAF50', '#E0E0E0', '#1E1E1E'],
