@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(column: 'meeting_id')->constrained(table: 'meetings', indexName: 'meeting_id');
-            $table->foreignId(column: 'excur_vendor_id')->constrained(table: 'excur_vendors', indexName: 'excur_vendor_id_1');
-            $table->foreignId(column: 'student_excur_vendor_id')->constrained(table: 'student_excur_vendors', indexName: 'student_excur_vendor_id');
+            $table->foreignId(column: 'meeting_id')->constrained(table: 'meetings', indexName: 'meeting_id')->onDelete('cascade');
+            $table->foreignId(column: 'excur_vendor_id')->constrained(table: 'excur_vendors', indexName: 'excur_vendor_id_1')->onDelete('cascade');
+            $table->foreignId(column: 'student_excur_vendor_id')->constrained(table: 'student_excur_vendors', indexName: 'student_excur_vendor_id')->onDelete('cascade');
             $table->string('keterangan');
             $table->foreignId(column: 'status_id')->constrained(table: 'statuses', indexName: 'status_id');
             $table->timestamps();

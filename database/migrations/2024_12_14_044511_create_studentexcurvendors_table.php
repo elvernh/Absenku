@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('student_excur_vendors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(column: 'excur_vendor_id')->constrained(table: 'excur_vendors', indexName: 'excurvendor_id');
-            $table->foreignId(column: 'student_id')->constrained(table: 'students', indexName: 'student_id');
+            $table->foreignId(column: 'excur_vendor_id')->constrained(table: 'excur_vendors', indexName: 'excurvendor_id')->onDelete('cascade');
+            $table->foreignId(column: 'student_id')->constrained(table: 'students', indexName: 'student_id')->onDelete('cascade');
             $table->integer('score_mid');
             $table->integer('score_final');
             $table->text('url_certificate');

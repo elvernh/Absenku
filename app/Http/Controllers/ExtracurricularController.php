@@ -28,18 +28,21 @@ class ExtracurricularController extends Controller
             'ekskul' => Extracurricular::find($id)
         ]);
     }
-    function destroy(Extracurricular $extracurricular)
+    public function destroy(Extracurricular $extracurricular)
     {
-        // delete all related projects
-        $del = $extracurricular->excurVendors()->delete();
-        // delete extracurricular
+        // Hapus semua data terkait di tabel excurVendors terlebih dahulu
+         $extracurricular->excurVendors()->delete();
+
+        // Hapus data utama setelah data terkait berhasil dihapus
         $del2 = $extracurricular->delete();
-        if ($del && $del2) {
+
+        if ($del2) {
             session()->flash('success', 'Berhasil menghapus ekskul');
-            return redirect()->route('dashboardSchool');
+            return redirect()->route('daftarekskul');
         } else {
             session()->flash('error', 'Gagal menghapus ekskul');
             return redirect()->back();
         }
     }
+
 }

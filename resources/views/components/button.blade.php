@@ -1,6 +1,6 @@
-<form action="{{ $action }}" method="{{ $method }}">
+<form action="{{ $action }}" method="POST">
     @csrf
-    @method($method)
+    @method($method)    
     @if ($method == 'DELETE')
         <button 
             class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-400"

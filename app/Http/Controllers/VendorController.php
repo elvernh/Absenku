@@ -10,9 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class VendorController extends Controller
 {
 
-    
-
-    public function index()
+    public function showDashboard()
     {
         $vendorId = session('vendor_id');
 

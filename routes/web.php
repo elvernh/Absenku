@@ -18,11 +18,10 @@ Route::get('/login', function () {
 });
 
 Route::prefix('school')->group(function () {
-    Route::get('/daftarekskul', [SchoolController::class, 'showDaftarEkskul']);
     Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboardSchool');
     Route::get('/logoutSekolah', [SchoolController::class, 'logout'])->name('logout');
     Route::get('/daftarekskulaktif', action: [SchoolController::class, 'showDaftarEkskulAktif']);
-    Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul']);
+    Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul'])->name("daftarekskul");
     Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
     Route::get('/absensisiswa', [SchoolController::class, 'showMeeting']);
     Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
@@ -40,6 +39,11 @@ Route::prefix('student')->group(function () {
     Route::get('/bayar', [StudentController::class, 'showBayar']);
 
 });
+
+Route::prefix('vendor')->group(function () {
+Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
+
+});
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);
 Route::get('/logout/{type}', [LoginController::class, 'logout']);
 Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::class, 'destroy'])->name('deleteExtracurricular');
@@ -51,7 +55,6 @@ Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::
 // Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMurid');
 
 // Route::post("/loginVendor", [VendorController::class, 'processLogin']);
-// Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
 // Route::get('/logoutVendor', [VendorController::class, 'logout'])->name('logoutVendor');
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
