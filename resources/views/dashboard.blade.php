@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/Atten-cropped.svg') }}" />
     <meta charset="UTF-8">
@@ -11,10 +10,10 @@
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
-
     <x-sidebar class="relative">
         <x-slot:type>{{ 'school' }}</x-slot:type>
     </x-sidebar>
@@ -23,7 +22,7 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
         <div>
-          
+
             <div class="flex w-full flex-wrap  gap-5">
                 <x-box>
                     <x-slot:text>Jumlah Extrakulikuler</x-slot:text>
@@ -99,7 +98,7 @@
                 <div class="flex items-center mb-4">
                     <h2 class="text-2xl font-bold">Daftar Vendor</h2>
                     <div class="ms-20 text-white bg-green-600 flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
-                        <a href="/jadwal" class="text-sm">Tambah Vendor</a>
+                        <a href="/school/addvendor" class="text-sm">Tambah Vendor</a>
                     </div>
                 </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
@@ -174,9 +173,16 @@
         });
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire('Success', "{{ session('success') }}", 'success');
+        @endif
 
-
-
+        @if (session('error'))
+            Swal.fire('Error', "{{ session('error') }}", 'error');
+        @endif
+    </script>
 
 </body>
 

@@ -7,4 +7,5 @@ use Illuminate\Http\Request;
 class StudentExcurVendorController extends Controller
 {
     //
+    
 }

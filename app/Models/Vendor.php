@@ -10,6 +10,7 @@ class Vendor extends Authenticatable
 {
     //
     use Notifiable;
+    protected $fillable = ['name', 'address', 'phone', 'email', 'password', 'token', 'description'];
 
     public static function getAll() {
         $vendors = Vendor::all();

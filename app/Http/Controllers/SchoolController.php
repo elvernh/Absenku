@@ -12,12 +12,13 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class SchoolController extends Controller
 {
     //
-    
-   
+
+
     public function index()
     {
 
@@ -30,7 +31,7 @@ class SchoolController extends Controller
         if (!$school) {
             return redirect()->route('/');
         }
-        
+
         $vendorsCount = Vendor::withCount('excurVendors')->get();
 
         return view('dashboard', [
@@ -42,6 +43,28 @@ class SchoolController extends Controller
             'counts' => $vendorsCount
         ]);
     }
+    public function showDaftarEkskulAktif()
+    {
+
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        $school = School::find($schoolId);
+
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('daftarekskulaktif', [
+            'pageTitle' => "Daftar Ekstrakulikuler Aktif",
+            'school' => $school,
+            'excurVendors' => ExcurVendor::getAll()
+        ]);
+    }
+
     public function showDaftarEkskul()
     {
 
@@ -58,9 +81,9 @@ class SchoolController extends Controller
         }
 
         return view('daftarekskul', [
-            'pageTitle' => "Daftar Ekskul",
+            'pageTitle' => "Daftar Ekstrakulikuler",
             'school' => $school,
-            'excurVendors' => ExcurVendor::getAll()
+            'extracurriculars' => Extracurricular::getAll()
         ]);
     }
 
@@ -161,5 +184,56 @@ class SchoolController extends Controller
             'all' => $vendors
         ]);
     }
+    public function showAddVendor()
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route('/');
+        }
+        $vendors = Vendor::getAll();
+        return view('add_vendor', [
+            'pageTitle' => "Tambah"
+        ]);
+    }
+
+    public function addVendor(Request $request)
+    {
+        // Validasi input dari form
+        $validated = $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required|email|unique:vendors',
+            'password' => 'required',
+            'description' => 'required',
+        ]);
+
+        // Hash password
+        $validated['password'] = bcrypt($validated['password']);
+
+        // Generate UUID token
+        $validated['token'] = Str::uuid();
+        $vendor = Vendor::create($validated);
+        if ($vendor) {
+            // Flash message ke session
+            session()->flash('success', 'Berhasil menambahkan vendor');
+            return redirect()->route('dashboardSchool');
+        } else {
+            session()->flash('error', 'Gagal menambahkan vendor');
+            return redirect()->back();
+        }
+       
+    }
+
 
 }

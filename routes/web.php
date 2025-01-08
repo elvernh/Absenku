@@ -21,9 +21,13 @@ Route::prefix('school')->group(function () {
     Route::get('/daftarekskul', [SchoolController::class, 'showDaftarEkskul']);
     Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboardSchool');
     Route::get('/logoutSekolah', [SchoolController::class, 'logout'])->name('logout');
+    Route::get('/daftarekskulaktif', action: [SchoolController::class, 'showDaftarEkskulAktif']);
     Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul']);
     Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
     Route::get('/absensisiswa', [SchoolController::class, 'showMeeting']);
+    Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
+    Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
+     Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
 
 });
 
@@ -38,7 +42,7 @@ Route::prefix('student')->group(function () {
 });
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);
 Route::get('/logout/{type}', [LoginController::class, 'logout']);
-
+Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::class, 'destroy'])->name('deleteExtracurricular');
 
 // Route::get("/dashboardStudent", [StudentController::class, 'showDashboard'])->name('dashboardStudent');
 // Route::get("/meetingStudent", [StudentController::class, 'showMeeting']);
@@ -59,7 +63,6 @@ Route::get(
 
 
 
-// Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
 // Route::get('/editprofile', function () {
 //     return view('editprofile', [
 //         "pageTitle" => "Edit Profile"

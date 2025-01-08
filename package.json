@@ -17,6 +17,7 @@
     "dependencies": {
         "chart.js": "^4.4.7",
         "flowbite": "^2.5.2",
-        "i": "^0.3.7"
+        "i": "^0.3.7",
+        "sweetalert2": "^11.15.10"
     }
 }

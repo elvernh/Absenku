@@ -54,41 +54,35 @@
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">No</th>
                         <th scope="col" class="px-6 py-3">Nama</th>
                         <th scope="col" class="px-6 py-3">Divisi</th>
                         <th scope="col" class="px-6 py-3">Level</th>
-                        
+                        <th scope="col" class="px-6 py-3">Vendor</th>
+                        <th scope="col" class="px-6 py-3">PIC</th>
+                        <th scope="col" class="px-6 py-3">Hari</th>
+                        <th scope="col" class="px-6 py-3">Jam Mulai</th>
+                        <th scope="col" class="px-6 py-3">Jam Selesai</th>
+                        <th scope="col" class="px-6 py-3">Biaya</th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $i = 1;
-                    @endphp
-                    @foreach ($extracurriculars as $exctracurricular)
-                    
+                    @foreach ($excurVendors as $excurVendor)
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{ $i }}
+                                {{ $excurVendor->extracurricular->name }}
                             </th>
-                            <td class="px-6 py-4">{{ $exctracurricular->name }}</td>
-                            <td class="px-6 py-4">{{ $exctracurricular->division }}</td>
-                            <td class="px-6 py-4">{{ $exctracurricular->level }}</td>
-
-                            <td> <x-button>
-                                <x-slot:action></x-slot:action>
-                                <x-slot:method>DELETE</x-slot:method>
-                            </x-button></td>
-                            <td> <x-button>
-                                <x-slot:action>PUT</x-slot:action>
-                                <x-slot:method>PUT</x-slot:method>
-                            </x-button></td>
-                            
+                            <td class="px-6 py-4">{{ $excurVendor->extracurricular->division }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->extracurricular->level }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->vendor->name }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->pic }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->day }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->start_time }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->end_time }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->fee }}</td>
+                            <td class="px-6 py-4 text-yellow-300"><a href="#">edit</a></td>
+                            <td class="px-6 py-4 text-red-500"><a href="#">delete</a></td>
                         </tr>
-                        @php
-                        $i++;
-                    @endphp
                     @endforeach
                 </tbody>
             </table>
