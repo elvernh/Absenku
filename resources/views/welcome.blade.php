@@ -20,13 +20,13 @@
                 <p class="text-lg text-gray-600 mt-4 w-[80%] md:w-[60%] lg:w-[60%] lg:text-xl">Solusi Mudah, Efisien, dan Terpercaya untuk Mencatat Kehadiran
                     Siswa dalam Kegiatan Ekstrakurikuler Anda</p>
                     <div class="flex flex-col gap-4 mt-8 lg:flex-row">
-                        <a href="{{ url('/login?type=Vendor') }}"
+                        <a href="{{ url('/login?type=vendor') }}"
                             class="py-4 px-8 text-center text-sm text-custom-blue bg-white font-medium border border-custom-blue rounded-xl hover:text-white hover:bg-custom-blue transition-all duration-300 lg:text-base whitespace-nowrap w-[300px] lg:w-full">Login
                             Sebagai Vendor</a>
-                        <a href="{{  url('/login?type=Murid')  }}"
+                        <a href="{{  url('/login?type=student')  }}"
                             class="py-4 px-8 text-center text-sm text-custom-blue bg-white font-medium border border-custom-blue rounded-xl hover:text-white hover:bg-custom-blue transition-all duration-300 lg:text-base whitespace-nowrap w-[300px] lg:w-full">Login
                             Sebagai Murid</a>
-                        <a href="{{ url('/login?type=Sekolah') }}"
+                        <a href="{{ url('/login?type=school') }}"
                         class="py-4 px-8 text-center text-sm text-custom-blue bg-white font-medium border border-custom-blue rounded-xl hover:text-white hover:bg-custom-blue transition-all duration-300 lg:text-base whitespace-nowrap w-[300px] lg:w-full">Login
                             Sebagai Sekolah</a>
                     </div>

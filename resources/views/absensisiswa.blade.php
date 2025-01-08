@@ -13,7 +13,7 @@
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
-        <x-slot:type>{{ 'Sekolah' }}</x-slot:type>
+        <x-slot:type>{{ 'school' }}</x-slot:type>
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
@@ -45,7 +45,7 @@
                     <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $meeting->teacher }}
                     </h1>
                     <a class="text-blue-700 sm:text-sm text-[11px] w-1/6 text-center"
-                        href={{ '/detail/absensi/' . $meeting->id }}>detail</a>
+                        href={{ '/school/detail/absensi/' . $meeting->id }}>detail</a>
                 </div>
             @endforeach
 

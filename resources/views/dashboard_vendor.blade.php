@@ -15,6 +15,7 @@
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
+
         <x-slot:type>{{ 'Vendor' }}</x-slot:type>
     </x-sidebar>
 

@@ -12,7 +12,7 @@
 </head>
 <body class="w-screen h-screen flex justify-center items-center" style="background-image: url('{{ asset('images/doodles.svg') }}'); background-size: cover;">
     <x-loginform :type="$type">{{ $type }}
-        <x-slot:route>{{ $type }}</x-slot:route>
+        <x-slot:type>{{ $type }}</x-slot:type>
     </x-loginform>
 </body>
 </html>
