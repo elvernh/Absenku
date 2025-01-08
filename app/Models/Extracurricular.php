@@ -11,12 +11,19 @@ class Extracurricular extends Model
     //
     use HasFactory;
 
-    public static function getAll() {
+    public static function getAll()
+    {
         $extracurriculars = Extracurricular::all();
         return $extracurriculars;
     }
-    public function excurVendors():HasMany  
+    public function excurVendors(): HasMany
     {
         return $this->hasMany(ExcurVendor::class, 'extracurricular_id');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'StudentExcurVendor', 'extracurricular_id', 'student_id')
+            ->withPivot('vendor_id'); // Include vendor info if needed
     }
 }

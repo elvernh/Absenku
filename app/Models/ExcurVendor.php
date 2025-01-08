@@ -48,12 +48,16 @@ class ExcurVendor extends Model
         return $excurvendors;
     }
 
+    public static function getAllById(){
+        
+    }
+
     public function extracurricular():BelongsTo
     {
         return $this->belongsTo(Extracurricular::class);
     }
-    public function studentExcurVendors():HasMany
-    {
-        return $this->hasMany(StudentExcurVendor::class, 'excur_vendor_id');
-    }
+    // public function studentExcurVendors():HasMany
+    // {
+    //     return $this->hasMany(StudentExcurVendor::class, 'excur_vendor_id');
+    // }
 }

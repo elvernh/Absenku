@@ -40,6 +40,11 @@ class StudentExcurVendor extends Model
         return $this->hasMany(Presence::class, 'student_excur_vendor_id');
     }
 
+    // public function getDetailExcur($id){
+    //     $extracurricular = Extracurricular::with('students')->find($id);
+    //     $totalStudents = $extracurricular->students->count();
+    // }
+
     public function payments():HasMany
     {
         return $this->hasMany(Payment::class, 'student_excur_vendor_id');

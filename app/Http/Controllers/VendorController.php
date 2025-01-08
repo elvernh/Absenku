@@ -77,6 +77,28 @@ class VendorController extends Controller
         ]);
     }
 
+    public function DaftarPertemuan(Request $request){
+        $vendorId = session('vendor_id');
+
+        if (!$vendorId) {
+            return redirect()->route('/');
+        }
+
+        $vendor = Vendor::find($vendorId);
+
+        if (!$vendor) {
+            return redirect()->route('/');
+        }
+        $ekskul = 
+
+        return view('daftarpertemuan',[
+            'pageTitle' => "Daftar Pertemuan",
+            'name' => $vendor->name,
+            'email' => $vendor->email,
+            'ekskul' => 
+        ]);
+    }
+
  
 
     public function logout(Request $request)

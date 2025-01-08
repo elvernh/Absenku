@@ -56,4 +56,9 @@ class Student extends Authenticatable
     {
         return $this->hasMany(StudentExcurVendor::class, 'student_id');
     }
+
+    // public function extracurriculars(){
+    //     return $this->belongsToMany(Extracurricular::class, 'StudentExcurVendor', 'student_id', 'extracurricular_id')
+    //     ->withPivot('vendor_id');
+    // }
 }

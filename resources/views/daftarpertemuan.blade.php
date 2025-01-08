@@ -24,7 +24,37 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
 
-        <div>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr class="flex justify-between">
+                        <th scope="col" class="px-6 py-3">
+                            Nama Ekskul
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jumlah Murid
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Hari
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jam Mulai
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Jam Berakhir
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Detail Pertemuan
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="flex justify-between bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td class="px-6 py-4">Kocak</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
             
     </x-layout_homepage>
 

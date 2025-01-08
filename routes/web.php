@@ -30,6 +30,7 @@ Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logoutMu
 Route::post("/loginVendor", [VendorController::class, 'processLogin']);
 Route::get("/dashboardVendor", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
 // Route::get("/daftarpertemuan",)
+Route::get('/daftarpertemuan', [VendorController::class, 'DaftarPertemuan']);
 Route::get('/logoutVendor', [VendorController::class, 'logout'])->name('logoutVendor');
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);

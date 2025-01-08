@@ -37,14 +37,14 @@
             </a>
         </li>
         @elseif ($type == "Vendor")
-        <li class="{{ Request::is('dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+        <li class="{{ Request::is('dashboardVendor') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
             <a href="/dashboardVendor" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/home.svg') }}" alt="home" class="mr-4">
                 <span class="font-medium">Dashboard Vendor</span>
             </a>
         </li>
-        <li class="{{ Request::is('daftarekskul') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/daftarekskul" class="flex px-6 py-3 items-center">
+        <li class="{{ Request::is('daftarpertemuan') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+            <a href="/daftarpertemuan" class="flex px-6 py-3 items-center">
                 <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
                 <span class="font-medium">Daftar Pertemuan</span>
             </a>
