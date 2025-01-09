@@ -26,9 +26,7 @@ Route::prefix('school')->group(function () {
     Route::get('/absensisiswa', [SchoolController::class, 'showMeeting']);
     Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
-     Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
-
-
+    Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
 });
 
 Route::prefix('student')->group(function () {
@@ -38,13 +36,14 @@ Route::prefix('student')->group(function () {
     Route::get('/payment', [StudentController::class, 'showPayment']);
     Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
     Route::get('/bayar', [StudentController::class, 'showBayar']);
-
 });
 
 Route::prefix('vendor')->group(function () {
-Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
-
+    Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
+    Route::get('/daftarpertemuan', [VendorController::class, 'daftarPertemuan']);
+    Route::get('/daftarsiswa', [VendorController::class, 'daftarSiswa']);
 });
+
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);
 Route::get('/logout/{type}', [LoginController::class, 'logout']);
 Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::class, 'destroy'])->name('deleteExtracurricular');
