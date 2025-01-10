@@ -39,7 +39,7 @@
                     <span class="font-medium">Siswa</span>
                 </a>
             </li>
-            
+
             <li
                 class="{{ Request::is('daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/daftarsiswa' }} class="flex px-6 py-3 items-center">
@@ -47,7 +47,6 @@
                     <span class="font-medium">Vendor</span>
                 </a>
             </li>
-            <div class="h-[320px] xl:h-[350px]"></div>
             <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
                 <a href={{ '/logout/' . $type }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">
@@ -78,63 +77,77 @@
             </li>
             <div class="h-[320px] xl:h-[350px]"></div>
             <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
-            <a href={{ '/logout' . $type }} class="flex px-6 py-3 items-center">
-                <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">
-                <span class="font-medium">Log out</span>
-            </a>
-        </li>
-        @elseif ($type == "Vendor")
-        <li class="{{ Request::is('dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/dashboardVendor" class="flex px-6 py-3 items-center">
-                <img src="{{ asset('icons/home.svg') }}" alt="home" class="mr-4">
-                <span class="font-medium">Dashboard Vendor</span>
-            </a>
-        </li>
-        <li class="{{ Request::is('daftarekskul') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/daftarekskul" class="flex px-6 py-3 items-center">
-                <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
-                <span class="font-medium">Daftar Pertemuan</span>
-            </a>
-        </li>
-       
-        <li class="{{ Request::is('siswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-            <a href="/daftarsiswa" class="flex px-6 py-3 items-center">
-                <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
-                <span class="font-medium">Siswa</span>
-            </a>
-        </li>
-        <div class="h-[320px] xl:h-[350px]"></div>
-        <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
+                <a href={{ '/logout' . $type }} class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">
+                    <span class="font-medium">Log out</span>
+                </a>
+            </li>
+        @elseif ($type == 'Vendor')
+            <li
+                class="{{ Request::is('dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href="/dashboardVendor" class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/home.svg') }}" alt="home" class="mr-4">
+                    <span class="font-medium">Dashboard Vendor</span>
+                </a>
+            </li>
+            <li
+                class="{{ Request::is('daftarekskul') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href="/daftarekskul" class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <span class="font-medium">Daftar Pertemuan</span>
+                </a>
+            </li>
 
-                <a href={{ $type . '/logout' }} class="flex px-6 py-3 items-center">
+            <li class="{{ Request::is('siswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href="/daftarsiswa" class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
+                    <span class="font-medium">Siswa</span>
+                </a>
+            </li>
+            <div class="h-[320px] xl:h-[350px]"></div>
+            <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
+
+                <a href={{ '/logout/' . $type }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">
                     <span class="font-medium">Log out</span>
                 </a>
             </li>
         @elseif($type == 'student')
             <li
-                class="{{ Request::is('dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                class="{{ Request::is('student/dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/dashboard' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/home.svg') }}" alt="home" class="mr-4">
                     <span class="font-medium">Dashboard</span>
                 </a>
             </li>
             <li
-                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                class="{{ Request::is('student/meeting') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/meeting' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Meeting</span>
                 </a>
             </li>
             <li
-                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                class="{{ Request::is('student/payment') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <img src="{{ asset('icons/dollar-sign.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Payments</span>
                 </a>
             </li>
-           
-            <div class="h-[320px] xl:h-[350px]"></div>
+            <li
+                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <span class="font-medium">Ekstrakurikuler</span>
+                </a>
+            </li>
+            <li
+                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <span class="font-medium">Sertifikat</span>
+                </a>
+            </li>
             <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
                 <a href={{ '/logout/' . $type }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">

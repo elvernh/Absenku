@@ -24,15 +24,12 @@ class StudentController extends Controller
         ]);
 
         // Membuat data student
-        $student = Student::createData($validatedData);
+        $student = Student::create($validatedData);
 
         // Mengembalikan respon
-        return response()->json([
-            'message' => 'Data berhasil dibuat',
-            'data' => $student,
-        ], 201);
+        return $student->id;
     }
-    
+
 
     public function index()
     {
@@ -43,7 +40,6 @@ class StudentController extends Controller
         }
 
         $student = Student::find($studentId);
-        $studentExcur = StudentExcurVendor::getStudentExcur($studentId);
         $sum = StudentExcurVendor::getSumExcur($studentId);
 
         // Jika tidak ditemukan, redirect ke login
@@ -54,16 +50,21 @@ class StudentController extends Controller
 
         // Mem-filter data berdasarkan hari ini
         $nows = $results->filter(function ($result) {
-            return $result->excurVendor->day == Carbon::now()->format('l'); // Bandingkan dengan hari ini
+            return $result->excurVendor->day == Carbon::now()->format('l');
         });
+
+        $midScore = StudentExcurVendor::getMidScoreAvg($studentId);
+        $finalScore = StudentExcurVendor::getFinalScoreAvg($studentId);
         return view('dashboard_student', [
             'pageTitle' => "Dashboard Murid",
             'name' => $student->full_name,
             'email' => $student->email,
-            'studentExcurs' => $studentExcur,
             'results' => $results,
-            'sum' => $sum,
-            'nows' => $nows
+            'nows' => $nows,
+            'student' => $studentId,
+            'sums' => PaymentController::rupiahFormat($sum),
+            'midScore' => $midScore,
+            'finalScore' => $finalScore
         ]);
     }
 
@@ -130,13 +131,15 @@ class StudentController extends Controller
         }
         $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
         $payments = $studentExcs->pluck('payment')->flatten();
+        $sum = StudentExcurVendor::getSumExcur($studentId);
 
         return view('payment_student', [
             'pageTitle' => "Pembayaran",
             'name' => $student->full_name,
             'email' => $student->email,
             'studentExcs' => $studentExcs,
-            'payments' => $payments
+            'payments' => $payments,
+            'billSum' => PaymentController::rupiahFormat($sum)
         ]);
     }
     public function showBayar()
@@ -155,13 +158,41 @@ class StudentController extends Controller
             return redirect()->route('/');
         }
         $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
-       
+        $studentExcs = $studentExcs->map(function ($item) {
+            // Modifikasi nilai dalam array
+            $item->bill = PaymentController::rupiahFormat($item->bill);
+            return $item;
+        });
+
         return view('paymentform', [
             'pageTitle' => "Pembayaran",
             'name' => $student->full_name,
             'email' => $student->email,
             'studentExcs' => $studentExcs,
-            
+
+        ]);
+    }
+
+    public function registerExcur(Request $request)
+    {
+        $validated = $request->validate([
+            'excur_vendor_id' => 'required|integer',
+            'day' => 'required|string',
+            'full_name' => 'required|string|max:255',
+            'grade' => 'required|string|max:255',
+            'educational_level' => 'required|string|max:255',
+            'from_class' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email|max:255',
+            'password' => 'required|string|min:8',
+        ]);
+        $ekskur = $request->input('ekskur', []); // Jika tidak ada checkbox dicentang, akan mengembalikan array kosong.
+
+        $studentId = StudentController::store($request);
+        
+        return view('tes', [
+            'data' => $ekskur,
+
+
         ]);
     }
 }

@@ -19,21 +19,7 @@ class Student extends Authenticatable
     // Kolom yang harus disembunyikan (untuk keamanan)
     protected $hidden = ['password', 'token'];
 
-    public static function createData(array $data)
-    {
-        return self::create([
-            'full_name' => $data['full_name'],
-            'grade' => $data['grade'],
-            'educatinal_level' => $data['educational_level'],
-            'from_class' => $data['from_class'],
-            'email' => $data['email'],
-            'token' => Str::uuid(),
-            'created_at' => now(),
-            'updated_at' => now(),
-            'password' => bcrypt($data['password'])
-        ]);
-        
-    }
+    
 
     public static function getSma()
     {

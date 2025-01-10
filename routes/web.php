@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\PaymentController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,7 @@ Route::prefix('school')->group(function () {
     Route::get('/absensisiswa', [SchoolController::class, 'showMeeting']);
     Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
-     Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
+    Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
 
 
 });
@@ -35,14 +36,15 @@ Route::prefix('student')->group(function () {
     Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboardStudent');
     Route::get('/logoutMurid', [StudentController::class, 'logout'])->name('logout');
     Route::get('/meeting', [StudentController::class, 'showMeeting']);
-    Route::get('/payment', [StudentController::class, 'showPayment']);
+    Route::get('/payment', [StudentController::class, 'showPayment'])->name('payment');
     Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
+    Route::post('/pendaftaranSubmit', [StudentController::class, 'registerExcur'])->name('pendaftaran');
     Route::get('/bayar', [StudentController::class, 'showBayar']);
-
+    Route::post('/bayarsubmit', [PaymentController::class, 'createPayment'])->name('bayar');
 });
 
 Route::prefix('vendor')->group(function () {
-Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
+    Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
 
 });
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);

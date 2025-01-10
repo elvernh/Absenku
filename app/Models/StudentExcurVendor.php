@@ -17,7 +17,15 @@ class StudentExcurVendor extends Model
     }
 
     public static function getSumExcur($id) {
-        $count = StudentExcurVendor::where('student_id', $id)->count();
+        $count = StudentExcurVendor::where('student_id', $id)->sum('bill');
+        return $count;
+    }
+    public static function getMidScoreAvg($id) {
+        $count = StudentExcurVendor::where('student_id', $id)->avg('score_mid');
+        return $count;
+    }
+    public static function getFinalScoreAvg($id) {
+        $count = StudentExcurVendor::where('student_id', $id)->avg('score_final');
         return $count;
     }
         public function payment(): HasMany

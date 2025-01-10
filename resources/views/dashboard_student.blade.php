@@ -13,6 +13,7 @@
 </head>
 
 <body class="flex overflow-x-hidden bg-[#f4f4f4bd] relative">
+ 
     <!-- Sidebar -->
     <x-sidebar class="relative">
         <x-slot:type>{{ 'student' }}</x-slot:type>
@@ -29,32 +30,29 @@
             <div class="flex w-full flex-wrap gap-5 mb-10">
                 <x-box>
                     <x-slot:text>Total Tagihan </x-slot:text>
-                    <x-slot:value>{{ $studentExcurs->bill }}</x-slot:value>
+                    <x-slot:value>{{ $sums }}</x-slot:value>
                 </x-box>
                 <x-box>
                     <x-slot:text>Mid Score </x-slot:text>
-                    <x-slot:value>{{ $studentExcurs->score_mid }}</x-slot:value>
+                    <x-slot:value>{{ $midScore }}</x-slot:value>
                 </x-box>
                 <x-box>
                     <x-slot:text>Final Score </x-slot:text>
-                    <x-slot:value>{{ $studentExcurs->score_final }}</x-slot:value>
+                    <x-slot:value>{{ $finalScore }}</x-slot:value>
                 </x-box>
                 <x-box>
                     <x-slot:text>Extrakulikuler </x-slot:text>
-                    <x-slot:value>{{ $sum }}</x-slot:value>
+                    <x-slot:value>{{ count($results) }}</x-slot:value>
                 </x-box>
             </div>
-
             <div class="flex w-full flex-wrap justify-between">
                 <div class="w-full xl:w-1/2 ">
                     <div class="flex items-center mb-4">
                         <h2 class="text-2xl font-bold">Ekstrakurikuler yang diikuti</h2>
 
                     </div>
-                    <div
-                        class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px]  bg-[#f6f6f685]">
-                        <table
-                            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px]  bg-[#f6f6f685]">
+                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
                             <thead class="text-xs text-gray-700 uppercase  dark:text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">Nomor</th>
@@ -68,42 +66,47 @@
                             </thead>
                             <tbody>
 
-                                @for ($i = 0; $i < count($results); $i++)
+                                @for ($i = 1; $i <= 5 ; $i++)
                                     <tr
                                         class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $results[$i]->id }}
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
+                                            {{ $i }}
                                         </th>
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
                                             {{ $results[$i]->excurVendor->extracurricular->name }}
                                         </th>
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
                                             {{ $results[$i]->excurVendor->start_time }}
                                         </th>
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
                                             {{ $results[$i]->excurVendor->end_time }}
                                         </th>
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
                                             {{ $results[$i]->excurVendor->extracurricular->level }}
                                         </th>
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
                                             {{ $results[$i]->excurVendor->extracurricular->division }}
                                         </th>
                                         <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
                                             {{ $results[$i]->excurVendor->day }}
                                         </th>
                                     </tr>
                                 @endfor
                             </tbody>
+                           
                         </table>
+                        
                     </div>
+                    @if (count($results) > 5)
+                        <a href="#">see more</a>
+                    @endif
                 </div>
                 <div class="w-full xl:w-[40%]">
                     <div class="flex items-center mb-4">
@@ -123,13 +126,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $a = 1;
+                                @endphp
                                 @foreach ($nows as $key => $now)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $key + 1 }}
+                                            {{ $a }}
                                         </th>
+                                        
                                         <td class="px-6 py-4">
                                             {{ $now->excurVendor->extracurricular->name ?? 'Tidak diketahui' }}
                                         </td>
@@ -140,6 +147,9 @@
                                             {{ $now->excurVendor->end_time }}
                                         </td>
                                     </tr>
+                                    @php
+                                    $a++;
+                                @endphp
                                 @endforeach
 
                             </tbody>
@@ -149,10 +159,10 @@
                 </div>
 
     </x-layout_homepage>
-    <img src="images/aset1.png" alt=""
-        class="absolute left-[-90px] -z-[100] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] bottom-0 ">
-    <img src="images/aset5.png" alt=""
-        class="absolute  right-[3px] -z-[100] sm:right-[-10px] md:right-[-20px] lg:right-[0px] w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] bottom-0 ">
+    <img src="{{ asset('images/aset1.png') }}" alt="dd"
+        class="absolute left-[-90px] -z-[100] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] bottom-[0]">
+    <img src="{{ asset('images/aset5.png') }}" alt="dd"
+        class="absolute  right-[3px] -z-[100] sm:right-[-10px] md:right-[-20px] lg:right-[0px] w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] bottom-[0]">
 
     <!-- Scripts -->
     <script></script>
