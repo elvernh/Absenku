@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId(column: 'student_excur_vendor_id')->constrained(table: 'student_excur_vendors', indexName: 'student_excur_vendor_id_m');
+            $table->foreignId(column: 'student_excur_vendor_id')->constrained(table: 'student_excur_vendors', indexName: 'student_excur_vendor_id_m')->onDelete('cascade');
             $table->date('payment_date');
             $table->integer('amount');
             $table->text('transfer_url');

@@ -32,7 +32,6 @@ class Student extends Authenticatable
             'updated_at' => now(),
             'password' => bcrypt($data['password'])
         ]);
-        
     }
 
     public static function getSma()
@@ -55,5 +54,10 @@ class Student extends Authenticatable
     public function studentExcurVendors(): HasMany
     {
         return $this->hasMany(StudentExcurVendor::class, 'student_id');
+    }
+
+    public function extracurriculars()
+    {
+        return $this->belongsToMany(ExcurVendor::class, 'student_excur_vendor', 'student_id', 'excur_vendor_id');
     }
 }

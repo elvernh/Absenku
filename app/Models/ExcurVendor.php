@@ -12,47 +12,76 @@ class ExcurVendor extends Model
 {
     //
     use HasFactory;
-    public static function formatRupiah($number) {
+    public static function formatRupiah($number)
+    {
         return "Rp " . number_format($number, 0, ',', '.');
     }
-    
-    public static function getAllTodayByVendor($vendorId) {
+
+    public static function getAllTodayByVendor($vendorId)
+    {
         return ExcurVendor::with(['extracurricular', 'vendor'])
-                          ->where('day', Carbon::now()->format('l')) // Filter by the current day of the week
-                          ->where('vendor_id', $vendorId)  // Filter by the specific vendor ID
-                          ->get();
+            ->where('day', Carbon::now()->format('l')) // Filter by the current day of the week
+            ->where('vendor_id', $vendorId)  // Filter by the specific vendor ID
+            ->get();
+    }
+    public static function getAllById($vendorId)
+    {
+        return ExcurVendor::with(['extracurricular', 'vendor'])
+            ->where('vendor_id', $vendorId)  // Filter by the specific vendor ID
+            ->get();
     }
 
-    public static function getAllToday() {
+    public static function getAllToday()
+    {
         return ExcurVendor::with(['extracurricular', 'vendor'])
-                          ->where('day', Carbon::now()->format('l'))  // Ensure it filters by the day of the week
-                          ->get();
+            ->where('day', Carbon::now()->format('l'))  // Ensure it filters by the day of the week
+            ->get();
     }
 
-    public static function getJumlahEkskul($vendorId){
+    public static function getJumlahEkskul($vendorId)
+    {
         return ExcurVendor::where('vendor_id', $vendorId)->count();
     }
 
     public function meetings(): HasMany
     {
-        return $this->HasMany(Meeting::class, 'excur_vendor_id'); 
+        return $this->HasMany(Meeting::class, 'excur_vendor_id');
     }
 
-    public function vendor():BelongsTo
+    public function vendor(): BelongsTo
     {
         return $this->belongsTo(Vendor::class);
     }
-    public function extracurricular():BelongsTo
+
+    public function studentsCount()
     {
-        return $this->belongsTo(Extracurricular::class);
+        return $this->hasMany(StudentExcurVendor::class, 'excur_vendor_id');
     }
 
-    public static function getAll() {
+    public static function getAllByVendorWithStudentCount($vendorId)
+    {
+        return self::with(['extracurricular', 'vendor'])
+            ->withCount('studentsCount') // Adds a `students_count` field
+            ->where('vendor_id', $vendorId)
+            ->get();
+    }
+    public function extracurricular(): BelongsTo
+    {
+        return $this->belongsTo(Extracurricular::class, 'extracurricular_id');
+    }
+
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'student_excur_vendor', 'excur_vendor_id', 'student_id');
+    }
+
+    public static function getAll()
+    {
         $excurvendors = ExcurVendor::all();
         return $excurvendors;
     }
 
-    public function studentExcurVendors():HasMany
+    public function studentExcurVendors(): HasMany
     {
         return $this->hasMany(StudentExcurVendor::class, 'excur_vendor_id');
     }
