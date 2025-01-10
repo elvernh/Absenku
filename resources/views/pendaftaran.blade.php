@@ -30,7 +30,7 @@
 
         <div
             class="m-auto w-full xl:w-[60%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
-            <form class="space-y-6" method="POST">
+            <form class="space-y-6" method="POST" action="{{ route('pendaftaran') }}">
                 <h1 class="text-3xl font-extrabold text-center text-indigo-700 mb-6">Form Pendaftaran Ekstrakurikuler
                 </h1>
                 @csrf
@@ -40,13 +40,13 @@
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
-                    <label for="class" class="block text-sm font-semibold text-gray-700">Kelas</label>
-                    <input type="number" name="class" id="class" required
+                    <label for="grade" class="block text-sm font-semibold text-gray-700">Kelas</label>
+                    <input type="number" name="grade" id="grade" required
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
-                    <label for="jenjang" class="block text-sm font-semibold text-gray-700">Jenjang</label>
-                    <select name="jenjang" id="jenjang" required
+                    <label for="educational_level" class="block text-sm font-semibold text-gray-700">Jenjang</label>
+                    <select name="educational_level" id="educational_level" required
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                         <option value="" disabled selected>Pilih Jenjang</option>
                         <option value="SMP">SMP</option>
@@ -54,8 +54,8 @@
                     </select>
                 </div>
                 <div>
-                    <label for="asal_kelas" class="block text-sm font-semibold text-gray-700">Asal Kelas</label>
-                    <input type="text" name="asal_kelas" id="asal_kelas" required
+                    <label for="from_class" class="block text-sm font-semibold text-gray-700">Asal Kelas</label>
+                    <input type="text" name="from_class" id="from_class" required
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
@@ -63,7 +63,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         @for ($i =0; $i < count($excurVendors); $i++)
                             <div class="flex items-center">
-                                <input type="checkbox" value={{ $excurVendors[$i] }}
+                                <input  name="ekskur[]" type="checkbox" value={{ $excurVendors[$i]->id }}
                                     class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
                                 <label for="e"
                                     class="ml-2 text-gray-700">{{ $excurVendors[$i]->extracurricular->name }} {{ $excurVendors[$i]->extracurricular->level }} {{ $excurVendors[$i]->extracurricular->division}} ({{ $feesRp[$i] }}) </label>

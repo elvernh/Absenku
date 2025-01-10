@@ -57,7 +57,6 @@
                                     <th scope="col" class="px-6 py-3">Vendor</th>
                                     <th scope="col" class="px-6 py-3">Jam Mulai</th>
                                     <th scope="col" class="px-6 py-3">Jam Berakhir</th>
-                                    <th scope="col" class="px-6 py-3">Hari</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,8 +72,6 @@
                                         <td class="px-6 py-4">{{ $excurVendor->vendor->name }}</td>
                                         <td class="px-6 py-4">{{ $excurVendor->start_time }}</td>
                                         <td class="px-6 py-4">{{ $excurVendor->end_time }}</td>
-                                        <td class="px-6 py-4">{{ $excurVendor->day }}</td>
-
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -178,11 +175,17 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         @if (session('success'))
-            Swal.fire('Success', "{{ session('success') }}", 'success');
+            Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
         @endif
 
         @if (session('error'))
-            Swal.fire('Error', "{{ session('error') }}", 'error');
+            Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
         @endif
     </script>
 

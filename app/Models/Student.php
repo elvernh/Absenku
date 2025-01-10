@@ -19,6 +19,7 @@ class Student extends Authenticatable
     // Kolom yang harus disembunyikan (untuk keamanan)
     protected $hidden = ['password', 'token'];
 
+
     public static function createData(array $data)
     {
         return self::create([

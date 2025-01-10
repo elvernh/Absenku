@@ -11,6 +11,8 @@ class Payment extends Model
 {
     //
     use HasFactory;
+    protected $fillable = ['amount', 'payment_date', 'transfer_url', 'student_excur_vendor_id', 'status_payment'];
+
 
     public function studentExcurVendors():BelongsTo {
         return $this->belongsTo(StudentExcurVendor::class, 'student_excur_vendor_id');

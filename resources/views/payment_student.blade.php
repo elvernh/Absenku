@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
@@ -27,13 +27,10 @@
         <div class="flex w-full flex-wrap gap-5 mb-10">
             <x-box>
                 <x-slot:text>Total Tagihan</x-slot:text>
-                <x-slot:value></x-slot:value>
+                <x-slot:value>{{ $billSum }}</x-slot:value>
             </x-box>
 
-            <x-box>
-                <x-slot:text>Sisa Tagihan</x-slot:text>
-                <x-slot:value></x-slot:value>
-            </x-box>
+           
         </div>
             <div class="flex">
                 <a href={{ "/student". "/bayar"}} class=" text-white bg-green-600 flex items-center px-6 py-3 rounded-lg text-sm mb-5">
@@ -48,8 +45,9 @@
             <table class="w-full text-sm text-left text-gray-600">
                 <thead class="bg-gray-100 text-gray-800 uppercase">
                     <tr>
-                        <th class="px-4 py-3 text-center">id</th>
+                        <th class="px-4 py-3 text-center">No</th>
                         <th class="px-4 py-3 text-center">Tanggal</th>
+                        <th class="px-4 py-3 text-center">Kode Pembayaran</th>
                         <th class="px-4 py-3 text-center">Jumlah</th>
                         <th class="px-4 py-3 text-center">Status</th>
                         <th class="px-4 py-3 text-center">Ekstrakurikuler</th>
@@ -57,11 +55,14 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $i = 1;
+                    @endphp
                     @foreach ($payments as $payment)
                         <tr class="border-b hover:bg-gray-50">
-                            <td class="px-4 py-3 text-center">{{ $payment->id }}</td>
-
+                            <td class="px-4 py-3 text-center">{{ $i }}</td>
                             <td class="px-4 py-3 text-center">{{ $payment->payment_date }}</td>
+                            <td class="px-4 py-3 text-center">{{ $payment->id }}</td>
                             <td class="px-4 py-3 text-center">{{ $payment->amount }}</td>
                             <td class="px-4 py-3 text-center">
                                 <span class="px-2 py-1 rounded-lg text-white text-xs
@@ -80,12 +81,30 @@
                                 @endif
                             </td>
                         </tr>
+                        @php
+                            $i++;   
+                            @endphp
                     @endforeach
                 </tbody>
             </table>
         </div>
     </x-layout_homepage>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;
+        @endif
 
+        @if (session('error'))
+            Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;
+        @endif
+    </script>
 </body>
 
 </html>
