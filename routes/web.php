@@ -41,6 +41,7 @@ Route::prefix('student')->group(function () {
 Route::prefix('vendor')->group(function () {
     Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
     Route::get('/daftarpertemuan', [VendorController::class, 'daftarPertemuan']);
+    Route::get('/daftarpertemuan/{id}', [VendorController::class, 'detilPertemuan'])->name('detilPertemuan');
     Route::get('/daftarsiswa', [VendorController::class, 'daftarSiswa']);
 });
 

@@ -43,7 +43,7 @@
                                 {{ $excur->extracurricular->name }}
                             </td>
                             <td class="px-6 py-4 text-center">
-                                {{ $excur->student_excur_vendors_count ?? '0' }} <!-- Display number of students -->
+                                {{ $excur->students_count_count}} <!-- Display number of students -->
                             </td>
                             <td class="px-6 py-4 text-center">
                                 {{ \Carbon\Carbon::parse($excur->start_date)->format('l') }} <!-- Display day of the week -->
@@ -55,7 +55,7 @@
                                 {{ \Carbon\Carbon::parse($excur->end_time)->format('H:i') }}
                             </td>
                             <td class="px-6 py-4 text-center">
-                                <a href="/" class="text-blue-600 hover:underline">
+                                <a href={{ "/vendor/daftarpertemuan/" . $excur->id }} class="text-blue-600 hover:underline">
                                     Lihat Detail
                                 </a>
                             </td>

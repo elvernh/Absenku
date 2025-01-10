@@ -32,7 +32,7 @@
             <div
                 class="flex  items-center bg-white p-4 xl:w-[23%] md:w-[30%] w-[100%] h-[100px] shadow border-s-[10px] border-custom-blue rounded-md">
                 <img src="{{ asset('icons/students.svg') }}" alt=null class="size-14 mr-4">
-                <p class="font-bold">Jumlah Ekskul : <span class="font-normal">{{ $jumlahEkskul }}</span></p>
+                <p class="font-bold">Jumlah Murid : <span class="font-normal">{{ $jumlahEkskul }}</span></p>
             </div>
         </div>
         <div class="mt-10 flex flex-col md:flex-row gap-8">
