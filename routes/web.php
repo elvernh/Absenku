@@ -29,7 +29,6 @@ Route::prefix('school')->group(function () {
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
     Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
 
-
 });
 
 Route::prefix('student')->group(function () {
@@ -41,12 +40,17 @@ Route::prefix('student')->group(function () {
     Route::post('/pendaftaranSubmit', [StudentController::class, 'registerExcur'])->name('pendaftaran');
     Route::get('/bayar', [StudentController::class, 'showBayar']);
     Route::post('/bayarsubmit', [PaymentController::class, 'createPayment'])->name('bayar');
+
 });
 
 Route::prefix('vendor')->group(function () {
     Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
 
+    Route::get('/daftarpertemuan', [VendorController::class, 'daftarPertemuan']);
+    Route::get('/daftarpertemuan/{id}', [VendorController::class, 'detilPertemuan'])->name('detilPertemuan');
+    Route::get('/daftarsiswa', [VendorController::class, 'daftarSiswa']);
 });
+
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);
 Route::get('/logout/{type}', [LoginController::class, 'logout']);
 Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::class, 'destroy'])->name('deleteExtracurricular');

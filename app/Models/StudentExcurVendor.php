@@ -52,4 +52,21 @@ class StudentExcurVendor extends Model
     {
         return $this->hasMany(Payment::class, 'student_excur_vendor_id');
     }
+
+    public static function getAllByVendorId($vendorId)
+    {
+        return self::with(['extracurricular', 'excurVendor'])
+                    ->whereHas('excurVendor', function ($query) use ($vendorId) {
+                        $query->where('vendor_id', $vendorId);  // Filter ExcurVendor by vendor_id
+                    })
+                    ->get();  // Get all records for the specific vendor
+    }
+
+
+    // Define the relationship to Extracurricular
+    public function extracurricular()
+    {
+        return $this->belongsTo(Extracurricular::class, 'extracurricular_id');
+    }
+
 }
