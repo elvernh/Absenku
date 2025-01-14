@@ -28,6 +28,8 @@ Route::prefix('school')->group(function () {
     Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
     Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
+    Route::get('/tambahekskul', [SchoolController::class, 'showAddExcur']);
+    Route::post('/addtambahekskulsubmit', [SchoolController::class, 'addExcur'])->name('addExcur');
 
 });
 
@@ -66,10 +68,10 @@ Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::
 
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
-Route::get(
-    '/tambahekskul',
-    [SchoolController::class, 'addExcur']
-);
+// Route::get(
+//     '/tambahekskul',
+//     [SchoolController::class, 'addExcur']
+// );
 
 
 

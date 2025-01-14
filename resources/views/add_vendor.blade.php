@@ -5,11 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <title>Form Pendaftaran</title>
+    <title>Tambah Vendor</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -17,11 +18,19 @@
     @endif
 </head>
 
-<body class="w-full h-full flex">
-    <div
+<body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
+    <x-sidebar class="relative">
+        <x-slot:type>{{ 'school' }}</x-slot:type>
+    </x-sidebar>
+    <x-layout_homepage>
+
+        <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:name>{{ $name }}</x-slot:name>
+        <x-slot:email>{{ $email }}</x-slot:email>
+        <div
         class="m-auto w-full xl:w-[60%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
         <form class="space-y-6" method="post" action="{{ route('add') }}">
-            <h1 class="text-3xl font-extrabold text-center text-indigo-700 mb-6">Register Vendor
+            <h1 class="text-3xl font-bold text-center text-[#343372] mb-6">Register Vendor
             </h1>
             @csrf
             <div>
@@ -75,10 +84,12 @@
             </div>
             <div>
                 <button type="submit"
-                    class="w-full rounded-lg bg-indigo-600 px-4 py-2 text-white font-semibold shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Daftar</button>
+                    class="w-full rounded-lg bg-[#343372] px-4 py-2 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Daftar</button>
             </div>
         </form>
     </div>
+    </x-layout_homepage>
+    
 </body>
 
 </html>

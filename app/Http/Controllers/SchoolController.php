@@ -162,7 +162,9 @@ class SchoolController extends Controller
         ]);
     }
 
-    public function addExcur()
+    
+
+    public function showAddExcur()
     {
         $schoolId = session('school_id');
 
@@ -180,9 +182,31 @@ class SchoolController extends Controller
         }
         $vendors = Vendor::getAll();
         return view('tambahekskul', [
-            'pageTitle' => "Tambah",
-            'all' => $vendors
+            'pageTitle' => "Tambah Ekskul",
+            'all' => $vendors,
+            'name' => $school->name,
+            'email' => $school->email,
         ]);
+    }
+    public function addExcur(Request $request){
+        $validated = $request->validate([
+            'name' => 'required',
+            'division' => 'required',
+            'level' => 'required',
+            'fee' => 'required|numeric',
+            'vendor_id' => 'required|array',
+            'vendor_id.*' => 'exists:vendors,id', // Ensure each vendor ID exists
+        ]);
+        $ekskul = Extracurricular::create($validated);
+        if ($ekskul) {
+            // Flash message ke session
+            session()->flash('success', 'Berhasil menambahkan ekskul');
+            return redirect()->route('dashboardSchool');
+        } else {
+            session()->flash('error', 'Gagal menambahkan ekskul');
+            return redirect()->back();
+        }
+
     }
     public function showAddVendor()
     {
@@ -202,7 +226,9 @@ class SchoolController extends Controller
         }
         $vendors = Vendor::getAll();
         return view('add_vendor', [
-            'pageTitle' => "Tambah"
+            'pageTitle' => "Tambah Vendor",
+            'name' => $school->name,
+            'email' => $school->email,
         ]);
     }
 
