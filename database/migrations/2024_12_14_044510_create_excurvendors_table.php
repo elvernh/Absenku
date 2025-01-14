@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->time('end_time');
             $table->string('pic');
             $table->string('day');
+            $table->string('status');
             $table->timestamps();
         });
     }

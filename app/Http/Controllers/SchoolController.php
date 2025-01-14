@@ -8,6 +8,7 @@ use App\Models\Meeting;
 use App\Models\Presence;
 use App\Models\School;
 use App\Models\Student;
+use App\Models\StudentExcurVendor;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -110,7 +111,7 @@ class SchoolController extends Controller
         ]);
     }
 
-    public static function showMeeting()
+    public static function showMeeting($excurVendorId)
     {
         $schoolId = session('school_id');
 
@@ -126,12 +127,13 @@ class SchoolController extends Controller
         if (!$school) {
             return redirect()->route('/');
         }
+        $name = ExcurVendor::find($excurVendorId);
 
         return view('absensisiswa', [
-            'pageTitle' => "Meeting",
+            'pageTitle' => $name->extracurricular->name,
             'name' => $school->name,
             'email' => $school->email,
-            'meetings' => Meeting::getAll()
+            'meetings' => Meeting::getAllByExcurVendorId($excurVendorId)
         ]);
     }
 
@@ -235,5 +237,29 @@ class SchoolController extends Controller
        
     }
 
+    public function showPendaftaran() {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('listpendaftaran', [
+            'pageTitle' => "Pendaftaran", 
+            'name' => $school->name,
+            'email' => $school->email,
+            'pendings' => StudentExcurVendor::listPending(),
+            'all' => StudentExcurVendor::all()           
+        ]);
+    }
 
 }

@@ -17,20 +17,19 @@
     @endif
 </head>
 
-<body class="w-full relative">
+<body class="w-full h-full flex flex-col items-center justify-center relative">
 
 
-    <x-navbar></x-navbar>
 
-    <main class="ps-8 pe-8 pb-2 -z-1000">
+    <main class="ps-8 pe-8 pb-2 -z-1000 w-full">
         <img src="images/aset1.png" alt=""
             class="absolute -bottom-10 left-[-90px] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] mb-4">
         <img src="images/aset5.png" alt=""
             class="absolute -bottom-4 right-[3px] sm:right-[-10px] md:right-[-20px] lg:right-[0px] w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] mb-4">
 
         <div
-            class="m-auto w-full xl:w-[60%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
-            <form class="space-y-6" method="POST">
+            class="m-auto w-full xl:w-[50%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
+            <form class="space-y-6" method="POST" action="{{ route('tambahekskul') }}">
                 @csrf
                 <h1 class="text-3xl font-extrabold text-center text-indigo-700 mb-6">Tambah Ekskul
                 </h1>
@@ -59,24 +58,9 @@
                         <option value="reguler">reguler</option>
                     </select>
                 </div>
-                <div>
-                    <label for="fee" class="block text-sm font-semibold text-gray-700">Biaya</label>
-                    <input type="number" name="fee" id="fee" required
-                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
+                
 
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700">Vendor</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        @foreach ($all as $vendor)
-                            <div class="flex items-center">
-                                <input type="checkbox" value={{ $vendor->id }}
-                                    class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="e" class="ml-2 text-gray-700">{{ $vendor->name }} </label>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+               
                 
                 <div>
                     <button type="submit"

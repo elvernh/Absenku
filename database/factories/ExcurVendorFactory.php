@@ -30,8 +30,11 @@ class ExcurVendorFactory extends Factory
             'start_time' => $this->faker->time(),
             'end_time' => $this->faker->time(),
             'pic' => $this->faker->name(),
-            'day' => $this->faker->randomElement(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
+            'day' => $this->faker->randomElement(array: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
+            'status' => $this->faker->randomElement(array: ['Aktif']),
             'fee' => $this->faker->numberBetween(100000, 1000000),
+            'end_date' => $this->faker->date(),
+
         ];
     }
 }

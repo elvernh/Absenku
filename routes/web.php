@@ -6,6 +6,7 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StudentExcurVendorController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,11 +25,24 @@ Route::prefix('school')->group(function () {
     Route::get('/daftarekskulaktif', action: [SchoolController::class, 'showDaftarEkskulAktif']);
     Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul'])->name("daftarekskul");
     Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
-    Route::get('/absensisiswa', [SchoolController::class, 'showMeeting']);
+    Route::get('/absensisiswa/{excurVendorId}', [SchoolController::class, 'showMeeting']);
     Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
     Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
-
+    Route::get(
+        '/tambahekskul',
+        [SchoolController::class, 'addExcur']
+    );
+    Route::post(
+        '/tambahekskulsubmit',
+        [ExtracurricularController::class, 'createEkskul']
+    )->name(
+            'tambahekskul'
+        );
+        Route::get("/pendaftaran", [SchoolController::class, 'showPendaftaran'])->name("pendaftaran");
+        Route::get('/reject/{id}', [StudentExcurVendorController::class, 'reject'])->name(
+            'reject'
+        );
 });
 
 Route::prefix('student')->group(function () {

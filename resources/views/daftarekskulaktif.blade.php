@@ -58,11 +58,12 @@
                         <th scope="col" class="px-6 py-3">Divisi</th>
                         <th scope="col" class="px-6 py-3">Level</th>
                         <th scope="col" class="px-6 py-3">Vendor</th>
+                        <th scope="col" class="px-6 py-3">Tahun Ajaran</th>
+                        <th scope="col" class="px-6 py-3">Semester</th>
                         <th scope="col" class="px-6 py-3">PIC</th>
                         <th scope="col" class="px-6 py-3">Hari</th>
-                        <th scope="col" class="px-6 py-3">Jam Mulai</th>
-                        <th scope="col" class="px-6 py-3">Jam Selesai</th>
                         <th scope="col" class="px-6 py-3">Biaya</th>
+                        <th scope="col" class="px-6 py-3">Status</th>
 
                     </tr>
                 </thead>
@@ -75,13 +76,15 @@
                             <td class="px-6 py-4">{{ $excurVendor->extracurricular->division }}</td>
                             <td class="px-6 py-4">{{ $excurVendor->extracurricular->level }}</td>
                             <td class="px-6 py-4">{{ $excurVendor->vendor->name }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->academic_year }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->semester }}</td>
                             <td class="px-6 py-4">{{ $excurVendor->pic }}</td>
-                            <td class="px-6 py-4">{{ $excurVendor->day }}</td>
-                            <td class="px-6 py-4">{{ $excurVendor->start_time }}</td>
-                            <td class="px-6 py-4">{{ $excurVendor->end_time }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->day }} ({{ $excurVendor->start_time }} - {{ $excurVendor->end_time }})</td>
                             <td class="px-6 py-4">{{ $excurVendor->fee }}</td>
-                            <td class="px-6 py-4 text-yellow-300"><a href="#">edit</a></td>
-                            <td class="px-6 py-4 text-red-500"><a href="#">delete</a></td>
+                            <td class="px-6 py-4">{{ $excurVendor->status }}</td>
+
+                            <td class="px-6 py-4 text-yellow-400"><a href="#">edit</a></td>
+                            <td class="px-6 py-4 text-blue-500"><a href={{ "absensisiswa/". $excurVendor->id }}>daftar pertemuan</a></td>
                         </tr>
                     @endforeach
                 </tbody>

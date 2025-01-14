@@ -22,6 +22,24 @@ class ExtracurricularController extends Controller
         ]);
     }
 
+    public function createEkskul(Request $request){
+        $validated = $request->validate([
+            'name' => 'required',
+            'division' => 'required',
+            'level' => 'required',
+        ]);
+
+        $extracurricular = Extracurricular::create($validated);
+
+        if ($extracurricular) {
+            session()->flash('success', 'Berhasil menambahkan ekskul');
+            return redirect()->route('daftarekskul');
+        }else {
+            session()->flash('error', 'Gagal menambahkan ekskul');
+            return redirect()->back();
+        }
+    }
+
     public function findDetilAbsensi($id)
     {
         return view('detilabsensi', [

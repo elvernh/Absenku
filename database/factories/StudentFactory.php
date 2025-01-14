@@ -35,6 +35,7 @@ class StudentFactory extends Factory
             'from_class' => $asal,
             'email' => $this->faker->unique()->safeEmail(),
             'password' => bcrypt('password123'), 
+            'profile_picture' => 'default.png',
             'token' => Str::uuid()
         ];
     }
