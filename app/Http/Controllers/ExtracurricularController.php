@@ -22,11 +22,15 @@ class ExtracurricularController extends Controller
         ]);
     }
 
-    public function createEkskul(Request $request){
+    public function createEkskul(Request $request)
+    {
         $validated = $request->validate([
             'name' => 'required',
             'division' => 'required',
             'level' => 'required',
+            'vendor_id' => 'required|array',
+            'vendor_id.*' => 'exists:vendors,id',
+
         ]);
 
         $extracurricular = Extracurricular::create($validated);
@@ -34,7 +38,7 @@ class ExtracurricularController extends Controller
         if ($extracurricular) {
             session()->flash('success', 'Berhasil menambahkan ekskul');
             return redirect()->route('daftarekskul');
-        }else {
+        } else {
             session()->flash('error', 'Gagal menambahkan ekskul');
             return redirect()->back();
         }
@@ -47,10 +51,11 @@ class ExtracurricularController extends Controller
             'ekskul' => Extracurricular::find($id)
         ]);
     }
+
     public function destroy(Extracurricular $extracurricular)
     {
         // Hapus semua data terkait di tabel excurVendors terlebih dahulu
-         $extracurricular->excurVendors()->delete();
+        $extracurricular->excurVendors()->delete();
 
         // Hapus data utama setelah data terkait berhasil dihapus
         $del2 = $extracurricular->delete();
@@ -63,5 +68,4 @@ class ExtracurricularController extends Controller
             return redirect()->back();
         }
     }
-
 }

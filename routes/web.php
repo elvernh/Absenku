@@ -25,43 +25,44 @@ Route::get('/login', function () {
 });
 
 Route::prefix('school')->group(function () {
+    // Dashboard and Logout
     Route::get('/dashboard', [SchoolController::class, 'index'])->name('dashboardSchool');
     Route::get('/logoutSekolah', [SchoolController::class, 'logout'])->name('logout');
-    Route::get('/daftarekskulaktif', action: [SchoolController::class, 'showDaftarEkskulAktif'])->name("daftarekskulaktif");
-    Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul'])->name("daftarekskul");
-    Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
-    Route::get('/daftarvendor', action: [SchoolController::class, 'showDaftarVendor']);
-    Route::get('/absensisiswa/{excurVendorId}', [SchoolController::class, 'showMeeting']);
+
+    // Extracurricular Routes
+    Route::get('/daftarekskulaktif', [SchoolController::class, 'showDaftarEkskulAktif'])->name('daftarekskulaktif');
+    Route::get('/daftarekskul', [SchoolController::class, 'showDaftarEkskul'])->name('daftarekskul');
+    Route::get('/tambahekskul', [SchoolController::class, 'showAddExcur']);
+    Route::post('/tambahekskulsubmit', [ExtracurricularController::class, 'createEkskul'])->name('tambahekskul');
+    Route::get('/editekskul/{id}', [SchoolController::class, 'updateExcur'])->name('editExcur'); // Added route name
+    Route::put('/editekskul/{id}', [SchoolController::class, 'setUpdateExcur'])->name('updateExcur');
+
+    // Student and Vendor Routes
+    Route::get('/daftarsiswa', [SchoolController::class, 'showDaftarMurid']);
+    Route::get('/daftarvendor', [SchoolController::class, 'showDaftarVendor']);
     Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');
-    Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
-    Route::get(
-        '/tambahekskul',
-        [SchoolController::class, 'addExcur']
-    );
-    Route::post(
-        '/tambahekskulsubmit',
-        [ExtracurricularController::class, 'createEkskul']
-    )->name(
-            'tambahekskul'
-        );
-    Route::get("/pendaftaran", [SchoolController::class, 'showPendaftaran'])->name("pendaftaran");
-    Route::get('/reject/{id}', [StudentExcurVendorController::class, 'reject'])->name(
-        'reject'
-    );
-    Route::get('/approve/{id}', [StudentExcurVendorController::class, 'approve'])->name(
-        'approve'
-    );
-    Route::get(uri: '/create/meeting', action: function() {
-        return view('pertemuanform', ["excurVendors" => ExcurVendor::all()]);
-    });
-    Route::get(uri: '/activate', action: function() {
-        return view('activateekskul', ["Vendors" => Vendor::all(), "extras" => Extracurricular::all()]);
-    });
-    Route::post(uri: '/submitactivate', action: [ExcurVendorController::class, 'store'])->name("submitActivate");
 
-    Route::post(uri: '/submitmeeting', action: [MeetingController::class, 'createMeeting'])->name("createMeeting");
+    // Attendance Routes
+    Route::get('/absensisiswa/{excurVendorId}', [SchoolController::class, 'showMeeting']);
+    Route::get('/detail/absensi/{id}', [SchoolController::class, 'showAbsensi']);
+
+    // Pendaftaran
+    Route::get('/pendaftaran', [SchoolController::class, 'showPendaftaran'])->name('pendaftaran');
+    Route::get('/reject/{id}', [StudentExcurVendorController::class, 'reject'])->name('reject');
+    Route::get('/approve/{id}', [StudentExcurVendorController::class, 'approve'])->name('approve');
+
+    // Meeting and Activation Routes
+    Route::get('/create/meeting', function () {
+        return view('pertemuanform', ['excurVendors' => ExcurVendor::all()]);
+    });
+    Route::post('/submitmeeting', [MeetingController::class, 'createMeeting'])->name('createMeeting');
+    Route::get('/activate', function () {
+        return view('activateekskul', ['Vendors' => Vendor::all(), 'extras' => Extracurricular::all()]);
+    });
+    Route::post('/submitactivate', [ExcurVendorController::class, 'store'])->name('submitActivate');
 });
+
 
 Route::prefix('student')->group(function () {
     Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboardStudent');
@@ -72,7 +73,6 @@ Route::prefix('student')->group(function () {
     // Route::post('/pendaftaranSubmit', [StudentController::class, 'registerExcur'])->name('pendaftaran');
     Route::get('/bayar', [StudentController::class, 'showBayar']);
     Route::post('/bayarsubmit', [PaymentController::class, 'createPayment'])->name('bayar');
-
 });
 
 Route::prefix('vendor')->group(function () {
@@ -95,7 +95,3 @@ Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
 //     '/tambahekskul',
 //     [SchoolController::class, 'addExcur']
 // );
-
-
-
-

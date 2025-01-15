@@ -87,8 +87,9 @@
                                     <x-slot:method>DELETE</x-slot:method>
                                 </x-button></td>
                             <td> <x-button>
-                                    <x-slot:action>PUT</x-slot:action>
-                                    <x-slot:method>PUT</x-slot:method>
+                                <x-slot:action>{{ route('editExcur', $exctracurricular->id) }}</x-slot:action>
+                                <x-slot:method>GET</x-slot:method>
+                                Edit
                                 </x-button></td>
 
                         </tr>

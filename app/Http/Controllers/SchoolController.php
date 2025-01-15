@@ -129,7 +129,7 @@ class SchoolController extends Controller
             'pageTitle' => "Daftar Vendor",
             'school' => $school,
             'vendors' => Vendor::getAll()
-            
+
         ]);
     }
     public static function showMeeting($excurVendorId)
@@ -185,7 +185,7 @@ class SchoolController extends Controller
         ]);
     }
 
-    
+
 
     public function showAddExcur()
     {
@@ -208,7 +208,8 @@ class SchoolController extends Controller
             'email' => $school->email,
         ]);
     }
-    public function addExcur(Request $request){
+    public function addExcur(Request $request)
+    {
         $validated = $request->validate([
             'name' => 'required',
             'division' => 'required',
@@ -226,8 +227,73 @@ class SchoolController extends Controller
             session()->flash('error', 'Gagal menambahkan ekskul');
             return redirect()->back();
         }
-
     }
+
+    public function updateExcur($id)
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        $school = School::find($schoolId);
+
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        // Retrieve the extracurricular record with the given ID and school ID
+        $extracurricular = Extracurricular::find($id);
+
+        if (!$extracurricular) {
+            return redirect()->route('/')->with('error', 'Extracurricular not found');
+        }
+
+        return view('editekskul', [
+            'pageTitle' => "Update Ekskul",
+            'name' => $school->name,
+            'email' => $school->email,
+            'extracurricular' => $extracurricular,
+            'school' => $school,
+        ]);
+    }
+
+
+    public function setUpdateExcur(Request $request, $id)
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        // Validate the input fields
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'division' => 'required|string',
+            'level' => 'required|string',
+        ]);
+
+        // Find the extracurricular by its ID and school ID
+        $extracurricular = Extracurricular::find($id);
+
+        if (!$extracurricular) {
+            return redirect()->route('/')->with('error', 'Extracurricular not found');
+        }
+
+        // Update the extracurricular data
+        $extracurricular->update([
+            'name' => $request->name,
+            'division' => $request->division,
+            'level' => $request->level,
+        ]);
+
+        // Redirect back with success message
+        return redirect()->route('daftarekskul')->with('success', 'Extracurricular updated successfully!');
+    }
+
+
     public function showAddVendor()
     {
         $schoolId = session('school_id');
@@ -278,10 +344,10 @@ class SchoolController extends Controller
             session()->flash('error', 'Gagal menambahkan vendor');
             return redirect()->back();
         }
-       
     }
 
-    public function showPendaftaran() {
+    public function showPendaftaran()
+    {
         $schoolId = session('school_id');
 
         if (!$schoolId) {
@@ -298,13 +364,12 @@ class SchoolController extends Controller
         }
 
         return view('listpendaftaran', [
-            'pageTitle' => "Pendaftaran", 
+            'pageTitle' => "Pendaftaran",
             'name' => $school->name,
             'email' => $school->email,
             'pendings' => StudentExcurVendor::listPending(),
             'historys' => StudentExcurVendor::getHistory(),
-            'all' => StudentExcurVendor::all()           
+            'all' => StudentExcurVendor::all()
         ]);
     }
-
 }
