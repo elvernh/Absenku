@@ -24,20 +24,14 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
 
-        <div class="flex w-full flex-wrap gap-5 mb-10">
-            <x-box>
-                <x-slot:text>Total Tagihan</x-slot:text>
-                <x-slot:value>{{ $billSum }}</x-slot:value>
-            </x-box>
+        
+        <div class="flex">
+            <a href={{ '/student' . '/bayar' }}
+                class=" text-white bg-green-600 flex items-center px-6 py-3 rounded-lg text-sm mb-5">
+                Bayar
+            </a>
+        </div>
 
-           
-        </div>
-            <div class="flex">
-                <a href={{ "/student". "/bayar"}} class=" text-white bg-green-600 flex items-center px-6 py-3 rounded-lg text-sm mb-5">
-                    Bayar
-                </a>
-        </div>
-       
         <h1 class="text-xl font-semibold mb-4">Riwayat Pembayaran</h1>
 
         <!-- Table Wrapper -->
@@ -52,6 +46,8 @@
                         <th class="px-4 py-3 text-center">Status</th>
                         <th class="px-4 py-3 text-center">Ekstrakurikuler</th>
                         <th class="px-4 py-3 text-center">Aksi</th>
+                        <th class="px-4 py-3 text-center">catatan</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -65,7 +61,8 @@
                             <td class="px-4 py-3 text-center">{{ $payment->id }}</td>
                             <td class="px-4 py-3 text-center">{{ $payment->amount }}</td>
                             <td class="px-4 py-3 text-center">
-                                <span class="px-2 py-1 rounded-lg text-white text-xs
+                                <span
+                                    class="px-2 py-1 rounded-lg text-white text-xs
                                     {{ $payment->status_payment == 'berhasil' ? 'bg-green-500' : 'bg-red-500' }}">
                                     {{ ucfirst($payment->status_payment) }}
                                 </span>
@@ -75,15 +72,18 @@
                             </td>
                             <td class="px-4 py-3 text-center">
                                 @if ($payment->status_payment == 'gagal')
-                                    <a href={{  "student/bayar/".$payment->id}} class="text-blue-500 hover:underline">Bayar Ulang</a>
+                                    <a href={{ 'student/bayar/' . $payment->id }}
+                                        class="text-blue-500 hover:underline">Bayar Ulang</a>
                                 @else
                                     -
                                 @endif
                             </td>
+                            <td class="px-4 py-3 text-center">{{ $payment->note }}</td>
+
                         </tr>
                         @php
-                            $i++;   
-                            @endphp
+                            $i++;
+                        @endphp
                     @endforeach
                 </tbody>
             </table>

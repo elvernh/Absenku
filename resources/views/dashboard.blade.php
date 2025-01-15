@@ -43,7 +43,12 @@
                 <!-- Table Section -->
                 <div class="w-full xl:w-1/2">
                     <div class="flex items-center mb-4">
-                        <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
+                        <div class="flex w-full justify-between">
+                            <h2 class="text-2xl font-bold">Pertemuan Hari Ini</h2>
+                            <div class="p-2 bg-green-500 rounded-lg">
+                                <a href="create/meeting">buat pertemuan</a>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
@@ -55,23 +60,22 @@
                                     <th scope="col" class="px-6 py-3">Divisi</th>
                                     <th scope="col" class="px-6 py-3">Level</th>
                                     <th scope="col" class="px-6 py-3">Vendor</th>
-                                    <th scope="col" class="px-6 py-3">Jam Mulai</th>
-                                    <th scope="col" class="px-6 py-3">Jam Berakhir</th>
+                                    <th scope="col" class="px-6 py-3">Status</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($excurVendors as $excurVendor)
+                                @foreach ($meetingsToday as $meetingToday)
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <th scope="row"
                                             class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $excurVendor->extracurricular->name }}
+                                            {{ $meetingToday->excurVendor->extracurricular->name }}
                                         </th>
-                                        <td class="px-6 py-4">{{ $excurVendor->extracurricular->division }}</td>
-                                        <td class="px-6 py-4">{{ $excurVendor->extracurricular->level }}</td>
-                                        <td class="px-6 py-4">{{ $excurVendor->vendor->name }}</td>
-                                        <td class="px-6 py-4">{{ $excurVendor->start_time }}</td>
-                                        <td class="px-6 py-4">{{ $excurVendor->end_time }}</td>
+                                        <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->division }}</td>
+                                        <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->level }}</td>
+                                        <td class="px-6 py-4">{{ $meetingToday->excurVendor->start_time }} -  {{ $meetingToday->excurVendor->end_time }}</td>
+                                        <td class="px-6 py-4">{{ $meetingToday->status }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -176,15 +180,13 @@
     <script>
         @if (session('success'))
             Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
-                // Callback di sini
-                // Pastikan tidak ada refresh halaman
+              
             });;;
         @endif
 
         @if (session('error'))
             Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
-                // Callback di sini
-                // Pastikan tidak ada refresh halaman
+                
             });;;
         @endif
     </script>

@@ -16,6 +16,7 @@ class StudentExcurVendor extends Model
         return $student;
     }
 
+
     public static function getSumExcur($id) {
         $count = StudentExcurVendor::where('student_id', $id)->sum('bill');
         return $count;
@@ -28,6 +29,18 @@ class StudentExcurVendor extends Model
         $count = StudentExcurVendor::where('student_id', $id)->avg('score_final');
         return $count;
     }
+
+    public static function listPending() {
+        $student = StudentExcurVendor::where('status', "pending")->paginate(10, ['*'], 'pagePendings');;
+        return $student;
+    }
+
+    public static function getHistory() {
+        $student = StudentExcurVendor::whereIn('status', ['approved', 'denied'])->paginate(15, ['*'], 'pageHistorys');;
+        return $student;
+    }
+
+
         public function payment(): HasMany
     {
         return $this->hasMany(Payment::class, 'student_excur_vendor_id'); 

@@ -21,10 +21,18 @@ class Presence extends Model
     }
 
     public static function getPresenceBasedOnMeet($id) {
-        $presences = Presence::where('meeting_id', $id)->get();
+        // Ambil semua presences berdasarkan meeting_id
+        $presences = Presence::where('meeting_id', $id)
+                             ->get()
+                             ->filter(function ($presence) {
+                                 // Hanya ambil presence dengan status 'approved'
+                                 return $presence->studentExcurVendor->status == 'approved';
+                             });
+        
+        // Kembalikan hasil presences yang sudah difilter
         return $presences;
-
     }
+    
     
     public function studentExcurVendor():BelongsTo{
         return $this->belongsTo(related: StudentExcurVendor::class);

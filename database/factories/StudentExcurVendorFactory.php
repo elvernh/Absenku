@@ -18,8 +18,8 @@ class StudentExcurVendorFactory extends Factory
      */
     public function definition(): array
     {
-        $extracurriculars = ExcurVendor::all(); 
-        $vendors = Vendor::all(); 
+        $extracurriculars = ExcurVendor::all();
+        $vendors = Vendor::all();
         return [
             //
             'excur_vendor_id' => $extracurriculars->random()->id,
@@ -28,7 +28,7 @@ class StudentExcurVendorFactory extends Factory
             'score_final' => $this->faker->numberBetween(1, 100),
             'url_certificate' => $this->faker->url(),
             'note' => $this->faker->sentence(5),
-            'bill' => $this->faker->numberBetween(1000000, 1100000)
+            'status' => $this->faker->randomElement(['pending', 'approved', 'denied']),
         ];
     }
 }

@@ -23,7 +23,8 @@ class MeetingFactory extends Factory
             'excur_vendor_id' =>$excur->random()->id,
             'meeting_date' => $this->faker->date(),
             'topic' => $this->faker->sentence(6),
-            'teacher' => $this->faker->name()
+            'teacher' => $this->faker->name(),
+            'status' => $this->faker->randomElement(['Ongoing']),
 
         ];
     }

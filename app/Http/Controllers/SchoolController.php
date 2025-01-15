@@ -8,6 +8,7 @@ use App\Models\Meeting;
 use App\Models\Presence;
 use App\Models\School;
 use App\Models\Student;
+use App\Models\StudentExcurVendor;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -38,7 +39,7 @@ class SchoolController extends Controller
             'pageTitle' => "Dashboard Sekolah",
             'name' => $school->name,
             'email' => $school->email,
-            'excurVendors' => ExcurVendor::getAllToday(),
+            'meetingsToday' => Meeting::getMeetingToday(),
             'vendors' => Vendor::all(),
             'counts' => $vendorsCount
         ]);
@@ -109,8 +110,29 @@ class SchoolController extends Controller
             'smas' => Student::getSma()
         ]);
     }
+    public function showDaftarVendor()
+    {
 
-    public static function showMeeting()
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        $school = School::find($schoolId);
+
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('listvendor', [
+            'pageTitle' => "Daftar Vendor",
+            'school' => $school,
+            'vendors' => Vendor::getAll()
+            
+        ]);
+    }
+    public static function showMeeting($excurVendorId)
     {
         $schoolId = session('school_id');
 
@@ -126,12 +148,13 @@ class SchoolController extends Controller
         if (!$school) {
             return redirect()->route('/');
         }
+        $name = ExcurVendor::find($excurVendorId);
 
         return view('absensisiswa', [
-            'pageTitle' => "Meeting",
+            'pageTitle' => $name->extracurricular->name,
             'name' => $school->name,
             'email' => $school->email,
-            'meetings' => Meeting::getAll()
+            'meetings' => Meeting::getAllByExcurVendorId($excurVendorId)
         ]);
     }
 
@@ -169,14 +192,11 @@ class SchoolController extends Controller
         $schoolId = session('school_id');
 
         if (!$schoolId) {
-            // Jika tidak ada school_id di sesi, redirect ke halaman login
             return redirect()->route('/');
         }
 
-        // Ambil data sekolah dari database berdasarkan school_id
         $school = School::find($schoolId);
 
-        // Jika tidak ditemukan, redirect ke login
         if (!$school) {
             return redirect()->route('/');
         }
@@ -261,5 +281,30 @@ class SchoolController extends Controller
        
     }
 
+    public function showPendaftaran() {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route(route: '/');
+        }
+
+        return view('listpendaftaran', [
+            'pageTitle' => "Pendaftaran", 
+            'name' => $school->name,
+            'email' => $school->email,
+            'pendings' => StudentExcurVendor::listPending(),
+            'historys' => StudentExcurVendor::getHistory(),
+            'all' => StudentExcurVendor::all()           
+        ]);
+    }
 
 }

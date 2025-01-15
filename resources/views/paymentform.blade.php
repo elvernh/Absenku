@@ -50,20 +50,22 @@
                         @foreach ($studentExcs as $studentExc)
                             <option value="{{ $studentExc->id }}">
                                 {{ $studentExc->excurVendor->extracurricular->name }} -
-                                {{ $studentExc->bill }}
-                                {{ $studentExc->id }}
-
+                                {{ $studentExc->formatted_fee}}
                             </option>
                         @endforeach
                     </select>
                 </div>
 
-                <!-- File Upload -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 " for="file_input">Upload Bukti
                         Pembayaran</label>
                     <input type="file" name="transfer_url" id="file_input" required
                         class="block w-full mt-1 text-sm border-gray-600 bg-gray-200 rounded-lg cursor-pointer  focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+                <div>
+                    <label for="note" class="block text-sm font-semibold text-gray-700">Catatan</label>
+                    <input type="text" name="note" value="{{ old('note') }}" id="note" required
+                        class="mt-1 block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
 
                 <!-- Submit Button -->

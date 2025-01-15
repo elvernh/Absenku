@@ -44,7 +44,7 @@
 
                 <!-- Button Buat Jadwal -->
                 <div class="flex items-center">
-                    <a href="/tambahekskul" class="ms-20 text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
+                    <a href="activate" class="ms-20 text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
                         Tambah Ekskul
                     </a>
                 </div>
@@ -58,11 +58,12 @@
                         <th scope="col" class="px-6 py-3">Divisi</th>
                         <th scope="col" class="px-6 py-3">Level</th>
                         <th scope="col" class="px-6 py-3">Vendor</th>
+                        <th scope="col" class="px-6 py-3">Tahun Ajaran</th>
+                        <th scope="col" class="px-6 py-3">Semester</th>
                         <th scope="col" class="px-6 py-3">PIC</th>
                         <th scope="col" class="px-6 py-3">Hari</th>
-                        <th scope="col" class="px-6 py-3">Jam Mulai</th>
-                        <th scope="col" class="px-6 py-3">Jam Selesai</th>
                         <th scope="col" class="px-6 py-3">Biaya</th>
+                        <th scope="col" class="px-6 py-3">Status</th>
 
                     </tr>
                 </thead>
@@ -75,13 +76,15 @@
                             <td class="px-6 py-4">{{ $excurVendor->extracurricular->division }}</td>
                             <td class="px-6 py-4">{{ $excurVendor->extracurricular->level }}</td>
                             <td class="px-6 py-4">{{ $excurVendor->vendor->name }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->academic_year }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->semester }}</td>
                             <td class="px-6 py-4">{{ $excurVendor->pic }}</td>
-                            <td class="px-6 py-4">{{ $excurVendor->day }}</td>
-                            <td class="px-6 py-4">{{ $excurVendor->start_time }}</td>
-                            <td class="px-6 py-4">{{ $excurVendor->end_time }}</td>
+                            <td class="px-6 py-4">{{ $excurVendor->day }} ({{ $excurVendor->start_time }} - {{ $excurVendor->end_time }})</td>
                             <td class="px-6 py-4">{{ $excurVendor->fee }}</td>
-                            <td class="px-6 py-4 text-yellow-300"><a href="#">edit</a></td>
-                            <td class="px-6 py-4 text-red-500"><a href="#">delete</a></td>
+                            <td class="px-6 py-4">{{ $excurVendor->status }}</td>
+
+                            <td class="px-6 py-4 text-yellow-400"><a href="#">edit</a></td>
+                            <td class="px-6 py-4 text-blue-500"><a href={{ "absensisiswa/". $excurVendor->id }}>daftar pertemuan</a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -99,6 +102,20 @@
             sidebar.classList.toggle('-translate-x-64');
             content.classList.toggle('ml-64');
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+              
+            });;;
+        @endif
+
+        @if (session('error'))
+            Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+                
+            });;;
+        @endif
     </script>
 </body>
 

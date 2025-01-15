@@ -67,11 +67,7 @@
                         <option value="reguler">Reguler</option>
                     </select>
                 </div>
-                <div>
-                    <label for="fee" class="block text-sm font-semibold text-gray-700">Biaya</label>
-                    <input type="number" name="fee" id="fee" required
-                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
-                </div>
+                
 
                 <div>
                     <label class="block text-sm font-semibold text-gray-700">Vendor</label>

@@ -25,7 +25,7 @@ class PaymentFactory extends Factory
             'amount' => $this->faker->numberBetween(300000, 1000000),
             'transfer_url' => $this->faker->url(),
             'status_payment' => $this->faker->randomElement(['gagal', 'berhasil']),
-            
+            'note' => $this->faker->text(10),
         ];
     }
 }
