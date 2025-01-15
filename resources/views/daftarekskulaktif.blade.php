@@ -83,8 +83,8 @@
                             <td class="px-6 py-4">{{ $excurVendor->fee }}</td>
                             <td class="px-6 py-4">{{ $excurVendor->status }}</td>
 
-                            <td class="px-6 py-4 text-yellow-400"><a href="#">edit</a></td>
-                            <td class="px-6 py-4 text-blue-500"><a href={{ "absensisiswa/". $excurVendor->id }}>daftar pertemuan</a></td>
+                            <td class="px-6 py-4 text-yellow-400"><a href="#">Edit</a></td>
+                            <td class="px-6 py-4 text-blue-500"><a href={{ "absensisiswa/". $excurVendor->id }}>Daftar pertemuan</a></td>
                         </tr>
                     @endforeach
                 </tbody>

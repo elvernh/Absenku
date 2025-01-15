@@ -1,32 +1,31 @@
 <!DOCTYPE html>
-<html class="h-full bg-gray-100" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <title>Form Pendaftaran</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/Atten-cropped.svg') }}" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit Ekskul</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Styles / Scripts -->
-    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @endif
+    @vite('resources/css/app.css')
 </head>
 
-<body class="w-full  flex flex-col items-center justify-center relative">
+<body class="flex overflow-x-hidden bg-[#F4F4F4]">
+    <!-- Sidebar -->
+    <x-sidebar>
+        <x-slot:type>school</x-slot:type>
+    </x-sidebar>
 
+    <!-- Layout Homepage -->
+    <x-layout_homepage>
+        <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:name>{{ $school->name }}</x-slot:name>
+        <x-slot:email>{{ $school->email }}</x-slot:email>
 
-
-    <main class="ps-8 pe-8 pb-10 pt-10 -z-1000 w-full">
-        <img src="images/aset1.png" alt=""
-            class="absolute -bottom-10 left-[-90px] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] mb-4">
-        <img src="images/aset5.png" alt=""
-            class="absolute -bottom-4 right-[3px] sm:right-[-10px] md:right-[-20px] lg:right-[0px] w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] mb-4">
-
+        <!-- Table Container -->
         <div
             class="m-auto w-full xl:w-[50%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
             <form class="space-y-6" method="POST" action="{{ route('submitActivate') }}">
@@ -121,7 +120,36 @@
                 </div>
             </form>
         </div>
-    </main>
+    </x-layout_homepage>
+
+    <!-- Sidebar Toggle Script -->
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const toggleBtn = document.getElementById('toggleBtn');
+        const content = document.getElementById('content');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-64');
+            content.classList.toggle('ml-64');
+        });
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    @if (session('success'))
+        Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
+    @endif
+
+    @if (session('error'))
+        Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
+    @endif
+</script>
 </body>
 
 </html>

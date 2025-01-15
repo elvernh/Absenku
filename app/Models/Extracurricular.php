@@ -14,6 +14,7 @@ class Extracurricular extends Model
         'name',
         'division',
         'level',
+        'school_id'
     ];
 
     public static function getAll() {

@@ -37,7 +37,7 @@
         <x-slot:email>{{ $email }}</x-slot:email>
         <div
             class="m-auto w-full xl:w-[60%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
-            <form class="space-y-6" method="POST" action="{{ route('addExcur') }}">
+            <form class="space-y-6" method="POST" action="{{ route('tambahekskul') }}">
                 {{-- post is weird --}}
                 @csrf
                 <h1 class="text-3xl
