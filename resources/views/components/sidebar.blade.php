@@ -16,7 +16,6 @@
             </li>
             <li
                 class="{{ Request::is($type . '/daftarekskul') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-                class="{{ Request::is($type . '/daftarekskul') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/daftarekskul' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/dribbble.svg') }}" alt="user" class="mr-4">
                     <span class="font-medium">Daftar Ektrakulikuler</span>

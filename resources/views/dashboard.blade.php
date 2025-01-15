@@ -65,19 +65,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($meetingsToday as $meetingToday)
+                                @if ($meetingsToday)
+                                    @foreach ($meetingsToday as $meetingToday)
+                                        <tr
+                                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                            <th scope="row"
+                                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                                {{ $meetingToday->excurVendor->extracurricular->name }}
+                                            </th>
+                                            <td class="px-6 py-4">
+                                                {{ $meetingToday->excurVendor->extracurricular->division }}</td>
+                                            <td class="px-6 py-4">
+                                                {{ $meetingToday->excurVendor->extracurricular->level }}</td>
+                                            <td class="px-6 py-4">{{ $meetingToday->excurVendor->start_time }} -
+                                                {{ $meetingToday->excurVendor->end_time }}</td>
+                                            <td class="px-6 py-4">{{ $meetingToday->status }}</td>
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr
                                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <th scope="row"
-                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            {{ $meetingToday->excurVendor->extracurricular->name }}
-                                        </th>
-                                        <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->division }}</td>
-                                        <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->level }}</td>
-                                        <td class="px-6 py-4">{{ $meetingToday->excurVendor->start_time }} -  {{ $meetingToday->excurVendor->end_time }}</td>
-                                        <td class="px-6 py-4">{{ $meetingToday->status }}</td>
+                                        <td class="px-6 py-4">
+                                            Tidak ada pertemuan hari ini.
+                                        </td>
                                     </tr>
-                                @endforeach
+                                @endif
+
                             </tbody>
                         </table>
                     </div>
@@ -180,13 +193,13 @@
     <script>
         @if (session('success'))
             Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
-              
+
             });;;
         @endif
 
         @if (session('error'))
             Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
-                
+
             });;;
         @endif
     </script>
