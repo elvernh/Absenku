@@ -44,7 +44,7 @@
 
                 <!-- Button Buat Jadwal -->
                 <div class="flex items-center">
-                    <a href="/tambahekskul" class="ms-20 text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
+                    <a href="activate" class="ms-20 text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
                         Tambah Ekskul
                     </a>
                 </div>
@@ -102,6 +102,20 @@
             sidebar.classList.toggle('-translate-x-64');
             content.classList.toggle('ml-64');
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+              
+            });;;
+        @endif
+
+        @if (session('error'))
+            Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+                
+            });;;
+        @endif
     </script>
 </body>
 

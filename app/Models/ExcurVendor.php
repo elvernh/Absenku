@@ -12,6 +12,20 @@ class ExcurVendor extends Model
 {
     //
     use HasFactory;
+    protected $fillable = [
+        'extracurricular_id',
+        'vendor_id',
+        'academic_year',
+        'semester',
+        'pic',
+        'day',
+        'start_time',
+        'end_time',
+        'fee',
+        'status',
+        'start_date',
+        'end_date'
+    ];
     public static function formatRupiah($number)
     {
         return "Rp " . number_format($number, 0, ',', '.');

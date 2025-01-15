@@ -28,10 +28,7 @@
         <div>
             <!-- Cards Section -->
             <div class="flex w-full flex-wrap gap-5 mb-10">
-                <x-box>
-                    <x-slot:text>Total Tagihan </x-slot:text>
-                    <x-slot:value>{{ $sums }}</x-slot:value>
-                </x-box>
+              
                 <x-box>
                     <x-slot:text>Mid Score </x-slot:text>
                     <x-slot:value>{{ $midScore }}</x-slot:value>

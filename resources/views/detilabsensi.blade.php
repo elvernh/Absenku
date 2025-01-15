@@ -23,7 +23,7 @@
         <x-slot:email>{{ $email }}</x-slot:email>
         
         <div>
-            <div class="w-full xl:w-[60%]">
+            <div class="w-full xl:w-[70%]">
                 <h1 class="text-2xl font-bold mb-4">{{ $excur->excurVendor->extracurricular->name }}</h1>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -33,6 +33,7 @@
                                 <th scope="col" class="px-6 py-3">Tanggal</th>
                                 <th scope="col" class="px-6 py-3">Status</th>
                                 <th scope="col" class="px-6 py-3">Keterangan</th>
+                                <th scope="col" class="px-6 py-3">status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +55,10 @@
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $presence->keterangan }}
+                                    </th>
+                                    <th scope="row"
+                                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $presence->studentExcurVendor->status }}
                                     </th>
                                 </tr>
                             @endforeach

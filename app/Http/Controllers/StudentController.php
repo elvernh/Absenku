@@ -40,7 +40,6 @@ class StudentController extends Controller
         }
 
         $student = Student::find($studentId);
-        $sum = StudentExcurVendor::getSumExcur($studentId);
 
         // Jika tidak ditemukan, redirect ke login
         if (!$student) {
@@ -62,7 +61,7 @@ class StudentController extends Controller
             'results' => $results,
             'nows' => $nows,
             'student' => $studentId,
-            'sums' => PaymentController::rupiahFormat($sum),
+           
             'midScore' => $midScore,
             'finalScore' => $finalScore
         ]);
@@ -131,7 +130,6 @@ class StudentController extends Controller
         }
         $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
         $payments = $studentExcs->pluck('payment')->flatten();
-        $sum = StudentExcurVendor::getSumExcur($studentId);
 
         return view('payment_student', [
             'pageTitle' => "Pembayaran",
@@ -139,7 +137,6 @@ class StudentController extends Controller
             'email' => $student->email,
             'studentExcs' => $studentExcs,
             'payments' => $payments,
-            'billSum' => PaymentController::rupiahFormat($sum)
         ]);
     }
     public function showBayar()

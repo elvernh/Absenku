@@ -25,11 +25,7 @@
         <x-slot:email>{{ $email }}</x-slot:email>
 
         <div class="flex w-full flex-wrap gap-5 mb-10">
-            <x-box>
-                <x-slot:text>Total Tagihan</x-slot:text>
-                <x-slot:value>{{ $billSum }}</x-slot:value>
-            </x-box>
-
+           
            
         </div>
             <div class="flex">

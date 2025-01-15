@@ -39,7 +39,7 @@ class SchoolController extends Controller
             'pageTitle' => "Dashboard Sekolah",
             'name' => $school->name,
             'email' => $school->email,
-            'excurVendors' => ExcurVendor::getAllToday(),
+            'meetingsToday' => Meeting::getMeetingToday(),
             'vendors' => Vendor::all(),
             'counts' => $vendorsCount
         ]);
@@ -250,7 +250,7 @@ class SchoolController extends Controller
 
         // Jika tidak ditemukan, redirect ke login
         if (!$school) {
-            return redirect()->route('/');
+            return redirect()->route(route: '/');
         }
 
         return view('listpendaftaran', [
@@ -258,6 +258,7 @@ class SchoolController extends Controller
             'name' => $school->name,
             'email' => $school->email,
             'pendings' => StudentExcurVendor::listPending(),
+            'historys' => StudentExcurVendor::getHistory(),
             'all' => StudentExcurVendor::all()           
         ]);
     }
