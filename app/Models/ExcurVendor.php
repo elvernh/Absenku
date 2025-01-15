@@ -65,6 +65,10 @@ class ExcurVendor extends Model
             ->where('vendor_id', $vendorId)
             ->get();
     }
+
+    public static function getAllByVendorWithStudent($vendorId){
+        return self::with(['extracurricular', 'vendor'])->where('vendor_id', $vendorId)->get();
+    }
     public function extracurricular(): BelongsTo
     {
         return $this->belongsTo(Extracurricular::class, 'extracurricular_id');
