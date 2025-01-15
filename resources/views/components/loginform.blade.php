@@ -1,7 +1,7 @@
 <div
     class="relative mx-auto xl:max-w-lg lg:max-w-md md:w-[50%] sm:w-[70%] w-[90%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-xl p-8 pb-15 pt-15">
 
-    <h1 class="text-3xl font-bold text-center text-custom-blue mb-6">Login sebagai {{ $slot }}</h1>
+    <h1 class="text-3xl font-bold text-center text-custom-blue mb-6">Login sebagai {{ ucfirst($slot) }}</h1>
     <form class="space-y-6" action={{ 'login/' . $type}} method="POST">
         @csrf
         <div>

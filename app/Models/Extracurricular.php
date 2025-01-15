@@ -10,7 +10,11 @@ class Extracurricular extends Model
 {
     //
     use HasFactory;
-    protected $fillable = ['name', 'division', 'level'];
+    protected $fillable = [
+        'name',
+        'division',
+        'level',
+    ];
 
     public static function getAll() {
         $extracurriculars = Extracurricular::all();

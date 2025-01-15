@@ -91,10 +91,10 @@ Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::
 
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
-Route::get(
-    '/tambahekskul',
-    [SchoolController::class, 'addExcur']
-);
+// Route::get(
+//     '/tambahekskul',
+//     [SchoolController::class, 'addExcur']
+// );
 
 
 
