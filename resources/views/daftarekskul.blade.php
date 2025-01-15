@@ -113,11 +113,17 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     @if (session('success'))
-        Swal.fire('Success', "{{ session('success') }}", 'success');
+        Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
     @endif
 
     @if (session('error'))
-        Swal.fire('Error', "{{ session('error') }}", 'error');
+        Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
     @endif
 </script>
 </body>
