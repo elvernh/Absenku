@@ -4,6 +4,7 @@ use App\Http\Controllers\ExcurVendorController;
 use App\Http\Controllers\ExtracurricularController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MeetingController;
+use App\Http\Controllers\PresenceController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\VendorController;
@@ -87,6 +88,10 @@ Route::prefix('vendor')->group(function () {
     Route::get('/daftarpertemuan', [VendorController::class, 'daftarPertemuan']);
     Route::get('/daftarpertemuan/{id}', [VendorController::class, 'detilPertemuan'])->name('detilPertemuan');
     Route::get('/daftarsiswa', [VendorController::class, 'daftarSiswa']);
+    Route::get('/buatabsen/{id}', [VendorController::class, 'makePresences']);
+    Route::post('/buatabsen', [PresenceController::class, 'store'])->name('createPresence');
+
+
 });
 
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);

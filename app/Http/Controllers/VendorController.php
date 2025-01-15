@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExcurVendor;
+use App\Models\Meeting;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use App\Models\StudentExcurVendor;
@@ -33,12 +34,14 @@ class VendorController extends Controller
         // Fetch today's schedule
         $jadwalHariIni = ExcurVendor::getAllTodayByVendor($vendorId);
         $jumlahEkskul = ExcurVendor::getJumlahEkskul($vendorId);
+        $meetingsToday = Meeting::getMeetingTodayVendor($vendorId);
         return view('dashboard_vendor', [
             'pageTitle' => "Dashboard Vendor",
             'name' => $vendor->name,
             'email' => $vendor->email,
             'jadwalHariIni' => $jadwalHariIni,
-            'jumlahEkskul' => $jumlahEkskul
+            'jumlahEkskul' => $jumlahEkskul,
+            'meetingsToday' => $meetingsToday,
         ]);
     }
 
@@ -144,7 +147,40 @@ class VendorController extends Controller
         ]);
     }
 
+    public function makePresences($id)
+    {
+        $vendorId = session('vendor_id');
 
+        if (!$vendorId) {
+            return redirect()->route('/');
+        }
+
+        $vendor = Vendor::find($vendorId);
+        // Ambil data meeting berdasarkan ID
+        $meeting = Meeting::with('excurVendor.studentExcurVendors.student')
+            ->find($id);
+
+        if (!$meeting) {
+            return redirect()->route('404');
+        }
+
+        // Ambil data murid yang terhubung
+        $students = $meeting->excurVendor->studentExcurVendors
+    ->filter(function ($muridVendorEkskul) {
+        // Ganti 'status' dan 'active' dengan atribut dan nilai yang sesuai
+        return $muridVendorEkskul->status === 'approved';
+    })
+    ->map(function ($muridVendorEkskul) {
+        return $muridVendorEkskul;
+    });
+        return view('tambahabsen', [
+            'pageTitle' => "Tambah Absen $id",
+            'name' => $vendor->name,
+            'email' => $vendor->email,
+            'meeting' => $meeting,
+            'students' => $students,
+        ]);
+    }
     public function logout(Request $request)
     {
         session()->forget('vendor_id');

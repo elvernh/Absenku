@@ -39,9 +39,9 @@
 
 
             <!-- Jadwal Hari Ini Table (50% width on medium screens and above) -->
-            <div class="w-full md:w-1/2">
+            <div class="w-full md:w-[60%]">
                 <div class="flex p-3 items-center">
-                    <h2 class="text-2xl font-bold">Jadwal Hari Ini</h2>
+                    <h2 class="text-2xl font-bold">Pertemuan Hari Ini</h2>
                 </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full border-[1px] border-slate-600">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -51,23 +51,26 @@
                                 <th scope="col" class="px-6 py-3">Divisi</th>
                                 <th scope="col" class="px-6 py-3">Level</th>
                                 <th scope="col" class="px-6 py-3">Vendor</th>
-                                <th scope="col" class="px-6 py-3">Jam Mulai</th>
-                                <th scope="col" class="px-6 py-3">Jam Berakhir</th>
+                                <th scope="col" class="px-6 py-3">Jam</th>
+                                <th scope="col" class="px-6 py-3">Status</th>
+                                <th scope="col" class="px-6 py-3"></th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($jadwalHariIni as $jadwal)
+                            @forelse ($meetingsToday as $meetingToday)
                                 <tr
                                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row"
                                         class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ $jadwal->extracurricular->name }}
+                                        {{ $meetingToday->excurVendor->extracurricular->name}}
                                     </th>
-                                    <td class="px-6 py-4">{{ $jadwal->extracurricular->division }}</td>
-                                    <td class="px-6 py-4">{{ $jadwal->extracurricular->level }}</td>
-                                    <td class="px-6 py-4">{{ $jadwal->vendor->name }}</td>
-                                    <td class="px-6 py-4">{{ $jadwal->start_time }}</td>
-                                    <td class="px-6 py-4">{{ $jadwal->end_time }}</td>
+                                    <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->division}}</td>
+                                    <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->level}}</td>
+                                    <td class="px-6 py-4">{{ $meetingToday->excurVendor->vendor->name}}</td>
+                                    <td class="px-6 py-4">{{ $meetingToday->excurVendor->start_time}} - {{ $meetingToday->excurVendor->end_time}}</td>
+                                    <td class="px-6 py-4">{{ $meetingToday->status}}</td>
+                                    <td class="px-6 py-4"><a href="buatabsen/{{ $meetingToday->id }}">buat absen</a></td>
                                 </tr>
                             @empty
                                 <tr>

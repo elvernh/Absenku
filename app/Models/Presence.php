@@ -19,7 +19,7 @@ class Presence extends Model
     {
         return $this->belongsTo(related: Status::class);
     }
-
+    protected $fillable =['student_excur_vendor_id', 'meeting_id', 'status_id', 'excur_vendor_id', 'keterangan'];
     public static function getPresenceBasedOnMeet($id) {
         // Ambil semua presences berdasarkan meeting_id
         $presences = Presence::where('meeting_id', $id)

@@ -34,6 +34,19 @@ class Meeting extends Model
         $meetings = Meeting::where('meeting_date', $today)->get();
         return $meetings;
     }
+    public static function getMeetingTodayVendor($vendorId) {
+        $today = Carbon::today()->toDateString();
+    
+        // Query meeting berdasarkan tanggal hari ini dan vendor
+        $meetings = Meeting::where('meeting_date', $today)
+            ->whereHas('excurVendor', function($query) use ($vendorId) {
+                $query->where('vendor_id', $vendorId);
+            })
+            ->get();
+    
+        return $meetings;
+    }
+    
     public function presences(): HasMany
     {
         return $this->hasMany(Presence::class, 'meeting_id');
@@ -42,6 +55,6 @@ class Meeting extends Model
 
     public function excurVendor(): BelongsTo
     {
-        return $this->belongsTo(ExcurVendor::class);
+        return $this->belongsTo(ExcurVendor::class, 'excur_vendor_id',);
     }
 }

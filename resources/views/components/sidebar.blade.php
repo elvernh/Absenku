@@ -79,13 +79,7 @@
                 </a>
             </li>
 
-            <li
-                class="{{ Request::is($type . '/daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-                <a href={{ '/' . $type . '/daftarsiswa' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
-                    <span class="font-medium">Siswa</span>
-                </a>
-            </li>
+            
             <div class="h-[100px] xl:h-[100px]"></div>
             <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
                 <a href={{ '/logout' . $type }} class="flex px-6 py-3 items-center">
