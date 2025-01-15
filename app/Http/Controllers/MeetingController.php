@@ -23,6 +23,9 @@ class MeetingController extends Controller
         if($meeting) {
             session()->flash('success', 'Berhasil menambahkan meeting');
             return redirect()->route('dashboardSchool');
+        }else {
+            session()->flash('error', 'Gagal menambahkan meeting');
+            return redirect()->back();
         }
         
     }
