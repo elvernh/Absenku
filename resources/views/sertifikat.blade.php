@@ -25,7 +25,7 @@
         <x-slot:email>{{ $email }}</x-slot:email>
 
 
-        <h1 class="text-xl font-semibold mb-4">Riwayat Pembayaran</h1>
+        <h1 class="text-xl font-semibold mb-4">List Sertifikat</h1>
 
         <!-- Table Wrapper -->
         <div class="overflow-x-auto bg-white rounded-lg shadow">
