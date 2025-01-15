@@ -61,7 +61,7 @@ class StudentController extends Controller
             'results' => $results,
             'nows' => $nows,
             'student' => $studentId,
-           
+
             'midScore' => $midScore,
             'finalScore' => $finalScore
         ]);
@@ -154,13 +154,20 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->route('/');
         }
-        $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
-        $studentExcs = $studentExcs->map(function ($item) {
-            // Modifikasi nilai dalam array
-            $item->bill = PaymentController::rupiahFormat($item->bill);
-            return $item;
-        });
-
+        $studentExcs = StudentExcurVendor::where('student_id', $studentId)
+            ->where('status', 'approved')  // Pengecekan status
+            ->get();
+        
+            $studentExcs = $studentExcs->map(function ($studentExc) {
+                // Mengambil fee dari excurVendor dan format menjadi rupiah
+                $fee = $studentExc->excurVendor->fee;
+                $formattedFee = 'Rp ' . number_format($fee, 2, ',', '.'); // Format dengan 2 desimal
+        
+                // Menambahkan formatted_fee ke dalam object studentExc
+                $studentExc->formatted_fee = $formattedFee;
+                
+                return $studentExc; // Mengembalikan object yang sudah diupdate
+            });
         return view('paymentform', [
             'pageTitle' => "Pembayaran",
             'name' => $student->full_name,
@@ -185,7 +192,7 @@ class StudentController extends Controller
         $ekskur = $request->input('ekskur', []); // Jika tidak ada checkbox dicentang, akan mengembalikan array kosong.
 
         $studentId = StudentController::store($request);
-        
+
         return view('tes', [
             'data' => $ekskur,
 

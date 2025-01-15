@@ -22,21 +22,18 @@ class PaymentController extends Controller
             'transfer_url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'amount' => 'required|numeric',
             'payment_date' => 'required|date',
-            'student_excur_vendor_id' => 'required|numeric'
+            'student_excur_vendor_id' => 'required|numeric',
+            'note' => 'required|string'
         ]);
 
         $filePath = $request->file('transfer_url')->store('bukti');
         $validated['transfer_url'] = $filePath;
         $validated['status_payment'] = 'berhasil'; // Tambahkan nilai default untuk status_payment
         $find = StudentExcurVendor::find($validated['student_excur_vendor_id']);
-        if($find->bill <= 0){
-            session()->flash('error', 'Tagihan sudah lunas');
-            return redirect()->route('payment');
-        }
+        
         $payment = Payment::create($validated);
 
         if ($payment) {
-            StudentExcurVendor::where('id', $validated['student_excur_vendor_id'])->update(['bill' => $find->bill - $validated['amount']]);
             session()->flash('success', 'PembayaranBerhasil');
             return redirect()->route('payment');
         }else {

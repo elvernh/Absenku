@@ -110,7 +110,28 @@ class SchoolController extends Controller
             'smas' => Student::getSma()
         ]);
     }
+    public function showDaftarVendor()
+    {
 
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        $school = School::find($schoolId);
+
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        return view('listvendor', [
+            'pageTitle' => "Daftar Vendor",
+            'school' => $school,
+            'vendors' => Vendor::getAll()
+            
+        ]);
+    }
     public static function showMeeting($excurVendorId)
     {
         $schoolId = session('school_id');
@@ -169,14 +190,11 @@ class SchoolController extends Controller
         $schoolId = session('school_id');
 
         if (!$schoolId) {
-            // Jika tidak ada school_id di sesi, redirect ke halaman login
             return redirect()->route('/');
         }
 
-        // Ambil data sekolah dari database berdasarkan school_id
         $school = School::find($schoolId);
 
-        // Jika tidak ditemukan, redirect ke login
         if (!$school) {
             return redirect()->route('/');
         }

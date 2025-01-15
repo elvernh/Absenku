@@ -45,17 +45,17 @@
                         @endforeach
                     </select>
                 </div>
+
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700">Vendor</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        @for ($i = 0; $i < count($Vendors); $i++)
-                            <div class="flex items-center">
-                                <input name="vendor[]" type="checkbox" value={{ $Vendors[$i]->id }}
-                                    class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="e" class="ml-2 text-gray-700">{{ $Vendors[$i]->name }}</label>
-                            </div>
-                        @endfor
-                    </div>
+                    <label for="jenjang" class="block text-sm font-semibold text-gray-700">Ekstrakurikuler</label>
+                    <select name="vendor_id" id="jenjang" required
+                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="" disabled selected>Pilih Vendor</option>
+                        @foreach ($Vendors as $vendor)
+                            <option value={{ $vendor->id }}>{{ $vendor->name }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div>
                     <label for="semester" class="block text-sm font-semibold text-gray-700">Semester</label>

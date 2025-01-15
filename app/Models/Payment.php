@@ -11,7 +11,7 @@ class Payment extends Model
 {
     //
     use HasFactory;
-    protected $fillable = ['amount', 'payment_date', 'transfer_url', 'student_excur_vendor_id', 'status_payment'];
+    protected $fillable = ['amount', 'payment_date', 'transfer_url', 'student_excur_vendor_id', 'status_payment', 'note'];
 
 
     public function studentExcurVendors():BelongsTo {

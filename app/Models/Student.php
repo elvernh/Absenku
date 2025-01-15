@@ -14,7 +14,7 @@ class Student extends Authenticatable
 {
     //
     use HasFactory, Notifiable;
-    protected $fillable = ['full_name', 'grade', 'email', 'password'];
+    protected $fillable = ['full_name', 'grade', 'email', 'password', 'from_class', 'educational_level', 'token', 'profile_picture'];
 
     // Kolom yang harus disembunyikan (untuk keamanan)
     protected $hidden = ['password', 'token'];

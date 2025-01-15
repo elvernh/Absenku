@@ -30,6 +30,7 @@ Route::prefix('school')->group(function () {
     Route::get('/daftarekskulaktif', action: [SchoolController::class, 'showDaftarEkskulAktif'])->name("daftarekskulaktif");
     Route::get('/daftarekskul', action: [SchoolController::class, 'showDaftarEkskul'])->name("daftarekskul");
     Route::get('/daftarsiswa', action: [SchoolController::class, 'showDaftarMurid']);
+    Route::get('/daftarvendor', action: [SchoolController::class, 'showDaftarVendor']);
     Route::get('/absensisiswa/{excurVendorId}', [SchoolController::class, 'showMeeting']);
     Route::get('/addvendor', [SchoolController::class, 'showAddVendor']);
     Route::post('/addvendorsubmit', [SchoolController::class, 'addVendor'])->name('add');

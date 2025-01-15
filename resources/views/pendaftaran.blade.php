@@ -31,7 +31,7 @@
         <div
             class="m-auto w-full xl:w-[60%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
             <form class="space-y-6" method="POST" action="{{ route('pendaftaran') }}">
-                <h1 class="text-3xl font-extrabold text-center text-indigo-700 mb-6">Form Pendaftaran Ekstrakurikuler
+                <h1 class="text-3xl font-extrabold text-center text-indigo-700 mb-6">Registrasi
                 </h1>
                 @csrf
                 <div>
@@ -58,20 +58,7 @@
                     <input type="text" name="from_class" id="from_class" required
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700">Ekstrakurikuler</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        @for ($i =0; $i < count($excurVendors); $i++)
-                            <div class="flex items-center">
-                                <input  name="ekskur[]" type="checkbox" value={{ $excurVendors[$i]->id }}
-                                    class="h-5 w-5 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
-                                <label for="e"
-                                    class="ml-2 text-gray-700">{{ $excurVendors[$i]->extracurricular->name }} {{ $excurVendors[$i]->extracurricular->level }} {{ $excurVendors[$i]->extracurricular->division}} ({{ $feesRp[$i] }}) </label>
-                            </div>
-                        @endfor
-                    </div>
-                </div>
-
+                
                 <div>
                     <label for="email" class="block text-sm font-semibold text-gray-700">Email</label>
                     <input type="email" name="email" id="email" autocomplete="email" required

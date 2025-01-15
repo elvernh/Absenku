@@ -28,7 +28,7 @@
                     <span class="font-medium">Daftar Ektrakulikuler Aktif</span>
                 </a>
             </li>
-            
+
             <li
                 class="{{ Request::is($type . '/daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/daftarsiswa' }} class="flex px-6 py-3 items-center">
@@ -38,8 +38,8 @@
             </li>
 
             <li
-                class="{{ Request::is($type . '/daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-                <a href={{ '/' . $type . '/daftarsiswa' }} class="flex px-6 py-3 items-center">
+                class="{{ Request::is($type . '/daftarvendor') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href={{ '/' . $type . '/daftarvendor' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
                     <span class="font-medium">Vendor</span>
                 </a>
@@ -155,7 +155,20 @@
                     <span class="font-medium">Sertifikat</span>
                 </a>
             </li>
-
+            <li
+                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <span class="font-medium">Pendaftaran</span>
+                </a>
+            </li>
+            <li
+                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
+                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <span class="font-medium">Profile </span>
+                </a>
+            </li>
             <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
                 <a href={{ '/logout/' . $type }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/log-out.svg') }}" alt="logout" class="mr-4">
