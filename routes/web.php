@@ -72,6 +72,8 @@ Route::prefix('student')->group(function () {
     // Route::post('/pendaftaranSubmit', [StudentController::class, 'registerExcur'])->name('pendaftaran');
     Route::get('/bayar', [StudentController::class, 'showBayar']);
     Route::post('/bayarsubmit', [PaymentController::class, 'createPayment'])->name('bayar');
+    Route::get("/daftar", [StudentController::class, 'showPendaftaranEkskul'])->name('daftarEks');
+    Route::post("/daftar", [StudentExcurVendorController::class, 'store'])->name('submitDaftar');
 
 });
 

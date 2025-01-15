@@ -199,4 +199,21 @@ class StudentController extends Controller
 
         ]);
     }
+
+    public function showPendaftaranEkskul(Request $request) {
+        $studentId = session('student_id');
+
+        if (!$studentId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+        $student = Student::find($studentId);
+        return view('student_pendaftaran', [
+            'pageTitle' => "Pendaftaran Ekskul",
+            'name' => $student->full_name,
+            'email' => $student->email,
+            'excurVendors' => ExcurVendor::where('status', 'Aktif')->get(),
+            'historys' => StudentExcurVendor::where('student_id', $studentId)->paginate(10)
+        ]);
+    }
 }
