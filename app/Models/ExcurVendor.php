@@ -72,6 +72,10 @@ class ExcurVendor extends Model
         return $this->hasMany(StudentExcurVendor::class, 'excur_vendor_id');
     }
 
+    // public function getById($id){
+    //     return ExcurVendor::find($id);
+    // }
+
     public static function getAllByVendorWithStudentCount($vendorId)
     {
         return self::with(['extracurricular', 'vendor'])

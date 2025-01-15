@@ -66,6 +66,85 @@ class SchoolController extends Controller
         ]);
     }
 
+    public function updateDaftarEkskulAktif($id)
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route('/');
+        }
+        $name = ExcurVendor::find($id);
+
+        return view('editekskulaktif', [
+            'pageTitle' => "Daftar Ekstrakulikuler Aktif",
+            'school' => $school,
+            'excurVendors' => $name,
+            'Vendors' => Vendor::all(),
+            'extras' => Extracurricular::all()
+        ]);
+    }
+
+    //sek gurung bener
+    public function setUpdateDaftarExcurAktif(Request $request, $id)
+    {
+        $schoolId = session('school_id');
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        // Fetch school data
+        $school = School::find($schoolId);
+        if (!$school) {
+            return redirect()->route('/');
+        }
+
+        // Validation
+        $validated = $request->validate([
+            'extracurricular_id' => 'required|exists:extracurriculars,id',
+            'vendor_id' => 'required|exists:vendors,id',
+            'semester' => 'required|in:1,2',
+            'academic_year' => 'required|string|max:9',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+            'pic' => 'required|string|max:255',
+            'day' => 'required|string|max:20',
+            'fee' => 'required|numeric|min:0',
+        ]);
+
+        // Find the ExcurVendor record
+        $excurVendor = ExcurVendor::find($id);
+        if (!$excurVendor) {
+            return redirect()->back()->with('error', 'Data not found!');
+        }
+
+        // Log the validated data before updating
+
+        // Update the ExcurVendor
+        $excurVendor->update($validated);
+
+        // Check if update was successful
+        if ($excurVendor->wasChanged()) {
+
+            return redirect()->route('daftarEkskulAktif')->with('success', 'Data updated successfully!');
+        } else {
+
+            return redirect()->back()->with('error', 'Failed to update the data');
+        }
+    }
+
+
+
     public function showDaftarEkskul()
     {
 

@@ -103,30 +103,30 @@
                 </a>
             </li>
             <li
-                class="{{ Request::is($type . '/meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                class="{{ Request::is($type . '/meeting') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/meeting' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <img src="{{ asset('icons/calendar.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Meeting</span>
                 </a>
             </li>
             <li
-                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                class="{{ Request::is($type.'/payment') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <img src="{{ asset('icons/dollar-sign.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Payments</span>
                 </a>
             </li>
             <li
                 class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <img src="{{ asset('icons/dribbble.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Ekstrakurikuler</span>
                 </a>
             </li>
             <li
                 class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
+                    <img src="{{ asset('icons/award.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Sertifikat</span>
                 </a>
             </li>
@@ -140,8 +140,8 @@
             <li
                 class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/book.svg') }}" alt="book" class="mr-4">
-                    <span class="font-medium">Profile </span>
+                    <img src="{{ asset('icons/user.svg') }}" alt="book" class="mr-4">
+                    <span class="font-medium">Profile</span>
                 </a>
             </li>
             <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
