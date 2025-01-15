@@ -12,6 +12,7 @@ use App\Http\Controllers\StudentExcurVendorController;
 
 use App\Models\ExcurVendor;
 use App\Models\Extracurricular;
+use App\Models\School;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Route;
 
@@ -58,7 +59,9 @@ Route::prefix('school')->group(function () {
     });
     Route::post('/submitmeeting', [MeetingController::class, 'createMeeting'])->name('createMeeting');
     Route::get('/activate', function () {
-        return view('activateekskul', ['Vendors' => Vendor::all(), 'extras' => Extracurricular::all()]);
+        return view('activateekskul', ['Vendors' => Vendor::all(), 'extras' => Extracurricular::all(),
+        'pageTitle' => 'Aktifkan Ekstrakulikuler',
+        'school' => School::find(session('school_id'))]);
     });
     Route::post('/submitactivate', [ExcurVendorController::class, 'store'])->name('submitActivate');
 });

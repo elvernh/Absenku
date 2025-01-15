@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExcurVendor;
+use App\Models\School;
 use Illuminate\Http\Request;
 
 class ExcurVendorController extends Controller
@@ -54,6 +55,17 @@ class ExcurVendorController extends Controller
     // }
     public function store(Request $request)
     {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            return redirect()->route('/');
+        }
+
+        $school = School::find($schoolId);
+
+        if (!$school) {
+            return redirect()->route('/');
+        }
         // Validasi input
         $validated = $request->validate([
             'extracurricular_id' => 'required|integer',
@@ -76,6 +88,9 @@ class ExcurVendorController extends Controller
         } else {
             session()->flash('error', 'Gagal mengaktifkan ekskul, tidak ada vendor yang valid.');
         }
-        return redirect()->route('daftarekskulaktif');
+        return redirect()->route('daftarekskulaktif',[
+            'pageTitle' => "Aktifkan Ekstrakulikuler",
+            'school' => $school,
+        ]);
     }
 }
