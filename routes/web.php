@@ -82,6 +82,8 @@ Route::prefix('student')->group(function () {
     Route::get("/daftar", [StudentController::class, 'showPendaftaranEkskul'])->name('daftarEks');
     Route::post("/daftar", [StudentExcurVendorController::class, 'store'])->name('submitDaftar');
 
+    Route::get('/sertifikat',[StudentController::class, 'showSertifikat']);
+
 });
 
 Route::prefix('vendor')->group(function () {

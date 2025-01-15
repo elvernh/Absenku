@@ -124,8 +124,8 @@
                 </a>
             </li>
             <li
-                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-                <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
+                class="{{ Request::is($type.'sertifikat') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href={{ '/' . $type . '/sertifikat' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/award.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Sertifikat</span>
                 </a>

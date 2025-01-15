@@ -128,17 +128,13 @@ class SchoolController extends Controller
             return redirect()->back()->with('error', 'Data not found!');
         }
 
-        // Log the validated data before updating
-
         // Update the ExcurVendor
         $excurVendor->update($validated);
 
         // Check if update was successful
-        if ($excurVendor->wasChanged()) {
-
+        if ($excurVendor) {
             return redirect()->route('daftarEkskulAktif')->with('success', 'Data updated successfully!');
         } else {
-
             return redirect()->back()->with('error', 'Failed to update the data');
         }
     }
