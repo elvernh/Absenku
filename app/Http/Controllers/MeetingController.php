@@ -16,7 +16,7 @@ class MeetingController extends Controller
             'topic' => 'required|string',
         ]);
         
-        $validated['teacher'] = null;
+        $validated['teacher'] = "";
         $validated['status'] = "ongoing";
 
         $meeting = Meeting::create($validated);

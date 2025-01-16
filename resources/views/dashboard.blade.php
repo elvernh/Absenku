@@ -27,15 +27,19 @@
             <div class="flex w-full flex-wrap  gap-5">
                 <x-box>
                     <x-slot:text>Jumlah Extrakulikuler</x-slot:text>
-                    <x-slot:value>10</x-slot:value>
+                    <x-slot:value>{{ $excurCount }}</x-slot:value>
                 </x-box>
                 <x-box>
                     <x-slot:text>Jumlah Murid</x-slot:text>
-                    <x-slot:value>10000</x-slot:value>
+                    <x-slot:value>{{ $studentCount }}</x-slot:value>
                 </x-box>
                 <x-box>
                     <x-slot:text>Jumlah Vendor</x-slot:text>
-                    <x-slot:value>10</x-slot:value>
+                    <x-slot:value>{{ $vendorCount }}</x-slot:value>
+                </x-box>
+                <x-box>
+                    <x-slot:text>Jumlah Ekstrakulikuler Aktif</x-slot:text>
+                    <x-slot:value>{{ $excurVendorCount }}</x-slot:value>
                 </x-box>
 
             </div>

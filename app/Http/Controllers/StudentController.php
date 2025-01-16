@@ -219,7 +219,10 @@ class StudentController extends Controller
     {
         // Validasi input (disarankan untuk menghindari error data yang tidak valid)
         
-    
+        $search = Student::where('email', $request['email'])->get();
+        if($search) {
+            return redirect()->route(route: 'pendaftaran')->with('error', 'Registration failed!');
+        }
         // Buat instance Student
         $student = Student::create([
             'full_name' => $request['full_name'],
@@ -238,7 +241,7 @@ class StudentController extends Controller
             session(['student_id' => $student->id]);
             return redirect()->route('dashboardStudent')->with('success', 'Registration successful!');
         } else {
-            return redirect()->route('pendaftaran')->with('error', 'Registration failed!');
+            return redirect()->route(route: 'pendaftaran')->with('error', 'Registration failed!');
         }
     }
     

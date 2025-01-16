@@ -33,15 +33,20 @@ class SchoolController extends Controller
             return redirect()->route('/');
         }
 
-        $vendorsCount = Vendor::withCount('excurVendors')->get();
-
+        $vendorsCount = count(Vendor::all());
+        $excurVendorCount = count(ExcurVendor::all());
+        $excurCount = count(Extracurricular::all());
+        $studentCount = count(Student::all());
         return view('dashboard', [
             'pageTitle' => "Dashboard Sekolah",
             'name' => $school->name,
             'email' => $school->email,
             'meetingsToday' => Meeting::getMeetingToday(),
             'vendors' => Vendor::all(),
-            'counts' => $vendorsCount
+            'vendorCount' => $vendorsCount,
+            'studentCount' => $studentCount,
+            'excurVendorCount' => $excurVendorCount,
+            'excurCount' => $excurCount,
         ]);
     }
     public function showDaftarEkskulAktif()
