@@ -26,8 +26,10 @@
         <x-slot:email>{{ $email }}</x-slot:email>
 
         <div class="w-full p-6 space-y-8">
-            <form action="" method="post" class="p-4 md:w-[50%] w-full bg-white shadow rounded-lg">
+            <form action="{{ route('updateMeeting', ['id' => $meeting->id]) }}" method="post" class="p-4 md:w-[50%] w-full bg-white shadow rounded-lg">
                 <!-- Topic -->
+                @csrf
+                @method('PUT')
                 <div class="mb-4">
                     <label for="topic" class="block text-sm font-medium text-gray-700">Topic</label>
                     <input type="text" id="topic" name="topic" value="{{ $meeting->topic }}" 
@@ -46,14 +48,15 @@
                 <!-- Status -->
                 <div class="mb-4">
                     <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
-                    <select id="status" name="status" 
+                    <select id="status" name="status"
                             class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
-                        <option value="" disabled selected>Select status</option>
-                        <option value="scheduled">Scheduled</option>
-                        <option value="completed">Completed</option>
-                        <option value="cancelled">Cancelled</option>
+                        <option value="" disabled {{ !$meeting->status ? 'selected' : '' }}>Select a status</option>
+                        <option value="scheduled" {{ $meeting->status == 'scheduled' ? 'selected' : '' }}>Scheduled</option>
+                        <option value="completed" {{ $meeting->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="cancelled" {{ $meeting->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                     </select>
                 </div>
+                
             
                 <!-- Submit Button -->
                 <div>
@@ -170,6 +173,20 @@
                 });
             });
         });
+
+        @if (session('success'))
+        Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
+    @endif
+
+    @if (session('error'))
+        Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+                // Callback di sini
+                // Pastikan tidak ada refresh halaman
+            });;;
+    @endif
     </script>
 
 </body>

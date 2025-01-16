@@ -98,7 +98,7 @@ Route::prefix('vendor')->group(function () {
     Route::get('/daftarsiswa', [VendorController::class, 'daftarSiswa']);
     Route::get('/buatabsen/{id}', [VendorController::class, 'makePresences']);
     Route::post('/buatabsen', [PresenceController::class, 'store'])->name('createPresence');
-
+    Route::put('updateMeeting/{id}', [MeetingController::class, 'updateMeeting'])->name('updateMeeting');
 
 });
 

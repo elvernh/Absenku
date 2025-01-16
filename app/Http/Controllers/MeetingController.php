@@ -29,4 +29,33 @@ class MeetingController extends Controller
         }
         
     }
+
+    public function updateMeeting(Request $request)
+{
+    // Validasi input
+    
+
+    // Ambil ID dari parameter request
+    $id = $request->route('id'); // Mengambil parameter 'id' dari URL
+    $meeting = Meeting::find($id);
+
+    // Cek apakah meeting dengan ID tersebut ditemukan
+    if (!$meeting) {
+        return redirect()->back()->with('error', 'Meeting not found.');
+    }
+
+    // Update data meeting
+    $meeting->topic = $request['topic'];
+    $meeting->teacher= $request['teacher']; 
+    $meeting->status = $request['status'];
+
+    // Simpan perubahan
+    if ($meeting->save()) {
+        return redirect()->back()->with('success', 'Meeting updated successfully.');
+    } else {
+        return redirect()->back()->with('error', 'Failed to update meeting.');
+    }
+}
+
+    
 }
