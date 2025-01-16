@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Payment</title>
+    <title>Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -24,15 +24,8 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
 
-        
-        <div class="flex">
-            <a href={{ '/student' . '/bayar' }}
-                class=" text-white bg-green-600 flex items-center px-6 py-3 rounded-lg text-sm mb-5">
-                Bayar
-            </a>
-        </div>
 
-        <h1 class="text-xl font-semibold mb-4">Riwayat Pembayaran</h1>
+        <h1 class="text-xl font-semibold mb-4">List Sertifikat</h1>
 
         <!-- Table Wrapper -->
         <div class="overflow-x-auto bg-white rounded-lg shadow">
@@ -40,46 +33,27 @@
                 <thead class="bg-gray-100 text-gray-800 uppercase">
                     <tr>
                         <th class="px-4 py-3 text-center">No</th>
-                        <th class="px-4 py-3 text-center">Tanggal</th>
-                        <th class="px-4 py-3 text-center">Kode Pembayaran</th>
-                        <th class="px-4 py-3 text-center">Jumlah</th>
-                        <th class="px-4 py-3 text-center">Status</th>
-                        <th class="px-4 py-3 text-center">Ekstrakurikuler</th>
-                        <th class="px-4 py-3 text-center">Aksi</th>
-                        <th class="px-4 py-3 text-center">catatan</th>
-
+                        <th class="px-4 py-3 text-center">Sertifikat</th>
+                        <th class="px-4 py-3 text-center">Download Certificate</th>
                     </tr>
                 </thead>
                 <tbody>
                     @php
                         $i = 1;
                     @endphp
-                    @foreach ($payments as $payment)
+                    @foreach ($studentExcurVendor as $aa)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3 text-center">{{ $i }}</td>
-                            <td class="px-4 py-3 text-center">{{ $payment->payment_date }}</td>
-                            <td class="px-4 py-3 text-center">{{ $payment->id }}</td>
-                            <td class="px-4 py-3 text-center">{{ $payment->amount }}</td>
+                            <td class="px-4 py-3 text-center">{{ $aa->url_certificate }}</td>
                             <td class="px-4 py-3 text-center">
-                                <span
-                                    class="px-2 py-1 rounded-lg text-white text-xs
-                                    {{ $payment->status_payment == 'berhasil' ? 'bg-green-500' : 'bg-red-500' }}">
-                                    {{ ucfirst($payment->status_payment) }}
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-center">
-                                {{ $payment->studentExcurVendors->excurVendor->extracurricular->name ?? 'Tidak Diketahui' }}
-                            </td>
-                            <td class="px-4 py-3 text-center">
-                                @if ($payment->status_payment == 'gagal')
-                                    <a href={{ 'student/bayar/' . $payment->id }}
-                                        class="text-blue-500 hover:underline">Bayar Ulang</a>
+                                @if ($aa->url_certificate)
+                                    <a href="{{ asset('storage/' . $aa->url_certificate) }}" 
+                                       class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" 
+                                       download>Download</a>
                                 @else
-                                    -
+                                    <span class="text-gray-500">No certificate</span>
                                 @endif
                             </td>
-                            <td class="px-4 py-3 text-center">{{ $payment->note }}</td>
-
                         </tr>
                         @php
                             $i++;
@@ -88,6 +62,7 @@
                 </tbody>
             </table>
         </div>
+        
     </x-layout_homepage>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>

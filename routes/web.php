@@ -33,6 +33,9 @@ Route::prefix('school')->group(function () {
 
     // Extracurricular Routes
     Route::get('/daftarekskulaktif', [SchoolController::class, 'showDaftarEkskulAktif'])->name('daftarekskulaktif');
+    Route::get('/editekskulaktif/{id}', [SchoolController::class, 'updateDaftarEkskulAktif']);
+    Route::put('/editekskulaktif/{id}', [SchoolController::class, 'setUpdateDaftarExcurAktif'])->name('submitEditActive');
+
     Route::get('/daftarekskul', [SchoolController::class, 'showDaftarEkskul'])->name('daftarekskul');
     Route::get('/tambahekskul', [SchoolController::class, 'showAddExcur']);
     Route::post('/tambahekskulsubmit', [ExtracurricularController::class, 'createEkskul'])->name('tambahekskul');
@@ -79,6 +82,8 @@ Route::prefix('student')->group(function () {
     Route::post('/bayarsubmit', [PaymentController::class, 'createPayment'])->name('bayar');
     Route::get("/daftar", [StudentController::class, 'showPendaftaranEkskul'])->name('daftarEks');
     Route::post("/daftar", [StudentExcurVendorController::class, 'store'])->name('submitDaftar');
+
+    Route::get('/sertifikat',[StudentController::class, 'showSertifikat']);
 
 });
 

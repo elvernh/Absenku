@@ -67,6 +67,41 @@ class StudentController extends Controller
         ]);
     }
 
+    public function showSertifikat(){
+        $studentId = session('student_id');
+    
+        if (!$studentId) {
+            return redirect()->route('/');
+        }
+    
+        $student = Student::find($studentId);
+    
+        // If student not found, redirect to login
+        if (!$student) {
+            return redirect()->route('/');
+        }
+    
+        // Fetch the student's extracurricular vendor record
+        $studentExcurVendor = StudentExcurVendor::where('student_id', $studentId)->get();
+    
+        if (!$studentExcurVendor) {
+            // If no record is found, redirect with an error message
+            return redirect()->route('/')->with('error', 'No extracurricular data found.');
+        }
+    
+        // Get the list of certificates (assuming it's stored as an array or JSON)
+    
+    
+        return view('sertifikat', [
+            'pageTitle' => "Sertifikat", 
+            'name' => $student->full_name,
+            'email' => $student->email,
+            'studentExcurVendor' => $studentExcurVendor
+        ]);
+    }
+    
+    
+
     public function logout(Request $request)
     {
         session()->forget('student_id');
