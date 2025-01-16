@@ -173,12 +173,15 @@ class VendorController extends Controller
     ->map(function ($muridVendorEkskul) {
         return $muridVendorEkskul;
     });
+    $presences = Presence::where('meeting_id', $id)->get();
+
         return view('tambahabsen', [
             'pageTitle' => "Tambah Absen $id",
             'name' => $vendor->name,
             'email' => $vendor->email,
             'meeting' => $meeting,
             'students' => $students,
+            'presences' => $presences
         ]);
     }
     public function logout(Request $request)
