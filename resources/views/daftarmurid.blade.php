@@ -20,6 +20,8 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $school->name }}</x-slot:name>
         <x-slot:email>{{ $school->email }}</x-slot:email>
+        <x-slot:filename>{{ "" }}</x-slot:filename>
+
         <h1 class="text-3xl font-bold mb-4">Siswa SMP</h1>
 
         <div

@@ -108,35 +108,44 @@ class SchoolController extends Controller
         }
 
         // Validation
-        $validated = $request->validate([
-            'extracurricular_id' => 'required|exists:extracurriculars,id',
-            'vendor_id' => 'required|exists:vendors,id',
-            'semester' => 'required|in:1,2',
-            'academic_year' => 'required|string|max:9',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
-            'pic' => 'required|string|max:255',
-            'day' => 'required|string|max:20',
-            'fee' => 'required|numeric|min:0',
-        ]);
+        // $validated = $request->validate([
+        //     'extracurricular_id' => 'required|exists:extracurriculars,id',
+        //     'vendor_id' => 'required|exists:vendors,id',
+        //     'semester' => 'required|in:1,2',
+        //     'academic_year' => 'required|string|max:9',
+        //     'start_date' => 'required|date',
+        //     'end_date' => 'required|date|after_or_equal:start_date',
+        //     'start_time' => 'required|date_format:H:i',
+        //     'end_time' => 'required|date_format:H:i|after:start_time',
+        //     'pic' => 'required|string|max:255',
+        //     'status' => 'required|string',
+        //     'day' => 'required|string|max:20',
+        //     'fee' => 'required|numeric|min:0',
+        // ]);
 
         // Find the ExcurVendor record
         $excurVendor = ExcurVendor::find($id);
         if (!$excurVendor) {
             return redirect()->back()->with('error', 'Data not found!');
         }
+        // Ambil data berdasarkan ID
+        $excurVendor = ExcurVendor::find($id);
+        if (!$excurVendor) {
+            return redirect()->back()->with('error', 'Data not found!');
+        }
 
-        // Update the ExcurVendor
-        $excurVendor->update($validated);
+        // Update data
+        $update = $excurVendor->update($request->all());
+
 
         // Check if update was successful
-        if ($excurVendor) {
-            return redirect()->route('daftarEkskulAktif')->with('success', 'Data updated successfully!');
+        if ($update) {
+            return redirect()->route('daftarekskulaktif')->with('success', 'Data updated successfully!');
         } else {
             return redirect()->back()->with('error', 'Failed to update the data');
         }
+        // return view('tes', ['data' => $request['status']]);
+
     }
 
 

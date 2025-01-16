@@ -47,6 +47,17 @@ class Meeting extends Model
         return $meetings;
     }
     
+    public static function getMeetingVendor($vendorId) {
+        // Query semua meeting yang terkait dengan vendor tertentu
+        $meetings = Meeting::whereHas('excurVendor', function ($query) use ($vendorId) {
+                $query->where('vendor_id', $vendorId);
+            })
+            ->get();
+    
+        return $meetings;
+    }
+    
+
     public function presences(): HasMany
     {
         return $this->hasMany(Presence::class, 'meeting_id');

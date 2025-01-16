@@ -77,6 +77,7 @@ class VendorController extends Controller
             'name' => $vendor->name,
             'email' => $vendor->email,
             'excurVendors' => $excurVendors,
+            'meetings' => Meeting::getMeetingVendor($vendorId)
         ]);
     }
 

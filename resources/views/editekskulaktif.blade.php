@@ -75,6 +75,20 @@
                     </select>
                 </div>
                 <div>
+                    <label for="status" class="block text-sm font-semibold text-gray-700">Status</label>
+                    <select name="status" id="status" required
+                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <option value="" disabled
+                            {{ old('status', $excurVendors->status) === null ? 'selected' : '' }}>Rubah status
+                        </option>
+                        <option value= "Aktif" {{ old('status', $excurVendors->status) }}> Aktif
+                        </option>
+                        <option value= "Tidak Aktif" {{ old('status', $excurVendors->status)}}> Tidak Aktif
+                        </option>
+
+                    </select>
+                </div>
+                <div>
                     <label for="academic_year" class="block text-sm font-semibold text-gray-700">Academic year</label>
                     <input type="text" name="academic_year" id="academic_year" autocomplete="academic_year" required
                         value="{{ old('academic_year', $excurVendors->academic_year) }}"

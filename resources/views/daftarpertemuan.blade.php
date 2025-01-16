@@ -23,42 +23,39 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
+        <x-slot:filename>{{ '' }}</x-slot:filename>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-fixed">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr class="bg-gray-200">
-                        <th scope="col" class="px-6 py-3 text-center">Nama Ekskul</th>
-                        <th scope="col" class="px-6 py-3 text-center">Jumlah Murid</th>
-                        <th scope="col" class="px-6 py-3 text-center">Hari</th>
-                        <th scope="col" class="px-6 py-3 text-center">Jam Mulai</th>
-                        <th scope="col" class="px-6 py-3 text-center">Jam Berakhir</th>
-                        <th scope="col" class="px-6 py-3 text-center">Detail Pertemuan</th>
+                        <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
+                        <th scope="col" class="px-6 py-3">Tanggal</th>
+                        <th scope="col" class="px-6 py-3">Divisi</th>
+                        <th scope="col" class="px-6 py-3">Level</th>
+                        <th scope="col" class="px-6 py-3">Vendor</th>
+                        <th scope="col" class="px-6 py-3">Jam</th>
+                        <th scope="col" class="px-6 py-3">Status</th>
+                        <th scope="col" class="px-6 py-3"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($excurVendors as $excur)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4 text-center font-medium text-gray-900 dark:text-white">
-                                {{ $excur->extracurricular->name }}
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ $excur->students_count_count}} <!-- Display number of students -->
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ \Carbon\Carbon::parse($excur->start_date)->format('l') }} <!-- Display day of the week -->
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ \Carbon\Carbon::parse($excur->start_time)->format('H:i') }} <!-- Format the time -->
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ \Carbon\Carbon::parse($excur->end_time)->format('H:i') }}
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <a href={{ "/vendor/daftarpertemuan/" . $excur->id }} class="text-blue-600 hover:underline">
-                                    Lihat Detail
-                                </a>
-                            </td>
+                    @forelse ($meetings as $meeting)
+                        <tr
+                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td class="px-6 py-4">{{ $meeting->excurVendor->extracurricular->name }}</td>
+
+                            <th scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                {{ $meeting->meeting_date }}
+                            </th>
+                            <td class="px-6 py-4">{{ $meeting->excurVendor->extracurricular->division }}</td>
+                            <td class="px-6 py-4">{{ $meeting->excurVendor->extracurricular->level }}</td>
+                            <td class="px-6 py-4">{{ $meeting->excurVendor->vendor->name }}</td>
+                            <td class="px-6 py-4">{{ $meeting->excurVendor->start_time }} -
+                                {{ $meeting->excurVendor->end_time }}</td>
+                            <td class="px-6 py-4">{{ $meeting->status }}</td>
+                            <td class="px-6 py-4"><a href="buatabsen/{{ $meeting->id }}">buat absen</a></td>
                         </tr>
                     @empty
                         <tr>
@@ -70,8 +67,8 @@
                 </tbody>
             </table>
         </div>
-        
-        
+
+
 
     </x-layout_homepage>
 

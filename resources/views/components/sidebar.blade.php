@@ -28,13 +28,7 @@
                     <span class="font-medium">Daftar Ektrakulikuler Aktif</span>
                 </a>
             </li>
-            <li
-                class="{{ Request::is($type . '/absensisiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-                <a href={{ '/' . $type . '/absensisiswa' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/calendar.svg') }}" alt="user" class="mr-4">
-                    <span class="font-medium">Meeting</span>
-                </a>
-            </li>
+            
             <li
                 class="{{ Request::is($type . '/daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/daftarsiswa' }} class="flex px-6 py-3 items-center">
@@ -110,13 +104,7 @@
                     <span class="font-medium">Payments</span>
                 </a>
             </li>
-            <li
-                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-                <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
-                    <img src="{{ asset('icons/dribbble.svg') }}" alt="book" class="mr-4">
-                    <span class="font-medium">Ekstrakurikuler</span>
-                </a>
-            </li>
+            
             <li
                 class="{{ Request::is($type.'sertifikat') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/sertifikat' }} class="flex px-6 py-3 items-center">
@@ -132,8 +120,8 @@
                 </a>
             </li>
             <li
-                class="{{ Request::is('meetingStudent') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
-                <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
+                class="{{ Request::is('profile') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                <a href={{ '/' . $type . '/profile' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/user.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Profile</span>
                 </a>

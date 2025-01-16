@@ -2,61 +2,89 @@
 <html lang="en">
 
 <head>
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/Atten-cropped.svg') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('images/Atten-cropped.svg') }}" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Profile</title>
+    <title>Edit Ekskul</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
     @vite('resources/css/app.css')
 </head>
 
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
-    {{-- sidebar --}}
-    <x-sidebar></x-sidebar>
+    <!-- Sidebar -->
+    <x-sidebar>
+        <x-slot:type>student</x-slot:type>
+    </x-sidebar>
+
+    <!-- Layout Homepage -->
     <x-layout_homepage>
-        <x-slot name="layoutTitle">
-            Edit {{ $type }}
-        </x-slot>
-        <div class="mt-12 flex flex-col px-8 py-8 bg-white rounded-lg">
-            <h1 class="font-medium text-lg mb-8">User Profile</h1>
-            <form>
-                <div class="mb-8">
-                    <label for="fullname" class="form-label block text-gray-700 mb-2">Full name</label>
-                    <div class="mb-4 relative">
-                        <img src="{{ asset('icons/profile.svg') }}" alt="profile_icon"
-                            class="absolute size-6 top-2 left-3">
-                        <input type="text"
-                            class="form-control w-full py-2 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            id="fullname" name="fullname" value="" required>
-                    </div>
-                    <label for="email" class="form-label block text-gray-700 mb-2">Email</label>
-                    <div class="mb-4 relative">
-                        <img src="{{ asset('icons/at-sign.svg') }}" alt="email_icon"
-                            class="absolute size-6 top-2 left-3">
-                        <input type="text"
-                            class="form-control w-full py-2 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            id="email" name="email" value="" required>
-                    </div>
-                    <label for="password" class="form-label block text-gray-700 mb-2">Password</label>
-                    <div class="mb-4 relative">
-                        <img src="{{ asset('icons/lock.svg') }}" alt="password_icon"
-                            class="absolute size-6 top-2 left-3">
-                        <input type="password"
-                            class="form-control w-full py-2 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                            id="password" name="password" value="" required>
-                    </div>
+        <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:name>{{ $student->full_name }}</x-slot:name>
+        <x-slot:email>{{ $student->email }}</x-slot:email>
+
+        <!-- Table Container -->
+        <div class="m-auto w-full xl:w-[60%] border-[1px] border-slate-400 bg-[#f4f4f47e] rounded-lg shadow-lg p-8 relative z-10">
+            <form method="POST" action="{{ route('updateProfile', $student->id) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+
+                <h1 class="text-3xl font-bold text-center text-[#343372] mb-6">Edit Profile</h1>
+
+                <div class="mb-4">
+                    <label for="full_name" class="block text-sm font-semibold text-gray-700">Nama Lengkap</label>
+                    <input type="text" name="full_name" id="full_name" required
+                        value="{{ old('full_name', $student->full_name) }}"
+                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
-        
-                <!-- Button aligned to the right -->
-                <div class="flex justify-end">
-                    <button class="bg-custom-blue text-white px-6 py-2 rounded-md" type="submit">Submit</button>
+
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-semibold text-gray-700">Email</label>
+                    <input type="email" name="email" id="email" required
+                        value="{{ old('email', $student->email) }}"
+                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="grade" class="block text-sm font-semibold text-gray-700">Kelas</label>
+                    <input type="text" name="grade" id="grade" required
+                        value="{{ old('grade', $student->grade) }}"
+                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="educational_level" class="block text-sm font-semibold text-gray-700">Jenjang</label>
+                    <input type="text" name="educational_level" id="educational_level" required
+                        value="{{ old('educational_level', $student->educational_level) }}"
+                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <div class="mb-4">
+                    <label for="from_class" class="block text-sm font-semibold text-gray-700">Asal Kelas</label>
+                    <input type="text" name="from_class" id="from_class" required
+                        value="{{ old('from_class', $student->from_class) }}"
+                        class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <div class="mb-6">
+                    <label for="profile_picture" class="block text-sm font-medium text-gray-700">Foto Profil</label>
+                    <input type="file" name="profile_picture" id="profile_picture"
+                        class="block w-full mt-1 text-sm border-gray-600 bg-gray-200 rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                </div>
+
+                <div>
+                    <button type="submit"
+                        class="w-full rounded-lg bg-[#343372] px-4 py-2 text-white font-semibold shadow-md hover:bg-[#2a285a] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Update
+                    </button>
                 </div>
             </form>
         </div>
-        
     </x-layout_homepage>
 
+    <!-- Sidebar Toggle Script -->
     <script>
         const sidebar = document.getElementById('sidebar');
         const toggleBtn = document.getElementById('toggleBtn');
@@ -66,6 +94,17 @@
             sidebar.classList.toggle('-translate-x-64');
             content.classList.toggle('ml-64');
         });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire('Success', "{{ session('success') }}", 'success');
+        @endif
+
+        @if (session('error'))
+            Swal.fire('Error', "{{ session('error') }}", 'error');
+        @endif
     </script>
 </body>
 

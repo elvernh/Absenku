@@ -24,6 +24,7 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $school->name }}</x-slot:name>
         <x-slot:email>{{ $school->email }}</x-slot:email>
+        <x-slot:filename>{{ "" }}</x-slot:filename>
 
         <!-- Table Container -->
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

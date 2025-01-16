@@ -10,12 +10,12 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\StudentExcurVendorController;
-
 use App\Models\ExcurVendor;
 use App\Models\Extracurricular;
 use App\Models\School;
 use App\Models\Vendor;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('welcome');
@@ -83,7 +83,10 @@ Route::prefix('student')->group(function () {
     Route::get("/daftar", [StudentController::class, 'showPendaftaranEkskul'])->name('daftarEks');
     Route::post("/daftar", [StudentExcurVendorController::class, 'store'])->name('submitDaftar');
 
-    Route::get('/sertifikat',[StudentController::class, 'showSertifikat']);
+    Route::get('/sertifikat',action: [StudentController::class, 'showSertifikat']);
+    Route::get('/profile',action: [StudentController::class, 'profileView']);
+    Route::get('/editprofile/{id}',action: [StudentController::class, 'editProfileView']);
+    Route::put('/editprofile/{id}',action: [StudentController::class, 'editProfileSubmit'])->name('updateProfile');
 
 });
 
@@ -105,8 +108,23 @@ Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::
 
 
 
+Route::get('/profile-image/{filename}', function ($filename) {
+    $path = storage_path('app/profile/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404); // Tampilkan halaman 404 jika file tidak ditemukan
+    }
+
+    $fileContent = file_get_contents($path);
+    $mimeType = mime_content_type($path);
+
+    return response($fileContent)->header('Content-Type', $mimeType);
+});
+
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
+Route::post('/pendaftaran', [StudentController::class, 'register'])->name('registerStudent');
+
 // Route::get(
 //     '/tambahekskul',
 //     [SchoolController::class, 'addExcur']
