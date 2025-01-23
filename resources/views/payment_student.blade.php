@@ -78,8 +78,15 @@
                                     -
                                 @endif
                             </td>
-                            <td class="px-4 py-3 text-center">{{ $payment->note }}</td>
-
+                            <td class="px-4 py-3 text-center">
+                                <a href="{{ route('download.private.file', ['filename' => $payment->transfer_url]) }}" 
+                                    class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                                    Download
+                                 </a>
+                                 
+                            </td>
+                            
+                           
                         </tr>
                         @php
                             $i++;

@@ -12,24 +12,7 @@ use Str;
 
 class StudentController extends Controller
 {
-    public function store(Request $request)
-    {
-        // Validasi input
-        $validatedData = $request->validate([
-            'full_name' => 'required|string|max:255',
-            'grade' => 'required|string|max:255',
-            'educational_level' => 'required|string|max:255',
-            'from_class' => 'required|string|max:255',
-            'email' => 'required|email|unique:students,email|max:255',
-            'password' => 'required|string|min:8',
-        ]);
-
-        // Membuat data student
-        $student = Student::create($validatedData);
-
-        // Mengembalikan respon
-        return $student->id;
-    }
+   
 
 
     public function index()
@@ -168,7 +151,14 @@ class StudentController extends Controller
         }
         $studentExcs = StudentExcurVendor::where('student_id', $studentId)->get();
         $payments = $studentExcs->pluck('payment')->flatten();
-
+        $payments = $payments->map(function ($payment) {
+            // Mengambil fee dari excurVendor dan format menjadi rupiah
+            $transfer = $payment->transfer_url;
+            $transfer1 = str_replace("bukti/", "", $transfer);    
+            $payment->transfer_url = $transfer1;
+            
+            return $payment;
+        });
         return view('payment_student', [
             'pageTitle' => "Pembayaran",
             'name' => $student->full_name,
@@ -192,6 +182,7 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->route('/');
         }
+       
         $studentExcs = StudentExcurVendor::where('student_id', $studentId)
             ->where('status', 'approved')  // Pengecekan status
             ->get();
@@ -216,25 +207,25 @@ class StudentController extends Controller
     }
 
     public function register(Request $request)
-    {
-        // Validasi input (disarankan untuk menghindari error data yang tidak valid)
-        
+    {        
         $search = Student::where('email', $request['email'])->get();
-        if($search) {
+        if(!$search) {
             return redirect()->route(route: 'pendaftaran')->with('error', 'Registration failed!');
         }
         // Buat instance Student
-        $student = Student::create([
-            'full_name' => $request['full_name'],
-            'grade' => $request['grade'],
-            'educational_level' => $request['educational_level'],
-            'from_class' => $request['from_class'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']), 
+        $validated = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'grade' => 'required|string|max:255',
+            'educational_level' => 'required|string|max:255',
+            'from_class' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email|max:255',
+            'password' => 'required|string|min:8',
             'profile_picture' => "default.png",
             'token' => Str::uuid(),
-            
         ]);
+        $validated['profile_picture'] = 'default.png';
+        $validated['token'] = Str::uuid();
+        $student = Student::create($validated);
     
         // Cek apakah berhasil disimpan
         if ($student) {

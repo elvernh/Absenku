@@ -145,7 +145,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="description" class="block text-sm font-medium text-gray-700">Keterangan</label>
-                            <input type="text" id="description" name="keterangan" placeholder="Masukkan keterangan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                            <input value="-" type="text" id="description" name="keterangan" placeholder="Masukkan keterangan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
                         </div>
                         <input type="hidden" value="${meetingId}" name="meeting_id">
                         <input type="hidden" value="${studentId}" name="student_excur_vendor_id">

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ExcurVendorController;
 use App\Http\Controllers\ExtracurricularController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\PresenceController;
@@ -124,6 +125,7 @@ Route::get('/profile-image/{filename}', function ($filename) {
 
 Route::get('/pendaftaran', [StudentController::class, 'showPendaftaran']);
 Route::post('/pendaftaran', [StudentController::class, 'register'])->name('registerStudent');
+Route::get('/download/private/{filename}', [FileController::class, 'downloadPrivateFile'])->name('download.private.file');
 
 // Route::get(
 //     '/tambahekskul',
