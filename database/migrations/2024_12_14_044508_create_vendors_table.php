@@ -29,6 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('excur_vendors', function (Blueprint $table) {
+            $table->dropForeign(['vendor_id']); // Drop the foreign key constraint
+        });
+
         Schema::dropIfExists('vendors');
     }
 };
