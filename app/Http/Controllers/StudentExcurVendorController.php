@@ -40,41 +40,52 @@ class StudentExcurVendorController extends Controller
 
     public function store(Request $request)
     {
-        // Retrieve the list of vendor IDs from the request
+        // Validasi request untuk vendor IDs
+        $request->validate([
+            'excurVendor' => 'required|array|min:1',
+            'excurVendor.*' => 'exists:excur_vendors,id',
+        ]);
+
         $excurVendor = $request['excurVendor'];
         $allExcurData = [];
-        $validateExc = [];
-        $data = [];
+        $conflictingVendors = [];
+        $conflictingMessages = [];
 
-        // Fetch data for each vendor from the database
-        for ($i = 0; $i < count($excurVendor); $i++) {
-            $excurVendorData = ExcurVendor::find($excurVendor[$i]);
+        // Ambil data vendor berdasarkan ID
+        foreach ($excurVendor as $vendorId) {
+            $vendorData = ExcurVendor::find($vendorId);
 
-            if ($excurVendorData) {
-                $allExcurData[] = $excurVendorData;
+            if ($vendorData) {
+                $allExcurData[] = $vendorData;
             } else {
-                // Vendor not found, add an error message or handle it accordingly
-                session()->flash('error', 'Vendor not found for ID: ' . $excurVendor[$i]);
+                session()->flash('error', 'Vendor not found for ID: ' . $vendorId);
                 return redirect()->back();
             }
         }
 
-        // Validate if start times of consecutive vendors are the same
+        // Validasi waktu mulai antar vendor
         for ($i = 0; $i < count($allExcurData) - 1; $i++) {
-            $startTime1 = Carbon::parse($allExcurData[$i]->start_time);
-            $startTime2 = Carbon::parse($allExcurData[$i + 1]->start_time);
+            for ($j = $i + 1; $j < count($allExcurData); $j++) {
+                $startTime1 = Carbon::parse($allExcurData[$i]->start_time);
+                $endTime1 = Carbon::parse($allExcurData[$i]->end_time);
+                $startTime2 = Carbon::parse($allExcurData[$j]->start_time);
+                $endTime2 = Carbon::parse($allExcurData[$j]->end_time);
 
-            // Check if start times are different
-            if (!($startTime1->equalTo($startTime2))) {
-                $validateExc[] = $allExcurData[$i];
-                $data[] = $allExcurData[$i]->extracurricular->name . " has different time";
+                // Periksa jika waktu mulai dan selesai tumpang tindih
+                if (
+                    ($startTime1->between($startTime2, $endTime2) || $endTime1->between($startTime2, $endTime2)) ||
+                    ($startTime2->between($startTime1, $endTime1) || $endTime2->between($startTime1, $endTime1))
+                ) {
+                    $conflictingVendors[] = $allExcurData[$i];
+                    $conflictingMessages[] = $allExcurData[$i]->extracurricular->name . ' conflicts with ' . $allExcurData[$j]->extracurricular->name;
+                }
             }
-
         }
 
-        // If there are any vendors with conflicting start times, return an error
-        if (count($validateExc) > 0) {
-            foreach ($validateExc as $vendor) {
+
+        // Jika ada konflik waktu
+        if (count($conflictingVendors) > 0) {
+            foreach ($conflictingVendors as $vendor) {
                 StudentExcurVendor::create([
                     'excur_vendor_id' => $vendor->id,
                     'status' => 'pending',
@@ -86,21 +97,26 @@ class StudentExcurVendorController extends Controller
                 ]);
             }
 
-            // Check if any vendors were successfully processed
-            if (count($excurVendor) > 0) {
-                session()->flash('success', 'Successfully registered for the extracurricular activities. Count: ' . count($validateExc));
-                return redirect()->route('daftarEks');
-            } else {
-                session()->flash('error', 'Failed to register');
-                return redirect()->back();
-            }
-        } else {
-            session()->flash('error', 'There are vendors with conflicting start times.' . count($validateExc));
+            session()->flash('error', implode(' ', $conflictingMessages));
             return redirect()->back();
         }
 
-        // Proceed to create the StudentExcurVendor records
+        // Jika tidak ada konflik, buat semua entri
+        foreach ($allExcurData as $vendor) {
+            StudentExcurVendor::create([
+                'excur_vendor_id' => $vendor->id,
+                'status' => 'active',
+                'student_id' => session('student_id'),
+                'score_mid' => 0,
+                'score_final' => 0,
+                'url_certificate' => '-',
+                'note' => '-',
+            ]);
+        }
 
+        // Redirect sukses
+        session()->flash('success', 'Successfully registered for the extracurricular activities.');
+        return redirect()->route('daftarEks');
     }
 
 

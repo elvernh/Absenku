@@ -70,7 +70,7 @@
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->vendor->name}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->start_time}} - {{ $meetingToday->excurVendor->end_time}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->status}}</td>
-                                    <td class="px-6 py-4"><a href="buatabsen/{{ $meetingToday->id }}">buat absen</a></td>
+                                    <td class="px-6 py-4"><a href="buatabsen/{{ $meetingToday->id }}" class="text-blue-400 underline">buat absen</a></td>
                                 </tr>
                             @empty
                                 <tr>

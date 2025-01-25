@@ -49,11 +49,15 @@
                 </div>
 
                 <div>
-                    <label for="topic" class="block text-sm font-semibold text-gray-700">Topic
-                    </label>
-                    <input type="text" name="topic" value="{{ old('topic') }}" id="topic" required
-                        class="mt-1 block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <label for="topic" class="block text-sm font-semibold text-gray-700">Topic</label>
+                    <input type="text" 
+                           name="topic" 
+                           id="topic" 
+                           value="{{ old('topic', '-') }}" 
+                           required 
+                           class="mt-1 block w-full rounded-lg border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
+                
 
                 <!-- Submit Button -->
                 <div>

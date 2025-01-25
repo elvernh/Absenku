@@ -32,8 +32,8 @@
 
                 <!-- Button Buat Jadwal -->
                 <div class="flex items-center">
-                    <a href="activate" class="ms-20 text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
-                        Tambah Ekskul
+                    <a href="activate" class=" text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
+                        Tambah Ekskul Aktif
                     </a>
                 </div>
             </div>
