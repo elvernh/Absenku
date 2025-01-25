@@ -12,9 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('excur_vendors', function (Blueprint $table) {
-            //
-            $table->date(column: 'end_date');
-
+            $table->date('end_date')->nullable(); // Allows NULL values to avoid issues with existing rows
         });
     }
 
@@ -24,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('excur_vendors', function (Blueprint $table) {
-            //
+            $table->dropColumn('end_date'); // Removes the column if the migration is rolled back
         });
     }
 };

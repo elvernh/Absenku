@@ -79,6 +79,7 @@ class ExcurVendorController extends Controller
             'start_time' => 'required|string',
             'end_time' => 'required|string',
             'fee' => 'required|numeric',
+            'status' => 'nullable|string'
         ]);
         $validated['status'] = 'Aktif';
         $create = ExcurVendor::create($validated);
