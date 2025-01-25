@@ -24,13 +24,13 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $school->name }}</x-slot:name>
         <x-slot:email>{{ $school->email }}</x-slot:email>
-        <x-slot:filename>{{ "" }}</x-slot:filename>
+        <x-slot:filename>{{ '' }}</x-slot:filename>
 
         <!-- Table Container -->
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div class="flex w-full bg-slate-300 justify-between p-4">
                 <!-- Search Form -->
-               
+
 
                 <!-- Button Buat Jadwal -->
                 <div class="flex items-center">
@@ -65,14 +65,14 @@
                             <td class="px-6 py-4">{{ $exctracurricular->division }}</td>
                             <td class="px-6 py-4">{{ $exctracurricular->level }}</td>
 
+                            <td> <button class="text-white bg-red-600 px-4 py-2 rounded-lg text-sm"
+                                    onclick="confirmDelete('{{ route('deleteExtracurricular', $exctracurricular) }}')">
+                                    Hapus
+                                </button></td>
                             <td> <x-button>
-                                    <x-slot:action>{{ route('deleteExtracurricular', $exctracurricular) }}</x-slot:action>
-                                    <x-slot:method>DELETE</x-slot:method>
-                                </x-button></td>
-                            <td> <x-button>
-                                <x-slot:action>{{ route('editExcur', $exctracurricular->id) }}</x-slot:action>
-                                <x-slot:method>GET</x-slot:method>
-                                Edit
+                                    <x-slot:action>{{ route('editExcur', $exctracurricular->id) }}</x-slot:action>
+                                    <x-slot:method>GET</x-slot:method>
+                                    Edit
                                 </x-button></td>
 
                         </tr>
@@ -94,22 +94,40 @@
         });
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    @if (session('success'))
-        Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (session('success'))
+            Swal.fire('Success', "{{ session('success') }}", 'success').then(() => {
                 // Callback di sini
                 // Pastikan tidak ada refresh halaman
             });;;
-    @endif
+        @endif
 
-    @if (session('error'))
-        Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
+        @if (session('error'))
+            Swal.fire('Error', "{{ session('error') }}", 'error').then(() => {
                 // Callback di sini
                 // Pastikan tidak ada refresh halaman
             });;;
-    @endif
-</script>
+        @endif
+
+        function confirmDelete(url) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Tindakan ini tidak dapat dibatalkan!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke URL untuk menghapus data
+                    window.location.href = url;
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

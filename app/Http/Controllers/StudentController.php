@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use App\Models\ExcurVendor;
 use App\Models\Student;
 use App\Models\StudentExcurVendor;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,7 +13,7 @@ use Str;
 
 class StudentController extends Controller
 {
-   
+
 
 
     public function index()
@@ -30,9 +31,9 @@ class StudentController extends Controller
             return redirect()->route('/');
         }
         $results = StudentExcurVendor::where('student_id', $studentId)
-        ->where('status', 'approved') // Menambahkan kondisi untuk kolom status
-        ->get();
-    
+            ->where('status', 'approved') // Menambahkan kondisi untuk kolom status
+            ->get();
+
         // Mem-filter data berdasarkan hari ini
         $nows = $results->filter(function ($result) {
             return $result->excurVendor->day == Carbon::now()->format('l');
@@ -53,40 +54,41 @@ class StudentController extends Controller
         ]);
     }
 
-    public function showSertifikat(){
+    public function showSertifikat()
+    {
         $studentId = session('student_id');
-    
+
         if (!$studentId) {
             return redirect()->route('/');
         }
-    
+
         $student = Student::find($studentId);
-    
+
         // If student not found, redirect to login
         if (!$student) {
             return redirect()->route('/');
         }
-    
+
         // Fetch the student's extracurricular vendor record
         $studentExcurVendor = StudentExcurVendor::where('student_id', $studentId)->get();
-    
+
         if (!$studentExcurVendor) {
             // If no record is found, redirect with an error message
             return redirect()->route('/')->with('error', 'No extracurricular data found.');
         }
-    
+
         // Get the list of certificates (assuming it's stored as an array or JSON)
-    
-    
+
+
         return view('sertifikat', [
-            'pageTitle' => "Sertifikat", 
+            'pageTitle' => "Sertifikat",
             'name' => $student->full_name,
             'email' => $student->email,
             'studentExcurVendor' => $studentExcurVendor
         ]);
     }
-    
-    
+
+
 
     public function logout(Request $request)
     {
@@ -154,9 +156,9 @@ class StudentController extends Controller
         $payments = $payments->map(function ($payment) {
             // Mengambil fee dari excurVendor dan format menjadi rupiah
             $transfer = $payment->transfer_url;
-            $transfer1 = str_replace("bukti/", "", $transfer);    
+            $transfer1 = str_replace("bukti/", "", $transfer);
             $payment->transfer_url = $transfer1;
-            
+
             return $payment;
         });
         return view('payment_student', [
@@ -182,21 +184,21 @@ class StudentController extends Controller
         if (!$student) {
             return redirect()->route('/');
         }
-       
+
         $studentExcs = StudentExcurVendor::where('student_id', $studentId)
             ->where('status', 'approved')  // Pengecekan status
             ->get();
-        
-            $studentExcs = $studentExcs->map(function ($studentExc) {
-                // Mengambil fee dari excurVendor dan format menjadi rupiah
-                $fee = $studentExc->excurVendor->fee;
-                $formattedFee = 'Rp ' . number_format($fee, 2, ',', '.'); // Format dengan 2 desimal
-        
-                // Menambahkan formatted_fee ke dalam object studentExc
-                $studentExc->formatted_fee = $formattedFee;
-                
-                return $studentExc; // Mengembalikan object yang sudah diupdate
-            });
+
+        $studentExcs = $studentExcs->map(function ($studentExc) {
+            // Mengambil fee dari excurVendor dan format menjadi rupiah
+            $fee = $studentExc->excurVendor->fee;
+            $formattedFee = 'Rp ' . number_format($fee, 2, ',', '.'); // Format dengan 2 desimal
+
+            // Menambahkan formatted_fee ke dalam object studentExc
+            $studentExc->formatted_fee = $formattedFee;
+
+            return $studentExc; // Mengembalikan object yang sudah diupdate
+        });
         return view('paymentform', [
             'pageTitle' => "Pembayaran",
             'name' => $student->full_name,
@@ -207,9 +209,9 @@ class StudentController extends Controller
     }
 
     public function register(Request $request)
-    {        
+    {
         $search = Student::where('email', $request['email'])->get();
-        if(!$search) {
+        if (!$search) {
             return redirect()->route(route: 'pendaftaran')->with('error', 'Registration failed!');
         }
         // Buat instance Student
@@ -226,7 +228,7 @@ class StudentController extends Controller
         $validated['profile_picture'] = 'default.png';
         $validated['token'] = Str::uuid();
         $student = Student::create($validated);
-    
+
         // Cek apakah berhasil disimpan
         if ($student) {
             session(['student_id' => $student->id]);
@@ -235,8 +237,9 @@ class StudentController extends Controller
             return redirect()->route(route: 'pendaftaran')->with('error', 'Registration failed!');
         }
     }
-    
-    public function showPendaftaranEkskul(Request $request) {
+
+    public function showPendaftaranEkskul(Request $request)
+    {
         $studentId = session('student_id');
 
         if (!$studentId) {
@@ -253,7 +256,8 @@ class StudentController extends Controller
         ]);
     }
 
-    public function profileView() {
+    public function profileView()
+    {
         $studentId = session('student_id');
 
         if (!$studentId) {
@@ -269,7 +273,8 @@ class StudentController extends Controller
         ]);
     }
 
-    public function editProfileView($id) {
+    public function editProfileView($id)
+    {
         $studentId = session('student_id');
 
         if (!$studentId) {
@@ -279,36 +284,51 @@ class StudentController extends Controller
         $student = Student::find($studentId);
 
         return view('editprofile', [
-            'pageTitle' => "profile",
+            'pageTitle' => "Profile",
             'name' => $student->full_name,
             'email' => $student->email,
             'student' => $student
         ]);
     }
 
-    public function editProfileSubmit(Request $request, $id) {
-       $update = Student::find($id);
-        // Find the ExcurVendor record
+
+
+    public function editProfileSubmit(Request $request, $id)
+    {
         $student = Student::find($id);
         if (!$student) {
             return redirect()->back()->with('error', 'Data not found!');
         }
-        // Ambil data berdasarkan ID
-        $student = Student::find($id);
-        if (!$student) {
-            return redirect()->back()->with('error', 'Data not found!');
+        $validated = $request->validate([
+            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+
+        ]);
+        if ($request->hasFile(key: 'profile_picture')) {
+            $filePath = $request->file('profile_picture')->store('profile');
+            $fileName = basename($filePath);
+        } else {
+            $fileName = $student->profile_picture;
         }
 
-        // Update data
-        $update = $student->update($request->all());
+        // return view('tes', ['data' => $request['profile_picture']]);
+        $update = DB::table('students')
+            ->where('id', $id)
+            ->update([
+                'full_name' => $request['full_name'],
+                'grade' => $request['grade'],
+                'educational_level' => $request['educational_level'],
+                'from_class' => $request['from_class'],
+                'email' => $request['email'],
+                'profile_picture' => $fileName
+            ]);
 
-
-        // Check if update was successful
+        // Redirect dengan pesan sukses atau gagal
         if ($update) {
             return redirect()->back()->with('success', 'Data updated successfully!');
         } else {
             return redirect()->back()->with('error', 'Failed to update the data');
         }
-        // return view('tes', ['data' => $request['status']]);
     }
+
+
 }

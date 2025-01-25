@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('grade');
             $table->string('educational_level');
             $table->string('from_class');
-            $table->string('profile_picture');
+            $table->text('profile_picture');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('token');

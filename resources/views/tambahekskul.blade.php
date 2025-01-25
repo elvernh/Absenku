@@ -69,7 +69,7 @@
                 </div>
                 
 
-                <div>
+                {{-- <div>
                     <label class="block text-sm font-semibold text-gray-700">Vendor</label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         @foreach ($all as $vendor)
@@ -80,7 +80,7 @@
                             </div>
                         @endforeach
                     </div>
-                </div>
+                </div> --}}
 
                 <div>
                     <button type="submit"

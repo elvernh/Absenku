@@ -28,8 +28,7 @@ class ExtracurricularController extends Controller
             'name' => 'required',
             'division' => 'required',
             'level' => 'required',
-            'vendor_id' => 'required|array',
-            'vendor_id.*' => 'exists:vendors,id',
+          
 
         ]);
 

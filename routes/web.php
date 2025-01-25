@@ -105,15 +105,15 @@ Route::prefix('vendor')->group(function () {
 
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);
 Route::get('/logout/{type}', [LoginController::class, 'logout']);
-Route::delete('/extracurricular/{extracurricular}', [ExtracurricularController::class, 'destroy'])->name('deleteExtracurricular');
+Route::get('/extracurricular/{extracurricular}', [ExtracurricularController::class, 'destroy'])->name('deleteExtracurricular');
 
 
 
 Route::get('/profile-image/{filename}', function ($filename) {
-    $path = storage_path('app/profile/' . $filename);
+    $path = storage_path('app/private/profile/' . $filename);
 
     if (!file_exists($path)) {
-        abort(404); // Tampilkan halaman 404 jika file tidak ditemukan
+        abort(404); 
     }
 
     $fileContent = file_get_contents($path);
