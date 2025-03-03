@@ -167,17 +167,17 @@ class VendorController extends Controller
 
         // Ambil data murid yang terhubung
         $students = $meeting->excurVendor->studentExcurVendors
-    ->filter(function ($muridVendorEkskul) {
-        // Ganti 'status' dan 'active' dengan atribut dan nilai yang sesuai
-        return $muridVendorEkskul->status === 'approved';
-    })
-    ->map(function ($muridVendorEkskul) {
-        return $muridVendorEkskul;
-    });
-    $presences = Presence::where('meeting_id', $id)->get();
+            ->filter(function ($muridVendorEkskul) {
+                // Ganti 'status' dan 'active' dengan atribut dan nilai yang sesuai
+                return $muridVendorEkskul->status === 'approved';
+            })
+            ->map(function ($muridVendorEkskul) {
+                return $muridVendorEkskul;
+            });
+        $presences = Presence::where('meeting_id', $id)->get();
 
         return view('tambahabsen', [
-            'pageTitle' => "Tambah Absen $id",
+            'pageTitle' => "Tambah Absen " . $meeting->ExcurVendor->extracurricular->name,
             'name' => $vendor->name,
             'email' => $vendor->email,
             'meeting' => $meeting,

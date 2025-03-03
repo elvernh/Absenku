@@ -21,7 +21,7 @@
     </x-sidebar>
 
     <x-layout_homepage>
-        <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
+        <x-slot:layoutTitle >{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
 
@@ -100,6 +100,7 @@
                                 <th scope="col" class="px-6 py-3">Nama</th>
                                 <th scope="col" class="px-6 py-3">Status</th>
                                 <th scope="col" class="px-6 py-3">Keterangan</th>
+                                <th scope="col" class="px-6 py-3"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,6 +109,8 @@
                                     <td class="px-6 py-4">{{ $presence->studentExcurVendor->student->full_name }}</td>
                                     <td class="px-6 py-4">{{ $presence->status->status_name }}</td>
                                     <td class="px-6 py-4">{{ $presence->keterangan }}</td>
+                                    <td class="px-6 py-4"><a href="" class="text-blue-700 underline">edit</a></td>
+
                                 </tr>
                             @endforeach
                         </tbody>

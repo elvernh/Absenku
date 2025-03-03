@@ -13,6 +13,15 @@ class PresenceController extends Controller
         // Ambil data yang diperlukan dari request
         $data = $request->only(['status_id', 'keterangan', 'meeting_id', 'student_excur_vendor_id', 'excur_vendor_id']);
         
+        //cek apakah sudah terbuat
+        $presence = Presence::where('student_excur_vendor_id', $data['student_excur_vendor_id'])
+            ->where('meeting_id', $data['meeting_id'])
+            ->first();
+            
+        if ($presence) {
+            return redirect()->back()->with('error', 'Anda sudah absen pada pertemuan ini.');
+        }
+
         // Buat entry baru ke database
         $create = Presence::create($data);
     
