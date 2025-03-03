@@ -33,9 +33,29 @@ class MeetingController extends Controller
 
     }
 
+    public function addMeeting(Request $request)
+    {
+        $id = $request->route('id');
+        $validated = $request->validate([
+            'teacher' => 'required|string',
+            'topic' => 'required|string',
+        ]);
+
+        // Simpan data dalam session
+        session([
+            'teacher' => $validated['teacher'],
+            'topic' => $validated['topic'],
+        ]);
+        return redirect()->route('makePresences', [
+            'id' => $id
+            
+        ]);
+    }
+
+
     public function updateMeeting(Request $request)
     {
-       
+
         $id = $request->route('id'); // Mengambil parameter 'id' dari URL
         $meeting = Meeting::find($id);
 
@@ -44,13 +64,6 @@ class MeetingController extends Controller
             return redirect()->back()->with('error', 'Meeting not found.');
         }
 
-        //ambil data siswa yang tidak ada absensi dan status approved
-        // $studentExcurVendors = StudentExcurVendor::where('excur_vendor_id', $meeting->excur_vendor_id)
-        //     ->whereDoesntHave('presences', function ($query) use ($meeting) {
-        //         $query->where('meeting_id', $meeting->id);
-        //     })
-        //     ->get();
-        
         $studentExcurVendors = StudentExcurVendor::where('excur_vendor_id', $meeting->excur_vendor_id)
             ->whereDoesntHave('presences', function ($query) use ($meeting) {
                 $query->where('meeting_id', $meeting->id);
@@ -68,11 +81,13 @@ class MeetingController extends Controller
                 'excur_vendor_id' => $meeting->excur_vendor_id,
             ]);
         }
-        
+
         // Update data meeting
         $meeting->topic = $request['topic'];
         $meeting->teacher = $request['teacher'];
         $meeting->status = $request['status'];
+
+        session()->forget(['teacher', 'topic']);
 
         // Simpan perubahan
         if ($meeting->save()) {

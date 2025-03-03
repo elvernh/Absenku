@@ -64,9 +64,12 @@ Route::prefix('school')->group(function () {
     });
     Route::post('/submitmeeting', [MeetingController::class, 'createMeeting'])->name('createMeeting');
     Route::get('/activate', function () {
-        return view('activateekskul', ['Vendors' => Vendor::all(), 'extras' => Extracurricular::all(),
-        'pageTitle' => 'Aktifkan Ekstrakulikuler',
-        'school' => School::find(session('school_id'))]);
+        return view('activateekskul', [
+            'Vendors' => Vendor::all(),
+            'extras' => Extracurricular::all(),
+            'pageTitle' => 'Aktifkan Ekstrakulikuler',
+            'school' => School::find(session('school_id'))
+        ]);
     });
     Route::post('/submitactivate', [ExcurVendorController::class, 'store'])->name('submitActivate');
 });
@@ -84,22 +87,23 @@ Route::prefix('student')->group(function () {
     Route::get("/daftar", [StudentController::class, 'showPendaftaranEkskul'])->name('daftarEks');
     Route::post("/daftar", [StudentExcurVendorController::class, 'store'])->name('submitDaftar');
 
-    Route::get('/sertifikat',action: [StudentController::class, 'showSertifikat']);
-    Route::get('/profile',action: [StudentController::class, 'profileView']);
-    Route::get('/editprofile/{id}',action: [StudentController::class, 'editProfileView']);
-    Route::put('/editprofile/{id}',action: [StudentController::class, 'editProfileSubmit'])->name('updateProfile');
+    Route::get('/sertifikat', action: [StudentController::class, 'showSertifikat']);
+    Route::get('/profile', action: [StudentController::class, 'profileView']);
+    Route::get('/editprofile/{id}', action: [StudentController::class, 'editProfileView']);
+    Route::put('/editprofile/{id}', action: [StudentController::class, 'editProfileSubmit'])->name('updateProfile');
 
 });
 
 Route::prefix('vendor')->group(function () {
     Route::get("/dashboard", [VendorController::class, 'showDashboard'])->name('dashboardVendor');
-
     Route::get('/daftarpertemuan', [VendorController::class, 'daftarPertemuan']);
     Route::get('/daftarpertemuan/{id}', [VendorController::class, 'detilPertemuan'])->name('detilPertemuan');
     Route::get('/daftarsiswa', [VendorController::class, 'daftarSiswa']);
-    Route::get('/buatabsen/{id}', [VendorController::class, 'makePresences']);
+    Route::get('/buatabsen/{id}', [VendorController::class, 'makePresences'])->name('makePresences');
     Route::post('/buatabsen', [PresenceController::class, 'store'])->name('createPresence');
-    Route::put('updateMeeting/{id}', [MeetingController::class, 'updateMeeting'])->name('updateMeeting');
+    Route::post('/addMeeting/{id}', [MeetingController::class, 'addMeeting'])->name('addMeeting');
+    Route::get('/create/{id}', [VendorController::class, 'createPresences'])->name('createPresences');
+    Route::put('/finishMeeting/{id}', [MeetingController::class, 'updateMeeting'])->name('updateMeeting');
 
 });
 
@@ -113,7 +117,7 @@ Route::get('/profile-image/{filename}', function ($filename) {
     $path = storage_path('app/private/profile/' . $filename);
 
     if (!file_exists($path)) {
-        abort(404); 
+        abort(404);
     }
 
     $fileContent = file_get_contents($path);

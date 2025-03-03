@@ -155,6 +155,8 @@ class VendorController extends Controller
         if (!$vendorId) {
             return redirect()->route('/');
         }
+        $teacher = session('teacher');
+        $topic = session('topic');
 
         $vendor = Vendor::find($vendorId);
         // Ambil data meeting berdasarkan ID
@@ -176,15 +178,46 @@ class VendorController extends Controller
             });
         $presences = Presence::where('meeting_id', $id)->get();
 
-        return view('tambahabsen', [
+        return view('tambahabsen2', [
             'pageTitle' => "Tambah Absen " . $meeting->ExcurVendor->extracurricular->name,
             'name' => $vendor->name,
             'email' => $vendor->email,
             'meeting' => $meeting,
             'students' => $students,
-            'presences' => $presences
+            'presences' => $presences,
+            'teacher' => $teacher,
+            'topic' => $topic,
         ]);
     }
+    public function createPresences($id)
+    {
+        $vendorId = session('vendor_id');
+
+        if (!$vendorId) {
+            return redirect()->route('/');
+        }
+
+        $vendor = Vendor::find($vendorId);
+        // Ambil data meeting berdasarkan ID
+        $meeting = Meeting::with('excurVendor.studentExcurVendors.student')
+            ->find($id);
+
+        if (!$meeting) {
+            return redirect()->route('404');
+        }
+
+
+
+        return view('tambahabsen', [
+            'pageTitle' => "Tambah Absen " . $meeting->ExcurVendor->extracurricular->name,
+            'name' => $vendor->name,
+            'email' => $vendor->email,
+            'meeting' => $meeting,
+
+        ]);
+    }
+
+
     public function logout(Request $request)
     {
         session()->forget('vendor_id');

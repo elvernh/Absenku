@@ -27,7 +27,7 @@ class PresenceController extends Controller
     
         // Anda bisa menambahkan respon atau redirect setelah data berhasil disimpan
         if ($create) {
-            return redirect()->back()->with('success', 'Absen berhasil disimpan!');
+            return redirect()->back();
         } else {
             return redirect()->back()->with('error', 'Terjadi kesalahan saat menyimpan absen.');
         }

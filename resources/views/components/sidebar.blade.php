@@ -1,4 +1,4 @@
-<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed transition-transform transform z-[10000]">
+<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed top-0 left-0 -translate-x-full transition-transform transform z-[10000]">
 
     <div class="flex justify-center mt-6 pb-5 border-b-[1px]">
         <img src="{{ asset('images/Atten-cropped.svg') }}" alt="logo" class="w-40 h-20">
@@ -28,7 +28,7 @@
                     <span class="font-medium">Daftar Ektrakulikuler Aktif</span>
                 </a>
             </li>
-            
+
             <li
                 class="{{ Request::is($type . '/daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/daftarsiswa' }} class="flex px-6 py-3 items-center">
@@ -73,7 +73,7 @@
                 </a>
             </li>
 
-            
+
             <div class="h-[100px] xl:h-[100px]"></div>
             <li class="hover:bg-[#343372] rounded-lg cursor-pointer">
                 <a href={{ '/logout/' . $type }} class="flex px-6 py-3 items-center">
@@ -81,7 +81,6 @@
                     <span class="font-medium">Log out</span>
                 </a>
             </li>
-        
         @elseif($type == 'student')
             <li
                 class="{{ Request::is($type . '/dashboard') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
@@ -98,15 +97,15 @@
                 </a>
             </li>
             <li
-                class="{{ Request::is($type.'/payment') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                class="{{ Request::is($type . '/payment') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/payment' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/dollar-sign.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Payments</span>
                 </a>
             </li>
-            
+
             <li
-                class="{{ Request::is($type.'sertifikat') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
+                class="{{ Request::is($type . 'sertifikat') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/sertifikat' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/award.svg') }}" alt="book" class="mr-4">
                     <span class="font-medium">Sertifikat</span>
@@ -139,3 +138,6 @@
     <button id="toggleBtn"
         class="absolute w-[40px] h-[80px] left-64 top-12 z-10 border-black border-t border-e border-b text-custom-blue p-2 text-3xl rounded bg-white">☰</button>
 </div>
+
+  <!-- Overlay -->
+  <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 hidden z-[9999]"></div>
