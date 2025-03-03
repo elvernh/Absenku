@@ -1,4 +1,5 @@
-<div id="sidebar" class="w-64 h-screen px-6 bg-custom-blue text-white fixed top-0 left-0 -translate-x-full transition-transform transform z-[10000]">
+<div id="sidebar"
+    class="w-64 h-screen px-6 bg-custom-blue text-white fixed top-0 left-0 -translate-x-full transition-transform transform z-[10000]">
 
     <div class="flex justify-center mt-6 pb-5 border-b-[1px]">
         <img src="{{ asset('images/Atten-cropped.svg') }}" alt="logo" class="w-40 h-20">
@@ -136,8 +137,13 @@
 
     </ul>
     <button id="toggleBtn"
-        class="absolute w-[40px] h-[80px] left-64 top-12 z-10 border-black border-t border-e border-b text-custom-blue p-2 text-3xl rounded bg-white">☰</button>
+        class="absolute flex items-center justify-center w-[45px] h-[45px] left-64 top-[110px] z-10 border-black border-t border-e border-b text-custom-blue  text-4xl rounded bg-white"><svg
+            xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+        </svg></button>
 </div>
 
-  <!-- Overlay -->
-  <div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 hidden z-[9999]"></div>
+<!-- Overlay -->
+<div id="overlay" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 hidden z-[9999]"></div>

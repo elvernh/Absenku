@@ -1,16 +1,16 @@
 {{-- layout_homepage.blade.php --}}
-<main id="content" class=" my-14 w-full ">
-    <div class="md:mx-14 mx-8">
+<main id="content" class=" w-full ">
+    <div class="">
         {{-- top section --}}
-        <div class="flex justify-between mb-10">
-            <h1 class="font-medium text-lg sm:text-2xl ms-8 ">{{ $layoutTitle }}</h1>
+        <div class="flex justify-between mb-10 bg-slate-400 px-16 py-5 items-center">
+            <h1 class="font-medium text-lg sm:text-2xl">{{ $layoutTitle }}</h1>
             {{-- Display the school name --}}
             <a href={{ '/editprofile?type=' . 'vendor' }} class="flex items-center">
                 @if (!empty($filename))
                     <img src="{{ url('/profile-image/' . $filename) }}" class="w-[60px] h-[60px] rounded-full me-4"
                         alt="Profile Image">
                 @else
-                    <img src="{{ asset('icons/profile.svg') }}" class="w-[60px] h-[60px] rounded-full me-4"
+                    <img src="{{ asset('icons/profile.svg') }}" class="w-[50px] h-[50px] rounded-full me-4"
                         alt="Default Profile Image">
                 @endif
 
@@ -20,9 +20,11 @@
                 </div>
             </a>
         </div>
+        <div class="px-[65px]">
+            {{-- content --}}
+            {{ $slot }}
+        </div>
 
-        {{-- content --}}
-        {{ $slot }}
     </div>
 </main>
 
