@@ -49,8 +49,8 @@
                     <div class="flex items-center mb-4">
                         <div class="flex w-full justify-between">
                             <h2 class="text-2xl font-bold">Pertemuan Hari Ini</h2>
-                            <div class="p-2 bg-green-500 rounded-lg">
-                                <a href="create/meeting">buat pertemuan</a>
+                            <div class="p-2 bg-green-600 rounded-lg">
+                                <a href="create/meeting" class="text-white">Buat pertemuan</a>
                             </div>
                         </div>
 

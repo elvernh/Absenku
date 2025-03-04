@@ -59,9 +59,11 @@ Route::prefix('school')->group(function () {
     Route::get('/approve/{id}', [StudentExcurVendorController::class, 'approve'])->name('approve');
 
     // Meeting and Activation Routes
-    Route::get('/create/meeting', function () {
-        return view('pertemuanform', ['excurVendors' => ExcurVendor::all()]);
-    });
+    // Route::get('/create/meeting', function () {
+    //     return view('pertemuanform', ['excurVendors' => ExcurVendor::all()]);
+    // });
+    Route::get('/create/meeting',[SchoolController::class, 'createMeeting'])->name('createMeeting');
+
     Route::post('/submitmeeting', [MeetingController::class, 'createMeeting'])->name('createMeeting');
     Route::get('/activate', function () {
         return view('activateekskul', [
@@ -91,7 +93,6 @@ Route::prefix('student')->group(function () {
     Route::get('/profile', action: [StudentController::class, 'profileView']);
     Route::get('/editprofile/{id}', action: [StudentController::class, 'editProfileView']);
     Route::put('/editprofile/{id}', action: [StudentController::class, 'editProfileSubmit'])->name('updateProfile');
-
 });
 
 Route::prefix('vendor')->group(function () {
@@ -104,7 +105,6 @@ Route::prefix('vendor')->group(function () {
     Route::post('/addMeeting/{id}', [MeetingController::class, 'addMeeting'])->name('addMeeting');
     Route::get('/create/{id}', [VendorController::class, 'createPresences'])->name('createPresences');
     Route::put('/finishMeeting/{id}', [MeetingController::class, 'updateMeeting'])->name('updateMeeting');
-
 });
 
 Route::post('/login/{type}', [LoginController::class, 'processLogin']);

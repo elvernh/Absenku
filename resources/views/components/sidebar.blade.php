@@ -34,7 +34,7 @@
                 class="{{ Request::is($type . '/daftarsiswa') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/daftarsiswa' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/users.svg') }}" alt="user" class="mr-4">
-                    <span class="font-medium">Siswa</span>
+                    <span class="font-medium text-[#FFD700]">Siswa</span>
                 </a>
             </li>
 
@@ -42,7 +42,7 @@
                 class="{{ Request::is($type . '/daftarvendor') ? 'bg-[#343372]' : 'hover:bg-[#343372]' }} rounded-lg cursor-pointer">
                 <a href={{ '/' . $type . '/daftarvendor' }} class="flex px-6 py-3 items-center">
                     <img src="{{ asset('icons/user.svg') }}" alt="user" class="mr-4">
-                    <span class="font-medium">Vendor</span>
+                    <span class="font-medium text-[#FFCBA4]">Vendor</span>
                 </a>
             </li>
             <li

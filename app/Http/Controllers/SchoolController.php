@@ -462,4 +462,29 @@ class SchoolController extends Controller
             'all' => StudentExcurVendor::all()
         ]);
     }
+
+    public function createMeeting()
+    {
+        $schoolId = session('school_id');
+
+        if (!$schoolId) {
+            // Jika tidak ada school_id di sesi, redirect ke halaman login
+            return redirect()->route('/');
+        }
+
+        // Ambil data sekolah dari database berdasarkan school_id
+        $school = School::find($schoolId);
+
+        // Jika tidak ditemukan, redirect ke login
+        if (!$school) {
+            return redirect()->route(route: '/');
+        }
+
+        return view('pertemuanform', [
+            'excurVendors' => ExcurVendor::all(),
+            'pageTitle' => 'Create Meeting',
+            'name' => $school->name,
+            'email' => $school->email
+        ]);
+    }
 }
