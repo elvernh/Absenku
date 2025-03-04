@@ -23,7 +23,7 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
-
+        <x-slot:filename>{{ $filename }}</x-slot:filename>
 
         <h1 class="text-xl font-semibold mb-4">List Sertifikat</h1>
 

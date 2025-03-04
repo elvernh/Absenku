@@ -20,6 +20,8 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
+        <x-slot:filename>{{ $filename }}</x-slot:filename>
+
         <h1 class="text-2xl font-bold">Daftar Ekskul Tersedia</h1>
         <div class="overflow-x-auto mb-4">
             <div class="overflow-x-auto">

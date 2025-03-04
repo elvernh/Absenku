@@ -21,7 +21,9 @@ class Meeting extends Model
     
     public static function getAllByExcurVendorId($excurVendorId)
     {
-        $meetings = Meeting::where('excur_vendor_id', $excurVendorId) // Filter berdasarkan parameter
+        //ambil meetings dan urutkan berdasarkan tanggal
+
+        $meetings = Meeting::where('excur_vendor_id', $excurVendorId)->orderBy('meeting_date', 'desc') // Filter berdasarkan parameter
             ->paginate(15); // Paginasi dengan 15 item per halaman
         return $meetings;
     }

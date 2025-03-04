@@ -96,6 +96,10 @@
                                                 class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
                                                 {{ $result->excurVendor->day }}
                                             </th>
+                                            <th scope="row"
+                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
+                                            {{ $result->status }}
+                                        </th>
                                         </tr>
                                 @endforeach
                     </div>

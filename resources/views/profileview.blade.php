@@ -23,6 +23,7 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
+        <x-slot:filename>{{ $filename }}</x-slot:filename>
 
         <!-- Profil Container -->
         <div class="w-full max-w-4xl mx-auto mt-10 bg-white rounded-lg shadow-lg p-8">

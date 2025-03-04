@@ -238,7 +238,8 @@ class SchoolController extends Controller
             return redirect()->route('/');
         }
         $name = ExcurVendor::find($excurVendorId);
-
+        //ambil meetings dan urutkan berdasarkan tanggal
+        $meetings = Meeting::getAllByExcurVendorId($excurVendorId);
         return view('absensisiswa', [
             'pageTitle' => $name->extracurricular->name,
             'name' => $school->name,

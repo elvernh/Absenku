@@ -85,6 +85,9 @@ class StudentController extends Controller
             'name' => $student->full_name,
             'email' => $student->email,
             'studentExcurVendor' => $studentExcurVendor
+            ,
+            'filename' => $student->profile_picture,
+
         ]);
     }
 
@@ -107,7 +110,8 @@ class StudentController extends Controller
         }
         return view("pendaftaran", [
             "excurVendors" => $excurVendors,
-            "feesRp" => $feeRp
+            "feesRp" => $feeRp,
+            
         ]);
     }
 
@@ -133,7 +137,9 @@ class StudentController extends Controller
             'pageTitle' => "Daftar Meeting",
             'name' => $student->full_name,
             'email' => $student->email,
-            'presences' => $presences
+            'presences' => $presences,
+            'filename' => $student->profile_picture,
+
         ]);
     }
     public function showPayment()
@@ -167,6 +173,8 @@ class StudentController extends Controller
             'email' => $student->email,
             'studentExcs' => $studentExcs,
             'payments' => $payments,
+            'filename' => $student->profile_picture,
+
         ]);
     }
     public function showBayar()
@@ -204,6 +212,7 @@ class StudentController extends Controller
             'name' => $student->full_name,
             'email' => $student->email,
             'studentExcs' => $studentExcs,
+            'filename' => $student->profile_picture,
 
         ]);
     }
@@ -252,6 +261,7 @@ class StudentController extends Controller
             'name' => $student->full_name,
             'email' => $student->email,
             'excurVendors' => ExcurVendor::where('status', 'Aktif')->get(),
+            'filename' => $student->profile_picture,
             'historys' => StudentExcurVendor::where('student_id', $studentId)->paginate(10)
         ]);
     }
@@ -270,6 +280,8 @@ class StudentController extends Controller
             'name' => $student->full_name,
             'email' => $student->email,
             'student' => $student
+            ,            'filename' => $student->profile_picture,
+
         ]);
     }
 
@@ -287,7 +299,9 @@ class StudentController extends Controller
             'pageTitle' => "Profile",
             'name' => $student->full_name,
             'email' => $student->email,
-            'student' => $student
+            'student' => $student,
+            'filename' => $student->profile_picture,
+
         ]);
     }
 
