@@ -20,9 +20,8 @@
 <body class="w-full relative">
 
 
-<x-navbar></x-navbar>
 
-    <main class="ps-8 pe-8 pb-2 -z-1000">
+    <main class="ps-8 pe-8 py-10 pt-16 -z-1000">
         <img src="images/aset1.png" alt=""
             class="absolute -bottom-10 left-[-90px] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] mb-4">
         <img src="images/aset5.png" alt=""
@@ -58,7 +57,7 @@
                     <input type="text" name="from_class" id="from_class" required
                         class="mt-1 block w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
-                
+
                 <div>
                     <label for="email" class="block text-sm font-semibold text-gray-700">Email</label>
                     <input type="email" name="email" id="email" autocomplete="email" required

@@ -137,12 +137,13 @@
 
     </ul>
     <button id="toggleBtn"
-        class="absolute flex items-center justify-center w-[45px] h-[45px] left-64 top-[110px] z-10 border-black border-t border-e border-b text-custom-blue  text-4xl rounded bg-white"><svg
+        class="fixed flex items-center justify-center md:w-[45px] size-[26px] md:h-[45px] left-64 top-[110px] z-10 border-black border-t border-e border-b text-custom-blue  text-4xl rounded bg-white"><svg
             xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-list"
             viewBox="0 0 16 16">
             <path fill-rule="evenodd"
                 d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
-        </svg></button>
+        </svg>
+    </button>
 </div>
 
 <!-- Overlay -->

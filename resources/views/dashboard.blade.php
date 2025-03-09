@@ -183,7 +183,6 @@
                     </table>
                 </div>
             </div>
-
             <img src="images/aset1.png" alt=""
                 class="absolute left-[-90px] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] mb-4">
             <img src="images/aset5.png" alt=""

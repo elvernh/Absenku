@@ -231,8 +231,6 @@ class StudentController extends Controller
             'from_class' => 'required|string|max:255',
             'email' => 'required|email|unique:students,email|max:255',
             'password' => 'required|string|min:8',
-            'profile_picture' => "default.png",
-            'token' => Str::uuid(),
         ]);
         $validated['profile_picture'] = 'default.png';
         $validated['token'] = Str::uuid();

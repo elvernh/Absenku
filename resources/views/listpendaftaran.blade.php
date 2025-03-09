@@ -44,7 +44,8 @@
                                 </td>
                                 <td class="px-4 py-3 text-center capitalize">{{ $pending->status }}</td>
                                 <td class="px-4 py-3 text-center">
-                                    <a   onclick="confirmAction('{{ route('approve', $pending->id) }}')" class="text-green-600 hover:underline">Approve</a>
+                                    <a onclick="confirmAction('{{ route('approve', $pending->id) }}')"
+                                        class="text-green-600 hover:underline">Approve</a>
                                 </td>
                                 <td class="px-4 py-3 text-center">
                                     <a onclick="confirmAction('{{ route('reject', $pending->id) }}')"
@@ -84,34 +85,36 @@
             </ul>
         </nav>
         <!-- Pagination -->
+        <div class="overflow-x-auto">
 
-        <h1 class="mt-4 mb-4">Riwayat pendaftaran</h1>
-        <table class="w-full text-sm text-left text-gray-600 border  border-gray-200 rounded-lg shadow-md">
-            <thead class="bg-yellow-300 text-gray-800 uppercase">
-                <tr>
-                    <th class="px-4 py-3 text-center">No</th>
-                    <th class="px-4 py-3 text-center">Nama</th>
-                    <th class="px-4 py-3 text-center">Ekstrakurikuler</th>
-                    <th class="px-4 py-3 text-center">Status</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($historys as $history)
-                    <tr class="border-b odd:bg-white even:bg-gray-50 hover:bg-gray-100">
-                        <td class="px-4 py-3 text-center">{{ $loop->iteration }}</td>
-                        <td class="px-4 py-3 text-center">{{ $history->student->full_name }}</td>
-                        <td class="px-4 py-3 text-center">{{ $history->excurVendor->extracurricular->name }}
-                        </td>
-                        <td class="px-4 py-3 text-center capitalize">{{ $history->status }}</td>
-                        
+            <h1 class="mt-4 mb-4">Riwayat pendaftaran</h1>
+            <table class="w-full text-sm text-left text-gray-600 border  border-gray-200 rounded-lg shadow-md">
+                <thead class="bg-yellow-300 text-gray-800 uppercase">
+                    <tr>
+                        <th class="px-4 py-3 text-center">No</th>
+                        <th class="px-4 py-3 text-center">Nama</th>
+                        <th class="px-4 py-3 text-center">Ekstrakurikuler</th>
+                        <th class="px-4 py-3 text-center">Status</th>
 
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
-         <!-- Pagination -->
-         <nav aria-label="Page navigation example" class="mt-4">
+                </thead>
+                <tbody>
+                    @foreach ($historys as $history)
+                        <tr class="border-b odd:bg-white even:bg-gray-50 hover:bg-gray-100">
+                            <td class="px-4 py-3 text-center">{{ $loop->iteration }}</td>
+                            <td class="px-4 py-3 text-center">{{ $history->student->full_name }}</td>
+                            <td class="px-4 py-3 text-center">{{ $history->excurVendor->extracurricular->name }}
+                            </td>
+                            <td class="px-4 py-3 text-center capitalize">{{ $history->status }}</td>
+
+
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example" class="mt-4">
             <ul class="inline-flex -space-x-px text-base h-10">
                 <li>
                     <a href="{{ $historys->previousPageUrl() }}"
