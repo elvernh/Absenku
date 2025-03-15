@@ -29,17 +29,14 @@ class VendorController extends Controller
         if (!$vendor) {
             return redirect()->route('/');
         }
-        $today = date('l');
 
         // Fetch today's schedule
-        $jadwalHariIni = ExcurVendor::getAllTodayByVendor($vendorId);
         $jumlahEkskul = ExcurVendor::getJumlahEkskul($vendorId);
         $meetingsToday = Meeting::getMeetingTodayVendor($vendorId);
         return view('dashboard_vendor', [
             'pageTitle' => "Dashboard Vendor",
             'name' => $vendor->name,
             'email' => $vendor->email,
-            'jadwalHariIni' => $jadwalHariIni,
             'jumlahEkskul' => $jumlahEkskul,
             'meetingsToday' => $meetingsToday,
         ]);
@@ -63,11 +60,7 @@ class VendorController extends Controller
 
         // Calculate the number of students for each ExcurVendor
         $excurVendors = ExcurVendor::getAllByVendorWithStudentCount($vendorId);
-        // $excurVendors  = ExcurVendor::where('vendor_id', $vendorId)->get();
-        // $excurVendors = $excurVendors->map(function ($item){
-        //     $item->total = StudentExcurVendor::where('excur_vendor_id', 3)->count();
-        //     return $item;
-        // });
+        
         // Fetch the vendor details
         $vendor = Vendor::find($vendorId);
 

@@ -112,13 +112,11 @@
                 </select>
             </div>
             <div class="mb-4">
-                <label for="topic" class="block text-sm font-medium text-gray-700">topic</label>
-                <input type="text" id="topic" name="topic" value="{{ $topic }}"
+                <input type="hidden" id="topic" name="topic" value="{{ $topic }}" 
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
             </div>
             <div class="mb-4">
-                <label for="teacher" class="block text-sm font-medium text-gray-700">teacher</label>
-                <input type="text" id="teacher" name="teacher" value="{{ $teacher }}"
+                <input type="hidden" id="teacher" name="teacher" value="{{ $teacher }}" 
                     class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500">
             </div>
 

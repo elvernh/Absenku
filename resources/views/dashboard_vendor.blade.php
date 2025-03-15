@@ -50,7 +50,6 @@
                                 <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
                                 <th scope="col" class="px-6 py-3">Divisi</th>
                                 <th scope="col" class="px-6 py-3">Level</th>
-                                <th scope="col" class="px-6 py-3">Vendor</th>
                                 <th scope="col" class="px-6 py-3">Jam</th>
                                 <th scope="col" class="px-6 py-3">Status</th>
                                 <th scope="col" class="px-6 py-3"></th>
@@ -67,7 +66,6 @@
                                     </th>
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->division}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->level}}</td>
-                                    <td class="px-6 py-4">{{ $meetingToday->excurVendor->vendor->name}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->start_time}} - {{ $meetingToday->excurVendor->end_time}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->status}}</td>
                                     <td class="px-6 py-4"><a href="create/{{ $meetingToday->id }}" class="text-blue-400 underline">buat absen</a></td>
