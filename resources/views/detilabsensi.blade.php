@@ -22,7 +22,7 @@
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
         
-        <div>
+        <div class="h-[100vh] bg-slate-600 overflow-scroll">
             <div class="w-full xl:w-[70%]">
                 <h1 class="text-2xl font-bold mb-4">{{ $excur->excurVendor->extracurricular->name }}</h1>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px] border-slate-600">
@@ -64,6 +64,8 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    
                 </div>
             </div>
 

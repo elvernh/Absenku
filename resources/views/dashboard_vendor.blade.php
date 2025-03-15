@@ -35,12 +35,12 @@
                 <p class="font-bold">Jumlah Murid : <span class="font-normal">{{ $jumlahEkskul }}</span></p>
             </div>
         </div>
-        <div class="mt-10 flex flex-col md:flex-row gap-8">
+        <div class="mt-10 flex flex-col md:flex-row gap-8 pb-20 pt-10">
 
 
             <!-- Jadwal Hari Ini Table (50% width on medium screens and above) -->
-            <div class="w-full md:w-[60%]">
-                <div class="flex p-3 items-center">
+            <div class="w-full md:w-[60%] ">
+                <div class="flex pb-4 items-center">
                     <h2 class="text-2xl font-bold">Pertemuan Hari Ini</h2>
                 </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full border-[1px] border-slate-600">
