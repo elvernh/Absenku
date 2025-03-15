@@ -27,14 +27,14 @@
 
         <!-- Table Container -->
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <div class="flex w-full bg-slate-300 justify-between p-4">
+            <div class="flex w-full  justify-between mb-4">
                 <!-- Search Form -->
 
 
                 <!-- Button Buat Jadwal -->
-                <div class="flex items-center">
+                <div class="flex ">
                     <a href="/school/tambahekskul"
-                        class="ms-20 text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
+                        class=" text-white bg-green-600 flex items-center px-4 py-2 rounded-lg text-sm">
                         Tambah Ekskul
                     </a>
                 </div>
@@ -48,6 +48,9 @@
                         <th scope="col" class="px-6 py-3">Nama</th>
                         <th scope="col" class="px-6 py-3">Divisi</th>
                         <th scope="col" class="px-6 py-3">Level</th>
+                        <th scope="col" class="px-6 py-3"></th>
+                        <th scope="col" class="px-6 py-3"></th>
+
 
 
                     </tr>
