@@ -146,7 +146,7 @@
 
             </div>
 
-            <div class="w-full xl:w-[70%]">
+            <div class="w-full xl:w-[90%]">
                 <div class="flex items-center mb-4">
                     <h2 class="text-2xl font-bold">Daftar Vendor</h2>
                     <div class="ms-20 text-white bg-green-600 flex ps-4 pt-2 pb-2 pe-4 rounded-lg">
