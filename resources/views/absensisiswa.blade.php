@@ -21,6 +21,7 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
+=
         <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
 
         <div>

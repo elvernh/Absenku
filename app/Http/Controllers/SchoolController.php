@@ -49,7 +49,7 @@ class SchoolController extends Controller
             'excurCount' => $excurCount,
         ]);
     }
-    public function showDaftarEkskulAktif()
+    public function showDaftarEkskulAktif(Request $request)
     {
 
         $schoolId = session('school_id');
@@ -63,11 +63,13 @@ class SchoolController extends Controller
         if (!$school) {
             return redirect()->route('/');
         }
+        $sortDirection = $request->get('sort', 'asc');
 
         return view('daftarekskulaktif', [
             'pageTitle' => "Daftar Ekstrakulikuler Aktif",
             'school' => $school,
-            'excurVendors' => ExcurVendor::getAll()
+            'excurVendors' => ExcurVendor::getAll($sortDirection),
+            'sortDirection' => $sortDirection
         ]);
     }
 
@@ -155,7 +157,7 @@ class SchoolController extends Controller
 
 
 
-    public function showDaftarEkskul()
+    public function showDaftarEkskul(Request $request)
     {
 
         $schoolId = session('school_id');
@@ -169,11 +171,13 @@ class SchoolController extends Controller
         if (!$school) {
             return redirect()->route('/');
         }
+        $sortDirection = $request->get('sort', 'asc');
 
         return view('daftarekskul', [
             'pageTitle' => "Daftar Ekstrakulikuler",
             'school' => $school,
-            'extracurriculars' => Extracurricular::getAll()
+            'extracurriculars' => Extracurricular::getAll($sortDirection),
+            'sortDirection' => $sortDirection
         ]);
     }
 

@@ -84,7 +84,10 @@ class ExcurVendor extends Model
             ->get();
     }
 
-    public static function getAllByVendorWithStudent($vendorId){
+
+
+    public static function getAllByVendorWithStudent($vendorId)
+    {
         return self::with(['extracurricular', 'vendor'])->where('vendor_id', $vendorId)->get();
     }
     public function extracurricular(): BelongsTo
@@ -97,10 +100,11 @@ class ExcurVendor extends Model
         return $this->belongsToMany(Student::class, 'student_excur_vendor', 'excur_vendor_id', 'student_id');
     }
 
-    public static function getAll()
+    public static function getAll($sortDirection = 'asc')
     {
-        $excurvendors = ExcurVendor::all();
-        return $excurvendors;
+        return self::with(['extracurricular', 'vendor'])
+            ->orderBy('academic_year', $sortDirection)
+            ->get();
     }
 
     public function studentExcurVendors(): HasMany
