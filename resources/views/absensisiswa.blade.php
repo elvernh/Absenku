@@ -14,11 +14,15 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
         <x-slot:type>{{ 'school' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-custom-blue' }}</x-slot:sidebarColor>
+
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
+        <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
+
         <div>
             <div
                 class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">

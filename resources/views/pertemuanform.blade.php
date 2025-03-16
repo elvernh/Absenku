@@ -20,12 +20,15 @@
 <body class="flex overflow-x-hidden">
     <x-sidebar>
         <x-slot:type>{{ 'school' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-custom-blue' }}</x-slot:sidebarColor>
+
     </x-sidebar>
     <x-layout_homepage>
+        <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
-        <main class=" w-full h-[100vh] p-2 ps-5 pe-5 flex items-center justify-center">
+        <main class=" w-full h-[80vh] p-2 ps-5 pe-5 flex items-center justify-center">
             <!-- Form Container -->
             <div
                 class="relative z-10 lg:w-[50%] w-full m-auto bg-[#f6f6f686] border border-gray-300 rounded-lg shadow-lg p-6 sm:p-8 lg:p-10">

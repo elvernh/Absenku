@@ -31,26 +31,19 @@ class StudentController extends Controller
             return redirect()->route('/');
         }
         $results = StudentExcurVendor::where('student_id', $studentId)
-            ->where('status', 'approved') // Menambahkan kondisi untuk kolom status
-            ->get();
+            ->where('status', 'approved')
+            ->paginate(6); 
 
-        // Mem-filter data berdasarkan hari ini
-        $nows = $results->filter(function ($result) {
-            return $result->excurVendor->day == Carbon::now()->format('l');
-        });
+        $total = count($results);
 
-        $midScore = StudentExcurVendor::getMidScoreAvg($studentId);
-        $finalScore = StudentExcurVendor::getFinalScoreAvg($studentId);
         return view('dashboard_student', [
             'pageTitle' => "Dashboard Murid",
             'name' => $student->full_name,
             'email' => $student->email,
             'results' => $results,
-            'nows' => $nows,
             'student' => $studentId,
             'filename' => $student->profile_picture,
-            'midScore' => $midScore,
-            'finalScore' => $finalScore
+            'total' => $total
         ]);
     }
 
@@ -111,7 +104,7 @@ class StudentController extends Controller
         return view("pendaftaran", [
             "excurVendors" => $excurVendors,
             "feesRp" => $feeRp,
-            
+
         ]);
     }
 
@@ -253,6 +246,9 @@ class StudentController extends Controller
             // Jika tidak ada school_id di sesi, redirect ke halaman login
             return redirect()->route('/');
         }
+
+        $excurActive = ExcurVendor::where('status', operator: 'Aktif')->get();
+
         $student = Student::find($studentId);
         return view('student_pendaftaran', [
             'pageTitle' => "Pendaftaran Ekskul",
@@ -278,7 +274,8 @@ class StudentController extends Controller
             'name' => $student->full_name,
             'email' => $student->email,
             'student' => $student
-            ,            'filename' => $student->profile_picture,
+            ,
+            'filename' => $student->profile_picture,
 
         ]);
     }

@@ -17,8 +17,12 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
     <x-sidebar class="relative">
         <x-slot:type>{{ 'school' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-custom-blue' }}</x-slot:sidebarColor>
+
     </x-sidebar>
     <x-layout_homepage class="relative">
+        <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
+
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
@@ -142,7 +146,7 @@
 
             </div>
 
-            <div class="w-full xl:w-[70%]">
+            <div class="w-full xl:w-[90%]">
                 <div class="flex items-center mb-4">
                     <h2 class="text-2xl font-bold">Daftar Vendor</h2>
                     <div class="ms-20 text-white bg-green-600 flex ps-4 pt-2 pb-2 pe-4 rounded-lg">

@@ -17,10 +17,14 @@
     <!-- Sidebar -->
     <x-sidebar>
         <x-slot:type>student</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-[#42A5F5]' }}</x-slot:sidebarColor>
+
     </x-sidebar>
 
     <!-- Layout Homepage -->
     <x-layout_homepage>
+        <x-slot:roleColor>{{ 'bg-[#42A5F5]' }}</x-slot:roleColor>
+
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $student->full_name }}</x-slot:name>
         <x-slot:email>{{ $student->email }}</x-slot:email>

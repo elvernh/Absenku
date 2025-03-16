@@ -16,8 +16,12 @@
     {{-- sidebar --}}
     <x-sidebar>
         <x-slot:type>{{ 'vendor' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-[#1565C0]' }}</x-slot:sidebarColor>
+
     </x-sidebar>
     <x-layout_homepage>
+        <x-slot:roleColor>{{ 'bg-[#1565C0]' }}</x-slot:roleColor>
+
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>

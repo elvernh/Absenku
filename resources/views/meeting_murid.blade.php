@@ -17,9 +17,13 @@
 
     <x-sidebar class="relative">
         <x-slot:type>{{ 'student' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-[#42A5F5]' }}</x-slot:sidebarColor>
+
     </x-sidebar>
 
     <x-layout_homepage class="relative">
+        <x-slot:roleColor>{{ 'bg-[#42A5F5]' }}</x-slot:roleColor>
+
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>

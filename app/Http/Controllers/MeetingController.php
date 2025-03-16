@@ -54,48 +54,43 @@ class MeetingController extends Controller
 
 
     public function updateMeeting(Request $request)
-    {
+{
+    $request->validate([
+        'topic' => 'required|string|max:255',
+        'teacher' => 'required|string|max:255',
+        'status' => 'required|in:active,inactive,completed', // Sesuaikan dengan status yang valid
+    ]);
 
-        $id = $request->route('id'); // Mengambil parameter 'id' dari URL
-        $meeting = Meeting::find($id);
+    $id = $request->route('id'); 
+    $meeting = Meeting::findOrFail($id); // Otomatis `abort(404)` jika tidak ditemukan
 
-        // Cek apakah meeting dengan ID tersebut ditemukan
-        if (!$meeting) {
-            return redirect()->back()->with('error', 'Meeting not found.');
-        }
+    // Ambil siswa yang belum absen
+    $studentExcurVendors = StudentExcurVendor::where('excur_vendor_id', $meeting->excur_vendor_id)
+        ->whereDoesntHave('presences', fn($query) => $query->where('meeting_id', $meeting->id))
+        ->where('status', 'approved')
+        ->get();
 
-        $studentExcurVendors = StudentExcurVendor::where('excur_vendor_id', $meeting->excur_vendor_id)
-            ->whereDoesntHave('presences', function ($query) use ($meeting) {
-                $query->where('meeting_id', $meeting->id);
-            })
-            ->where('status', 'approved')
-            ->get();
+    // Tambahkan absen "Tidak Hadir" jika siswa belum absen
+    $presences = $studentExcurVendors->map(fn($student) => [
+        'status_id' => 4,
+        'keterangan' => 'Tidak Hadir',
+        'meeting_id' => $meeting->id,
+        'student_excur_vendor_id' => $student->id,
+        'excur_vendor_id' => $meeting->excur_vendor_id,
+        'created_at' => now(),
+        'updated_at' => now(),
+    ]);
 
-        // Jika tidak ada siswa yang belum absen buat absen tidak hadir
-        foreach ($studentExcurVendors as $studentExcurVendor) {
-            Presence::create([
-                'status_id' => 4,
-                'keterangan' => 'Tidak Hadir',
-                'meeting_id' => $meeting->id,
-                'student_excur_vendor_id' => $studentExcurVendor->id,
-                'excur_vendor_id' => $meeting->excur_vendor_id,
-            ]);
-        }
+    Presence::insert($presences->toArray()); // Lebih efisien daripada `foreach()`
 
-        // Update data meeting
-        $meeting->topic = $request['topic'];
-        $meeting->teacher = $request['teacher'];
-        $meeting->status = $request['status'];
+    // Update meeting dengan cara lebih ringkas
+    $meeting->update($request->only(['topic', 'teacher', 'status']));
 
-        session()->forget(['teacher', 'topic']);
+    session()->forget(['teacher', 'topic']);
+    return redirect()->route('daftarPertemuan')->with('success', 'Meeting updated successfully.');
 
-        // Simpan perubahan
-        if ($meeting->save()) {
-            return redirect()->back()->with('success', 'Meeting updated successfully.');
-        } else {
-            return redirect()->back()->with('error', 'Failed to update meeting.');
-        }
-    }
+}
+
 
 
 }

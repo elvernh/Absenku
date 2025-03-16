@@ -44,6 +44,7 @@ class Meeting extends Model
             ->whereHas('excurVendor', function($query) use ($vendorId) {
                 $query->where('vendor_id', $vendorId);
             })
+            ->orderBy('meeting_date', 'desc')
             ->get();
     
         return $meetings;
@@ -54,6 +55,8 @@ class Meeting extends Model
         $meetings = Meeting::whereHas('excurVendor', function ($query) use ($vendorId) {
                 $query->where('vendor_id', $vendorId);
             })
+            ->orderBy('meeting_date', 'desc')
+
             ->get();
     
         return $meetings;

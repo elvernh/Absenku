@@ -25,12 +25,13 @@
 
     <x-sidebar class="relative">
         <x-slot:type>{{ 'school' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-custom-blue' }}</x-slot:sidebarColor>
+
     </x-sidebar>
 
     <x-layout_homepage>
-        {{-- <x-slot:layoutTitle>Tambah Ekskul</x-slot:layoutTitle>
-        <x-slot:name>Test</x-slot:name>
-        <x-slot:email>A</x-slot:email> --}}
+        <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
+       
 
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
