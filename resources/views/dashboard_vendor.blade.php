@@ -17,20 +17,24 @@
     <x-sidebar>
 
         <x-slot:type>{{ 'vendor' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-[#1565C0]' }}</x-slot:sidebarColor>
+
     </x-sidebar>
 
     <x-layout_homepage>
+        <x-slot:roleColor>{{ 'bg-[#1565C0]' }}</x-slot:roleColor>
+
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
         <div class="flex flex-wrap gap-5">
             <div
-                class="flex  items-center bg-white p-4 xl:w-[23%] md:w-[30%] w-[100%] h-[100px] shadow border-s-[10px] border-custom-blue rounded-md">
+                class="flex  items-center bg-white p-4 xl:w-[23%] md:w-[30%] w-[100%] h-[100px] shadow border-s-[10px] border-[#1565C0] rounded-md">
                 <img src="{{ asset('icons/smile.svg') }}" alt=null class="size-14 mr-4">
                 <p class="font-bold">Jumlah Ekskul : <span class="font-normal">{{ $jumlahEkskul }}</span></p>
             </div>
             <div
-                class="flex  items-center bg-white p-4 xl:w-[23%] md:w-[30%] w-[100%] h-[100px] shadow border-s-[10px] border-custom-blue rounded-md">
+                class="flex  items-center bg-white p-4 xl:w-[23%] md:w-[30%] w-[100%] h-[100px] shadow border-s-[10px] border-[#1565C0] rounded-md">
                 <img src="{{ asset('icons/students.svg') }}" alt=null class="size-14 mr-4">
                 <p class="font-bold">Jumlah Murid : <span class="font-normal">{{ $jumlahEkskul }}</span></p>
             </div>
@@ -45,12 +49,11 @@
                 </div>
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full border-[1px] border-slate-600">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-white uppercase bg-custom-blue">
+                        <thead class="text-xs text-white uppercase bg-[#1565C0]">
                             <tr>
                                 <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
                                 <th scope="col" class="px-6 py-3">Divisi</th>
                                 <th scope="col" class="px-6 py-3">Level</th>
-                                <th scope="col" class="px-6 py-3">Vendor</th>
                                 <th scope="col" class="px-6 py-3">Jam</th>
                                 <th scope="col" class="px-6 py-3">Status</th>
                                 <th scope="col" class="px-6 py-3"></th>
@@ -67,7 +70,6 @@
                                     </th>
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->division}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->extracurricular->level}}</td>
-                                    <td class="px-6 py-4">{{ $meetingToday->excurVendor->vendor->name}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->excurVendor->start_time}} - {{ $meetingToday->excurVendor->end_time}}</td>
                                     <td class="px-6 py-4">{{ $meetingToday->status}}</td>
                                     <td class="px-6 py-4"><a href="create/{{ $meetingToday->id }}" class="text-blue-400 underline">buat absen</a></td>
@@ -86,7 +88,7 @@
 
             <!-- Calendar Section (50% width on medium screens and above) -->
             <div class="w-full md:w-1/2 bg-white rounded-lg shadow-md mt-8 md:mt-0">
-                <div class="bg-custom-blue text-white rounded-t-lg flex items-center justify-between">
+                <div class="bg-[#1565C0] text-white rounded-t-lg flex items-center justify-between">
                     <!-- Previous Month Button -->
                     <button id="prev-month" class="px-4 py-2 text-lg font-medium">
                         &lt; Prev
@@ -159,9 +161,9 @@
 
                 // Highlight today
                 if (isToday) {
-                    dateDiv.classList.add('bg-custom-blue', 'text-white', 'font-medium', 'rounded-sm');
+                    dateDiv.classList.add('bg-[#1565C0]', 'text-white', 'font-medium', 'rounded-sm');
                 } else {
-                    dateDiv.classList.add('hover:bg-custom-blue', 'hover:text-white', 'cursor-pointer', 'hover:rounded-sm');
+                    dateDiv.classList.add('hover:bg-[#1565C0]', 'hover:text-white', 'cursor-pointer', 'hover:rounded-sm');
                 }
                 dateDiv.classList.add('text-center', 'py-2');
                 dateDiv.innerText = day;

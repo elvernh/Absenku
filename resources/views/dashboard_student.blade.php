@@ -17,112 +17,103 @@
     <!-- Sidebar -->
     <x-sidebar class="relative">
         <x-slot:type>{{ 'student' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-[#42A5F5]' }}</x-slot:sidebarColor>
     </x-sidebar>
 
-    <!-- Main Layout -->
-    <x-layout_homepage class="relative">
+    <x-layout_homepage>
+        <x-slot:roleColor>{{ 'bg-[#42A5F5]' }}</x-slot:roleColor>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
         <x-slot:filename>{{ $filename }}</x-slot:filename>
-
-        <div>
-            <!-- Cards Section -->
-            <div class="flex w-full flex-wrap gap-5 mb-10">
-
-                <x-box>
-                    <x-slot:text>Mid Score </x-slot:text>
-                    <x-slot:value>{{ $midScore }}</x-slot:value>
-                </x-box>
-                <x-box>
-                    <x-slot:text>Final Score </x-slot:text>
-                    <x-slot:value>{{ $finalScore }}</x-slot:value>
-                </x-box>
-                <x-box>
-                    <x-slot:text>Extrakulikuler </x-slot:text>
-                    <x-slot:value>{{ count($results) }}</x-slot:value>
-                </x-box>
-            </div>
-            <div class="flex w-full flex-wrap justify-between ">
-                <div class="w-full xl:w-1/2 ">
-                    <div class="flex items-center mb-4">
-                        <h2 class="text-2xl font-bold">Ekstrakurikuler yang diikuti</h2>
-
-                    </div>
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg border-[1px]  bg-[#f6f6f685]">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 ">
-                            <thead class="text-xs text-gray-700 uppercase  dark:text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">Nomor</th>
-                                    <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
-                                    <th scope="col" class="px-6 py-3">Jam Mulai</th>
-                                    <th scope="col" class="px-6 py-3">Jam Berakhir</th>
-                                    <th scope="col" class="px-6 py-3">Level</th>
-                                    <th scope="col" class="px-6 py-3">Divisi</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (count($results) != 0)
-                                    @foreach ($results as $result)
-                                        <tr
-                                            class=" border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                                {{ $loop->iteration }}
-                                            </th>
-                                            
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                                {{ $result->excurVendor->extracurricular->name }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                                {{ $result->excurVendor->start_time }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                                {{ $result->excurVendor->end_time }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                                {{ $result->excurVendor->extracurricular->level }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                                {{ $result->excurVendor->extracurricular->division }}
-                                            </th>
-                                            <th scope="row"
-                                                class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                                {{ $result->excurVendor->day }}
-                                            </th>
-                                            <th scope="row"
-                                            class="px-6 py-4 font-medium  whitespace-nowrap dark:text-white">
-                                            {{ $result->status }}
-                                        </th>
-                                        </tr>
-                                @endforeach
-                    </div>
+        <x-box>
+            <x-slot:text>Jumlah Ekstrakurikuler</x-slot:text>
+            <x-slot:value>{{ $total }}</x-slot:value>
+        </x-box>
+        <div class="w-full flex justify-between mb-4 overflow-scroll py-5">
+            <div class="relative overflow-x-auto w-[50%]">
+                <h1 class="text-3xl font-bold pb-4 text-black">Ekstrakurikuler yang Diikuti</h1>
+                <table class="w-full text-sm text-left rtl:text-right text-black border-[2px] border-gray-200 ">
+                    <thead class="text-xs text-black uppercase bg-gray-50 dark:bg-gray-700 dark:text-white">
+                        <tr>
+                            <th scope="col" class="px-6 py-3">No</th>
+                            <th scope="col" class="px-6 py-3">Ekskul</th>
+                            <th scope="col" class="px-6 py-3">Jam</th>
+                            <th scope="col" class="px-6 py-3">Hari</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($results as $result)
+                            <tr
+                                class="border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-black">
+                                    {{ $loop->iteration }}
+                                </th>
+                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-black">
+                                    {{ $result->excurVendor->extracurricular->name }}
+                                </th>
+                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-black">
+                                    {{ $result->excurVendor->start_time }} - {{ $result->excurVendor->end_time }}
+                                </th>
+                                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap text-black">
+                                    {{ $result->excurVendor->day }}
+                                </th>
+                            </tr>
+                        @endforeach
                     </tbody>
-                    </table>
-                </div>
-                @if (count($results) > 5)
-                    <a href="#">see more</a>
-                @endif
-                @endif
+                </table>
 
-                
+
+
+                <nav aria-label="Page navigation example " class="mt-5">
+                    <ul class="flex items-center -space-x-px h-8 text-sm">
+                      <!-- Tombol Previous -->
+                      @if ($results->onFirstPage())
+                        <li>
+                          <span class="flex items-center justify-center px-3 h-8 text-gray-400 bg-gray-200 border border-gray-300 rounded-s-lg">Previous</span>
+                        </li>
+                      @else
+                        <li>
+                          <a href="{{ $results->previousPageUrl() }}" class="flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700">
+                            <span class="sr-only">Previous</span>
+                            <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                            </svg>
+                          </a>
+                        </li>
+                      @endif
+                  
+                      <!-- Nomor Halaman -->
+                      @foreach ($results->getUrlRange(1, $results->lastPage()) as $page => $url)
+                        <li>
+                          <a href="{{ $url }}" class="flex items-center justify-center px-3 h-8 {{ $results->currentPage() == $page ? 'text-blue-600 border border-blue-300 bg-blue-50' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700' }}">
+                            {{ $page }}
+                          </a>
+                        </li>
+                      @endforeach
+                  
+                      <!-- Tombol Next -->
+                      @if ($results->hasMorePages())
+                        <li>
+                          <a href="{{ $results->nextPageUrl() }}" class="flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700">
+                            <span class="sr-only">Next</span>
+                            <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                            </svg>
+                          </a>
+                        </li>
+                      @else
+                        <li>
+                          <span class="flex items-center justify-center px-3 h-8 text-gray-400 bg-gray-200 border border-gray-300 rounded-e-lg">Next</span>
+                        </li>
+                      @endif
+                    </ul>
+                  </nav>
+                  
+
 
             </div>
-
     </x-layout_homepage>
-    <img src="{{ asset('images/aset1.png') }}" alt="dd"
-        class="absolute left-[-90px] -z-[100] sm:left-[-70px] md:left-[-30px] lg:left-[-40px] w-[300px] sm:w-[350px] md:w-[400px] lg:w-[450px] bottom-[0]">
-    <img src="{{ asset('images/aset5.png') }}" alt="dd"
-        class="absolute  right-[3px] -z-[100] sm:right-[-10px] md:right-[-20px] lg:right-[0px] w-[260px] sm:w-[300px] md:w-[350px] lg:w-[400px] bottom-[0]">
-
-    <!-- Scripts -->
-    <script></script>
 </body>
 
 </html>

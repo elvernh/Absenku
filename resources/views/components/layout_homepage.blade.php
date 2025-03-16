@@ -2,7 +2,7 @@
 <main id="content" class=" w-full ">
     <div class="">
         {{-- top section --}}
-        <div class="flex justify-between mb-10 bg-custom-blue px-10 md:px-16 py-5 items-center">
+        <div class="flex justify-between mb-10 {{ $roleColor }} px-10 md:px-16 py-5 items-center">
             <h1 class="font-medium text-lg sm:text-2xl text-white">{{ ucfirst($layoutTitle) }}</h1>
             {{-- Display the school name --}}
             <a href={{ '/editprofile?type=' . 'vendor' }} class="flex items-center">
@@ -33,7 +33,9 @@
 
 
     </div>
-    <x-footer></x-footer>
+    <x-footer>
+        <x-slot:roleColor>{{ $roleColor }}</x-slot:roleColor>
+    </x-footer>
 
 </main>
 

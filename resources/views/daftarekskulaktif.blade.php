@@ -15,6 +15,8 @@
     <!-- Sidebar -->
     <x-sidebar>
         <x-slot:type>school</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-custom-blue' }}</x-slot:sidebarColor>
+
     </x-sidebar>
 
     <!-- Layout Homepage -->
@@ -22,6 +24,7 @@
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $school->name }}</x-slot:name>
         <x-slot:email>{{ $school->email }}</x-slot:email>
+        <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
 
         <!-- Table Container -->
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

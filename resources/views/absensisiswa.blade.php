@@ -14,39 +14,45 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4]">
     <x-sidebar>
         <x-slot:type>{{ 'school' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-custom-blue' }}</x-slot:sidebarColor>
+
     </x-sidebar>
     <x-layout_homepage>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        <th scope="col" class="px-6 py-3 text-center">Id</th>
-                        <th scope="col" class="px-6 py-3 text-center">Tanggal</th>
-                        <th scope="col" class="px-6 py-3 text-center">Ekstrakurikuler</th>
-                        <th scope="col" class="px-6 py-3 text-center">Topik</th>
-                        <th scope="col" class="px-6 py-3 text-center">Guru</th>
-                        <th scope="col" class="px-6 py-3 text-center">Absensi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($meetings as $meeting)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4 text-center text-[#726F6F]">{{ $meeting->id }}</td>
-                            <td class="px-6 py-4 text-center text-[#726F6F]">{{ $meeting->meeting_date }}</td>
-                            <td class="px-6 py-4 text-center text-[#726F6F]">{{ $meeting->excurVendor->extracurricular->name }}</td>
-                            <td class="px-6 py-4 text-center text-[#726F6F]">{{ $meeting->topic }}</td>
-                            <td class="px-6 py-4 text-center text-[#726F6F]">{{ $meeting->teacher }}</td>
-                            <td class="px-6 py-4 text-center text-blue-700">
-                                <a href="{{ '/school/detail/absensi/' . $meeting->id }}">Detail</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            
+=
+        <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
+
+        <div>
+            <div
+                class="flex flex-wrap items-center justify-between bg-white w-full h-[60px] rounded-md px-4 xl:px-10 mb-4 border-s-[10px] shadow border-custom-blue sticky top-4">
+                <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center font-bold">Id</h1>
+                <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center font-bold">Tanggal</h1>
+                <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center font-bold">Ekstrakurikuler</h1>
+                <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center font-bold">Topik</h1>
+                <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center font-bold">Guru</h1>
+                <h1 class="text-black sm:text-sm text-[11px] w-1/6 text-center font-bold">Absensi</h1>
+
+            </div>
+
+            <!-- Data Row -->
+            @foreach ($meetings as $meeting)
+                <div
+                    class="flex flex-wrap items-center justify-between bg-white w-full h-[80px] rounded-md px-4 xl:px-10 mb-[10px] border-s-[11px] shadow border-custom-blue">
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $meeting->id }}
+                    </h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $meeting->meeting_date }}
+                    </h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">
+                        {{ $meeting->excurVendor->extracurricular->name }}</h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $meeting->topic }}</h1>
+                    <h1 class="text-[#726F6F] sm:text-sm text-[11px] w-1/6 text-center">{{ $meeting->teacher }}
+                    </h1>
+                    <a class="text-blue-700 sm:text-sm text-[11px] w-1/6 text-center"
+                        href={{ '/school/detail/absensi/' . $meeting->id }}>detail</a>
+                </div>
+            @endforeach
 
         </div>
         <!-- Pagination -->
