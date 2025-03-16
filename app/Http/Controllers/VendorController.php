@@ -61,6 +61,8 @@ class VendorController extends Controller
         // Calculate the number of students for each ExcurVendor
         $excurVendors = ExcurVendor::getAllByVendorWithStudentCount($vendorId);
         
+       
+
         // Fetch the vendor details
         $vendor = Vendor::find($vendorId);
 
@@ -70,7 +72,7 @@ class VendorController extends Controller
             'name' => $vendor->name,
             'email' => $vendor->email,
             'excurVendors' => $excurVendors,
-            'meetings' => Meeting::getMeetingVendor($vendorId)
+            'meetings' => Meeting::getMeetingVendor($vendorId),
         ]);
     }
 
@@ -133,11 +135,16 @@ class VendorController extends Controller
         }
 
         $vendor = Vendor::find($vendorId);
-
+        $students = StudentExcurVendor::whereHas('excurVendor', function ($query) use ($vendorId) {
+            $query->where('vendor_id', $vendorId);
+        })->where('status', 'approved')->get();
+        
         return view('daftarsiswa', [
             'pageTitle' => "Daftar Siswa",
             'name' => $vendor->name,
             'email' => $vendor->email,
+            'students' => $students
+
         ]);
     }
 

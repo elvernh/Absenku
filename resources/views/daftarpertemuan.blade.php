@@ -17,10 +17,13 @@
     <!-- Sidebar -->
     <x-sidebar>
         <x-slot:type>{{ 'vendor' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-[#1565C0]' }}</x-slot:sidebarColor>
+
     </x-sidebar>
 
     <!-- Main Layout -->
     <x-layout_homepage>
+        <x-slot:roleColor>{{ 'bg-[#1565C0]' }}</x-slot:roleColor>
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
@@ -33,6 +36,8 @@
                     class="w-full text-sm text-left text-gray-700 bg-white border border-gray-200 rounded-lg shadow-md">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                         <tr class="text-center">
+                            <th scope="col" class="px-6 py-3">no</th>
+
                             <th scope="col" class="px-6 py-3">Ekstrakurikuler</th>
                             <th scope="col" class="px-6 py-3">Tanggal</th>
                             <th scope="col" class="px-6 py-3">Divisi</th>
@@ -45,6 +50,7 @@
                     <tbody class="divide-y divide-gray-200">
                         @forelse ($meetings as $meeting)
                             <tr class="hover:bg-gray-50 transition">
+                                <td class="px-6 py-4 text-center">{{ $loop->iteration }}</td>
                                 <td class="px-6 py-4">{{ $meeting->excurVendor->extracurricular->name }}</td>
                                 <td class="px-6 py-4 ">
                                     {{ $meeting->meeting_date }}</td>

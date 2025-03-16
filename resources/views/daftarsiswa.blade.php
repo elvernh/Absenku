@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,69 +12,57 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
-<body class="flex overflow-x-hidden bg-[#F4F4F4]">
+<body class="flex overflow-x-hidden bg-gray-100">
+
     <!-- Sidebar -->
     <x-sidebar>
         <x-slot:type>{{ 'vendor' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-[#1565C0]' }}</x-slot:sidebarColor>
+
     </x-sidebar>
 
     <!-- Main Layout -->
     <x-layout_homepage>
+        <x-slot:roleColor>{{ 'bg-[#1565C0]' }}</x-slot:roleColor>
+
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
-        <x-slot:filename>{{ "" }}</x-slot:filename>
 
-        
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-fixed">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr class="bg-gray-200">
-                        <th scope="col" class="px-6 py-3 text-center">Nama Ekskul</th>
-                        <th scope="col" class="px-6 py-3 text-center">Nama Siswa</th>
-                        <th scope="col" class="px-6 py-3 text-center">Divisi</th>
-                        <th scope="col" class="px-6 py-3 text-center">Detail</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{-- @forelse ($excurVendors as $excur)
-                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4 text-center font-medium text-gray-900 dark:text-white">
-                                {{ $excur->extracurricular->name }}
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ $excur->student_excur_vendors_count ?? '0' }} <!-- Display number of students -->
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ \Carbon\Carbon::parse($excur->start_date)->format('l') }} <!-- Display day of the week -->
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ \Carbon\Carbon::parse($excur->start_time)->format('H:i') }} <!-- Format the time -->
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                {{ \Carbon\Carbon::parse($excur->end_time)->format('H:i') }}
-                            </td>
-                            <td class="px-6 py-4 text-center">
-                                <a href="/" class="text-blue-600 hover:underline">
-                                    Lihat Detail
-                                </a>
-                            </td>
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg h-[90vh] bg-white p-4">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Daftar Siswa</h2>
+            <div class="overflow-auto max-h-[70vh] border rounded-lg">
+                <table class="w-full text-sm text-left text-gray-600 bg-white border-collapse">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-200 sticky top-0 z-10">
+                        <tr class="border-b">
+                            <th scope="col" class="px-6 py-3 text-center w-10">No</th>
+                            <th scope="col" class="px-6 py-3 text-center">Nama Ekskul</th>
+                            <th scope="col" class="px-6 py-3 text-center">Nama Siswa</th>
+                            <th scope="col" class="px-6 py-3 text-center">Divisi</th>
+                            <th scope="col" class="px-6 py-3 text-center">Vendor</th>
+                            <th scope="col" class="px-6 py-3 text-center w-20">Detail</th>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="6" class="px-6 py-4 text-center">
-                                Tidak ada jadwal untuk hari ini.
-                            </td>
-                        </tr>
-                    @endforelse --}}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($students as $student)
+                            <tr class="border-b hover:bg-gray-100 transition">
+                                <td class="px-6 py-4 text-center">{{ $loop->iteration }}</td>
+                                <td class="px-6 py-4 text-center">{{ $student->excurVendor->extracurricular->name }}</td>
+                                <td class="px-6 py-4 text-center">{{ $student->student->full_name }}</td>
+                                <td class="px-6 py-4 text-center">{{ $student->excurVendor->extracurricular->division }}</td>
+                                <td class="px-6 py-4 text-center">{{ $student->excurVendor->vendor->name }}</td>
+                                <td class="px-6 py-4 text-center">
+                                    <a href="#" class="text-blue-500 hover:underline">Detail</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-        
 
     </x-layout_homepage>
 
-    <script></script>
 </body>
 
 </html>

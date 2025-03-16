@@ -17,8 +17,12 @@
 <body class="flex overflow-x-hidden bg-[#F4F4F4] relative">
     <x-sidebar class="relative">
         <x-slot:type>{{ 'school' }}</x-slot:type>
+        <x-slot:sidebarColor>{{ 'bg-custom-blue' }}</x-slot:sidebarColor>
+
     </x-sidebar>
     <x-layout_homepage class="relative">
+        <x-slot:roleColor>{{ 'bg-custom-blue' }}</x-slot:roleColor>
+
         <x-slot:layoutTitle>{{ $pageTitle }}</x-slot:layoutTitle>
         <x-slot:name>{{ $name }}</x-slot:name>
         <x-slot:email>{{ $email }}</x-slot:email>
